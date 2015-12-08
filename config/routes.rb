@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'products#index'
 
   resources :products do
-    get "/reviews/:id/create" , to: "products#review"
+    post "/review" , to: "products#review"
   end
 
   resources :orders, only: [:show, :update]
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :orders
     resources :products
   end
-  
+
   resources :sessions, :only => [:new, :create]
   delete "/logout", to: "sessions#destroy", as: :logout
 

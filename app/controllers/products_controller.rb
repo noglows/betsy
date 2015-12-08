@@ -22,6 +22,18 @@ class ProductsController < ApplicationController
     end
   end
 
+  def show
+    @product = Product.find(params[:id])
+    @review = Review.new
+    @reviews = Review.all
+  end
+
+  def review
+    Review.create(review_params)
+
+    redirect_to product_path(params[:product_id])
+  end
+
   def new
     @product = Product.new
     @action = "create"
@@ -60,8 +72,12 @@ class ProductsController < ApplicationController
 
   private
 
+  def review_params
+    params.require(:review).permit(:review_text).merge(product_id: params[:product_id])
+  end
+
   def product_params
-        params.require(:product).permit(:name, :description, :price, :inventory_total, :retired, :image_url, :user_id)
+    params.require(:product).permit(:name, :description, :price, :inventory_total, :retired, :image_url, :user_id)
   end
 
 end
