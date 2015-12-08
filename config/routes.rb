@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  root 'products#index'
 
   resources :products do
     get "/reviews/:id/create" , to: "products#review"
