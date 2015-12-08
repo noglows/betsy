@@ -8,6 +8,18 @@ class ProductsController < ApplicationController
       else
         @user_name = User.find(@user_id).first_name
       end
+
+    @products = Product.order(:name)
+    @categories = Category.all
+    @markets = User.all
+    case params[:order]
+    when "prod"
+      @order = "prod"
+    when "mart"
+      @order = "mart"
+    when "cat"
+      @order = "cat"
+    end
   end
 
 end
