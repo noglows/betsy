@@ -72,4 +72,16 @@ seed_order_items = [
 
 seed_order_items.each do |seed|
   OrderItem.create(seed)
+
+seed_orders = [
+  { status: "pending", user_id: 1 },
+  { status: "complete", user_id: 2 },
+  { status: "cancelled", user_id: 3 },
+  { status: "paid", user_id: 4 },
+  { status: "pending", user_id: 5 },
+  { status: "pending", user_id: 5 }
+]
+
+seed_orders.each do |seed|
+  Order.create(seed)
 end
