@@ -9,21 +9,19 @@
   <%= link_to "My Account Page", user_path(@user_id) %>
 <% end %>
 
-<%= link_to(products_path(order: 'prod'), :class => "nav_button") do %>
-   <hr />
-   by product
-   <hr />
-<% end %>
-<%= link_to(products_path(order: 'cat')) do %>
-   <hr />
-   by category
-   <hr />
-<% end %>
-<%= link_to(products_path(order: 'mart')) do %>
-  <hr />
-  by category
-  <hr />
-<% end %>
+<div class="btn-group">
+  <%= link_to(products_path(order: 'prod'), :class => "btn btn-default") do %>
+     by product
+  <% end %>
+
+  <%= link_to(products_path(order: 'cat'), :class => "btn btn-default") do %>
+     by category
+  <% end %>
+
+  <%= link_to(products_path(order: 'mart'), :class => "btn btn-default") do %>
+    by category
+  <% end %>
+</div>
 
 <% if @order = "prod" %>
   <% @products.each do |product| %>
