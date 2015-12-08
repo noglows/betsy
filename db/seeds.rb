@@ -65,3 +65,7 @@ seed_orders = [
   { status: "pending", user_id: 5 },
   { status: "pending", user_id: 5 }
 ]
+
+seed_orders.each do |seed|
+  Order.create(seed)
+end
