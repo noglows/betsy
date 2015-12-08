@@ -25,6 +25,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @review = Review.new
+    @reviews = Review.all
   end
 
   def review
@@ -32,7 +33,7 @@ class ProductsController < ApplicationController
 
     redirect_to product_path(params[:product_id])
   end
-  
+
   def new
     @product = Product.new
   end
