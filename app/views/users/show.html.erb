@@ -1,8 +1,16 @@
 <h2>Account Details</h2>
 
 <h4>My Products</h4>
-<ul>
+<table class="table">
   <% @user.products.each do |product| %>
-    <li>product.name</li>
+  <tr>
+    <td><%= product.name %></td>
+    <td><%= link_to "Edit" %></td>
+    <td><%= link_to "Delete" %></td>
+  </tr>
   <% end %>
-</ul>
+</table>
+
+<br>
+
+<%= link_to "Add a New Product", new_user_product_path(@user.id) %>
