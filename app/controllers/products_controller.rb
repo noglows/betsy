@@ -31,12 +31,26 @@ class ProductsController < ApplicationController
     Review.create(review_params)
 
     redirect_to product_path(params[:product_id])
+  def new
+    @product = Product.new
+  end
+
+  def create
+    @user_id = session[:user_id]
+    @product = Product.new(product_params)
+    if @product.save
+      redirect_to user_path(@user_id)
+    else
+      render :new
+    end
   end
 
   private
 
   def review_params
     params.require(:review).permit(:review_text).merge(product_id: params[:product_id])
+  def product_params
+    params.require(:product).permit(:name, :description, :price, :inventory_total, :retired, :image_url, :user_id)
   end
 
 end
