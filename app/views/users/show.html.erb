@@ -5,8 +5,8 @@
   <% @user.products.each do |product| %>
   <tr>
     <td><%= product.name %></td>
-    <td><%= link_to "Edit" %></td>
-    <td><%= link_to "Delete" %></td>
+    <td><%= link_to "Edit", edit_user_product_path(@user.id, product.id) %></td>
+    <td><%= link_to "Delete", user_product_path(@user.id, product.id), method: :delete %></td>
   </tr>
   <% end %>
 </table>

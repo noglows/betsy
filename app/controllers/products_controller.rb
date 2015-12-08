@@ -24,6 +24,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @action = "create"
   end
 
   def create
@@ -34,6 +35,27 @@ class ProductsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    @product = Product.find(params[:id])
+    @action = "update"
+  end
+
+  def update
+    user_id = session[:user_id]
+    @product = Product.update(params[:id], product_params)
+    if @product.save
+      redirect_to user_path(user_id)
+    else
+      render "new"
+    end
+  end
+
+  def destroy
+    product_id = params[:id]
+    Product.destroy(product_id)
+    redirect_to user_path(params[:user_id])
   end
 
   private
