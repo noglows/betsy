@@ -56,3 +56,12 @@ seed_reviews = [
 seed_reviews.each do |seed|
   Review.create(seed)
 end
+
+seed_orders = [
+  { status: "pending", user_id: 1 },
+  { status: "complete", user_id: 2 },
+  { status: "cancelled", user_id: 3 },
+  { status: "paid", user_id: 4 },
+  { status: "pending", user_id: 5 },
+  { status: "pending", user_id: 5 }
+]
