@@ -1,0 +1,14 @@
+<% if !flash.now[:error].nil? %>
+  <%= flash.now[:error] %>
+<% end %>
+
+<%= form_for(:session_data, url: sessions_path) do |f| %>
+<div class="form-group">
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+</div>
+<%= f.submit class:"btn btn-info" %>
+<% end %>

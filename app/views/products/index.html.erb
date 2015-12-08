@@ -1,3 +1,10 @@
+<h1>HELLO, <%= @user_name %> </h1>
+
+<%= link_to "Login", new_session_path %>
+<br>
+<%= link_to "Logout", logout_path, method: :delete %>
+<br>
+
 <% @products.each do |product| %>
   <% if !product.retired? %>
     <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
