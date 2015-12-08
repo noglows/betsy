@@ -3,3 +3,19 @@
     <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
   <% end %>
 <% end %>
+
+<% @categories.each do |cat| %>
+  <% @products.each do |product| %>
+    <% if !product.retired? && product.categories.include?(cat) %>
+      <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% @markets.each do |mark| %>
+  <% @products.each do |product| %>
+    <% if !product.retired? && product.categories.include?(mark) %>
+      <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
+    <% end %>
+  <% end %>
+<% end %>
