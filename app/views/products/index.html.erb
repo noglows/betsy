@@ -5,17 +5,17 @@
 <%= link_to "Logout", logout_path, method: :delete %>
 <br>
 
-<%= link_to(products_path(order: 'prod'), :class => "nav_button") do %>
+<%= link_to(products_path(order: 'prod')) do %>
    <hr />
    by product
    <hr />
 <% end %>
-<%= link_to(products_path(order: 'cat'), :class => "nav_button") do %>
+<%= link_to(products_path(order: 'cat')) do %>
    <hr />
    by category
    <hr />
 <% end %>
-<%= link_to(products_path(order: 'mart'), :class => "nav_button") do %>
+<%= link_to(products_path(order: 'mart')) do %>
   <hr />
   by category
   <hr />
@@ -42,3 +42,5 @@
         <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
       <% end %>
     <% end %>
+  <% end %>
+<% end %>
