@@ -1,0 +1,21 @@
+<h1><%= @product.name %></h1>
+<br>
+<%= @product.description %>
+<br>
+<% if @product.retired %>
+  Product Unavailable
+<% else %>
+  Available
+<% end %>
+<br>
+<div class="row">
+    <%= image_tag @product.image_url, class: "img-responsive" %>
+</div>
+
+<%= form_for @review, url: product_review_path(@product) do |f| %>
+  <div class="form-group">
+  <%= f.label :review_text, "Review" %>
+  <%= f.text_area :review_text, class: "form-control"%>
+  </div>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

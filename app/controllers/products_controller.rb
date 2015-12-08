@@ -22,4 +22,21 @@ class ProductsController < ApplicationController
     end
   end
 
+  def show
+    @product = Product.find(params[:id])
+    @review = Review.new
+  end
+
+  def review
+    Review.create(review_params)
+
+    redirect_to product_path(params[:product_id])
+  end
+
+  private
+
+  def review_params
+    params.require(:review).permit(:review_text).merge(product_id: params[:product_id])
+  end
+
 end
