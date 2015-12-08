@@ -11,6 +11,7 @@ seed_categories = [
   { name: "clothing" },
   { name: "slippers" },
   { name: "socks" },
+  { name: "people"}
 ]
 
 seed_categories.each do |seed|
@@ -32,12 +33,12 @@ seed_users.each do |seed|
 end
 
 seed_products = [
-  {name: "Fuzzy Bunny", description: "A bunny that is fuzzy", price: 1000, inventory_total: 15, retired: false, image_url: "https://img1.etsystatic.com/016/0/5209660/il_fullxfull.418850207_s1jz.jpg", user_id: 1},
-  {name: "Fuzzy Wozniack", description: "A fuzzy computer guy", price: 5000, inventory_total: 1, retired: false, image_url: "http://rack.0.mshcdn.com/media/ZgkyMDEyLzEyLzA0LzVmL3N0ZXZld296bmlhLmMzUy5qcGcKcAl0aHVtYgkxMjAweDYyNyMKZQlqcGc/04902e3b/343/steve-wozniak-on-steve-jobs-videos--e2d1864990.jpg", user_id: 2},
-  {name: "Fozzie Was-he", description: "A muppet that tells dad jokes", price: 3000, inventory_total: 5, retired: true, image_url: "http://vignette1.wikia.nocookie.net/muppet/images/b/be/Fozzie-pose-60percent.png/revision/latest?cb=20131219191526", user_id: 3},
-  {name: "Fonzie Was-he", description: "Eeeeyyyyyyy", price: 2000, inventory_total: 8, retired: false, image_url: "http://digilander.libero.it/happydays/foto_attori/fonzie/hdc1.jpg", user_id: 4},
-  {name: "Fuzzy Wah-Wah pedal", description: "Making some glorious vintage guitar sounds", price: 4000, inventory_total: 50, retired: false, image_url: "http://i.ebayimg.com/images/i/251806872987-0-1/s-l1000.jpg", user_id: 2},
-  {name: "Fun Size Whatchamacallit", description: "Caaaaaaaaandy", price: 500, inventory_total: 2000, retired: true, image_url: "http://ecx.images-amazon.com/images/I/41kHr2%2BU6XL._SL500_AA300_.jpg", user_id: 1}
+  {name: "Fuzzy Bunny", description: "A bunny that is fuzzy", price: 1000, inventory_total: 15, retired: false, image_url: "https://img1.etsystatic.com/016/0/5209660/il_fullxfull.418850207_s1jz.jpg", user_id: 1, :categories => Category.where(:name => ['stuffed animals'])},
+  {name: "Fuzzy Wozniack", description: "A fuzzy computer guy", price: 5000, inventory_total: 1, retired: false, image_url: "http://rack.0.mshcdn.com/media/ZgkyMDEyLzEyLzA0LzVmL3N0ZXZld296bmlhLmMzUy5qcGcKcAl0aHVtYgkxMjAweDYyNyMKZQlqcGc/04902e3b/343/steve-wozniak-on-steve-jobs-videos--e2d1864990.jpg", user_id: 2, :categories => Category.where(:name => ['people'])},
+  {name: "Fozzie Was-he", description: "A muppet that tells dad jokes", price: 3000, inventory_total: 5, retired: true, image_url: "http://vignette1.wikia.nocookie.net/muppet/images/b/be/Fozzie-pose-60percent.png/revision/latest?cb=20131219191526", user_id: 3, :categories => Category.where(:name => ['stuffed animals', 'stickers'])},
+  {name: "Fonzie Was-he", description: "Eeeeyyyyyyy", price: 2000, inventory_total: 8, retired: false, image_url: "http://digilander.libero.it/happydays/foto_attori/fonzie/hdc1.jpg", user_id: 4, :categories => Category.where(:name => ['people', 'socks'])},
+  {name: "Fuzzy Wah-Wah pedal", description: "Making some glorious vintage guitar sounds", price: 4000, inventory_total: 50, retired: false, image_url: "http://i.ebayimg.com/images/i/251806872987-0-1/s-l1000.jpg", user_id: 2, :categories => Category.where(:name => ['stuffed animals',  'slippers'])},
+  {name: "Fun Size Whatchamacallit", description: "Caaaaaaaaandy", price: 500, inventory_total: 2000, retired: true, image_url: "http://ecx.images-amazon.com/images/I/41kHr2%2BU6XL._SL500_AA300_.jpg", user_id: 1, :categories => Category.where(:name => ['stuffed animals', 'clothing'])}
 ]
 
 seed_products.each do |seed|
@@ -55,4 +56,32 @@ seed_reviews = [
 
 seed_reviews.each do |seed|
   Review.create(seed)
+end
+
+seed_order_items = [
+  { quantity: 1, order_id: 3, product_id: 2 },
+  { quantity: 12, order_id: 1, product_id: 6 },
+  { quantity: 2, order_id: 2, product_id: 4 },
+  { quantity: 4, order_id: 4, product_id: 5 },
+  { quantity: 3, order_id: 5, product_id: 6 },
+  { quantity: 2, order_id: 3, product_id: 2 },
+  { quantity: 7, order_id: 1, product_id: 5 },
+  { quantity: 2, order_id: 4, product_id: 1 },
+  { quantity: 5, order_id: 6, product_id: 6 },
+]
+
+seed_order_items.each do |seed|
+  OrderItem.create(seed)
+
+seed_orders = [
+  { status: "pending", user_id: 1 },
+  { status: "complete", user_id: 2 },
+  { status: "cancelled", user_id: 3 },
+  { status: "paid", user_id: 4 },
+  { status: "pending", user_id: 5 },
+  { status: "pending", user_id: 5 }
+]
+
+seed_orders.each do |seed|
+  Order.create(seed)
 end
