@@ -1,3 +1,10 @@
+<h1>HELLO, <%= @user_name %> </h1>
+
+<%= link_to "Login", new_session_path %>
+<br>
+<%= link_to "Logout", logout_path, method: :delete %>
+<br>
+
 <%= link_to(products_path(order: 'prod'), :class => "nav_button") do %>
    <hr />
    by product
@@ -35,5 +42,3 @@
         <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
       <% end %>
     <% end %>
-  <% end %>
-<% end %>
