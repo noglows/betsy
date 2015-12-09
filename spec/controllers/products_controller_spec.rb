@@ -141,7 +141,7 @@ RSpec.describe ProductsController, type: :controller do
       }
     end
 
-    it "deletes an album" do
+    it "deletes a product" do
       expect(Product.all).to include(product)
       delete :destroy, params
       expect(Product.all).to_not include(product)
