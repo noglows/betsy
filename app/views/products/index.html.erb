@@ -21,7 +21,9 @@
     </button>
     <ul class="dropdown-menu">
       <% @categoies.each do |cat| %>
-      <li><a href="#"><%= cat.name %></a></li>
+        <li><%= link_to(root_path(order: cat.id)) do %>
+        <%= cat.name %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
