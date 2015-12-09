@@ -1,14 +1,3 @@
-<h1>HELLO, <%= @user_name %> </h1>
-
-<%= link_to "Login", new_session_path %>
-<br>
-<%= link_to "Logout", logout_path, method: :delete %>
-<br>
-
-<% if @user_name != "Guest" %>
-  <%= link_to "My Account Page", user_path(@user_id) %>
-<% end %>
-
 <div class="btn-group" role="group" aria-label="...">
   <%= link_to(products_path(order: 'prod'), :class => "btn btn-default") do %>
      by product
@@ -21,7 +10,9 @@
     </button>
     <ul class="dropdown-menu">
       <% @categoies.each do |cat| %>
-      <li><a href="#"><%= cat.name %></a></li>
+        <li><%= link_to(root_path(order: cat.id)) do %>
+        <%= cat.name %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
@@ -32,7 +23,9 @@
     </button>
     <ul class="dropdown-menu">
       <% @merchants.each do |merch| %>
-      <li><a href="#"><%= merch.first_name %> <%= merch.last_name %></a></li>
+        <li><%= link_to(root_path(order: merch.id)) do %>
+        <%= merch.first_name %> <%= merch.last_name %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>

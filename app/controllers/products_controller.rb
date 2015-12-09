@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :current_user
 
   def index
     @products = Product.all
@@ -29,7 +30,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @review = Review.new
-    @reviews = Review.all
+    @reviews = Review.all.reverse
   end
 
   def review
@@ -86,7 +87,7 @@ class ProductsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:review_text).merge(product_id: params[:product_id])
+    params.require(:review).permit(:review_text, :rating).merge(product_id: params[:product_id])
   end
 
   def product_params
