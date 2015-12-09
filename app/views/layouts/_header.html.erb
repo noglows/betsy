@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar-inverse navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -10,20 +10,6 @@
       <div class="navbar-brand"><%= link_to "Fuzzy", root_path %></div>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li>
-          <%= link_to "Add a Product", new_product_path if @current_user %>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li>
-            </li>
-            <li>
-            </li>
-          </ul>
-        </li>
-      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="navbar-text">
           <% if @current_user %>
