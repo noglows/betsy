@@ -1,13 +1,25 @@
 <h1>Order Fulfillment</h1>
 
+<h2>Revenue Stats</h2>
 <table class="table">
   <tr>
-    <td>Total Revenue</td>
-    <td><%= @user.revenue %></td>
+    <td>Total Revenue (exluding cancelled orders)</td>
+    <td>$<%= @user.revenue %></td>
   </tr>
-
+  <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+    <tr>
+      <td>Revenue for <%= status %> orders</td>
+      <td>$<%= @user.revenue_by_status(status) %></td>
+    </tr>
+  <% end %>
 </table>
-<h2>Total Revenue: $</h2>
+
+<br>
+
+
+<h2>All Orders</h2>
+<br>
+<br>
 
 <div class="col-md-2"></div>
 <div class="col-md-8">
