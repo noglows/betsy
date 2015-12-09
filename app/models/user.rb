@@ -35,4 +35,9 @@ class User < ActiveRecord::Base
     return revenue
   end
 
+  def num_by_status(status)
+    status_orders = orders.where(status: status)
+    return status_orders.length
+  end
+
 end
