@@ -13,11 +13,9 @@
   <%= link_to(products_path(order: 'prod'), :class => "btn btn-default") do %>
      by product
   <% end %>
-
   <%= link_to(products_path(order: 'cat'), :class => "btn btn-default") do %>
      by category
   <% end %>
-
   <%= link_to(products_path(order: 'mart'), :class => "btn btn-default") do %>
     by category
   <% end %>
@@ -25,12 +23,12 @@
 
 <br>
 <% @sort_by.each do |sort| %>
-  <% @products.each do |product| %>
-    <% if !product.retired? %>
+  <% @products.each do |product| if @sort_by!=nil %>
+    <% if !product.retired? && product.sort %>
       <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
       <br>
     <% end %>
-  <% end %>
+  <% end if @sort_by!=nil %>
 <% end %>
 
 <!-- <% elsif @order = "cat" %>
