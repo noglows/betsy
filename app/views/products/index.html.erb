@@ -32,8 +32,8 @@
     </button>
     <ul class="dropdown-menu">
       <% @merchants.each do |merch| %>
-        <%= link_to(root_path(order: merch.id), :class => "btn btn-default dropdown-toggle") do %>
-        <li><%= merch.first_name %> <%= merch.last_name %></li>
+        <li><%= link_to(root_path(order: merch.id)) do %>
+        <%= merch.first_name %> <%= merch.last_name %></li>
         <% end %>
       <% end %>
     </ul>
