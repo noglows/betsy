@@ -44,6 +44,7 @@ group :development, :test do
   # Debugging
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry'
 
   # Testing
   gem 'rspec-rails', '~> 3.0'

@@ -1,0 +1,14 @@
+<h1>Order Details</h1>
+
+<h3><%= @order.created_at %></h3>
+<h3><%= @order.status %></h3>
+
+<table class="table">
+  <% @order.order_items.each do |order_item| %>
+    <tr>
+      <td><%= order_item.product.name %></td>
+      <td><%= order_item.product.price %></td>
+      <td><%= order_item.quantity %></td>
+    </tr>
+  <% end %>
+</table>
