@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :current_user
 
   def index
     @products = Product.all
