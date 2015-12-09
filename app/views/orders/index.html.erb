@@ -3,8 +3,8 @@
 <h2>Revenue Stats</h2>
 <table class="table">
   <tr>
-    <td>Total Revenue (exluding cancelled orders)</td>
-    <td>$<%= @user.revenue %></td>
+    <td><strong>Total Revenue (exluding cancelled orders)</strong></td>
+    <td><strong>$<%= @user.revenue %></strong></td>
   </tr>
   <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
     <tr>
@@ -16,6 +16,21 @@
 
 <br>
 
+<h2>Order Stats</h2>
+<table class="table">
+  <tr>
+    <td><strong>Total Orders</strong></td>
+    <td><strong><%= @user.orders.length %></strong></td>
+  </tr>
+  <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+    <tr>
+      <td><%= status.capitalize %> orders</td>
+      <td><%= @user.num_by_status(status) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
 
 <h2>All Orders</h2>
 <br>
