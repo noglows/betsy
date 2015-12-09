@@ -21,6 +21,36 @@
   <% end %>
 </div>
 
+<div class="btn-group" role="group" aria-label="...">
+  <%= link_to(products_path(order: 'prod'), :class => "btn btn-default") do %>
+     by product
+  <% end %>
+
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      by category
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <% @categoies.each do |cat| %>
+      <li><a href="#"><%= cat.name %></a></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      by merchant
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <% @merchants.each do |merch| %>
+      <li><a href="#"><%= merch.first_name %> <%= merch.last_name %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
 <br>
 <% @products.each do |product| %>
   <% if !product.retired? %>
