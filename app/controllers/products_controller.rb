@@ -68,10 +68,19 @@ class ProductsController < ApplicationController
     end
   end
 
-  def destroy
-    product_id = params[:id]
-    Product.destroy(product_id)
-    redirect_to user_path(params[:user_id])
+  # def destroy
+  #   product_id = params[:id]
+  #   Product.destroy(product_id)
+  #   redirect_to user_path(params[:user_id])
+  # end
+
+  def retire
+    product_id = params[:product_id]
+    user_id = params[:user_id]
+    product = Product.find(product_id)
+    product.retired = true
+    product.save
+    redirect_to user_path(user_id)
   end
 
   private
