@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :current_user
+
   def index
     user_id = params[:user_id]
     @user = User.find(user_id)
