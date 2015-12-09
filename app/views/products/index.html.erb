@@ -22,31 +22,9 @@
 </div>
 
 <br>
-<% @sort_by.each do |sort| %>
-  <% @products.each do |product| if @sort_by!=nil %>
-    <% if !product.retired? && product.sort %>
-      <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
-      <br>
-    <% end %>
-  <% end if @sort_by!=nil %>
+<% @products.each do |product| %>
+  <% if !product.retired? %>
+    <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
+    <br>
+  <% end %>
 <% end %>
-
-<!-- <% elsif @order = "cat" %>
-  <% @categories.each do |cat| %>
-    <% @products.each do |product| %>
-      <% if !product.retired? && product.categories.include?(cat) %>
-        <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
-        <br>
-      <% end %>
-    <% end %>
-  <% end %>
-<% else %>
-  <% @markets.each do |mark| %>
-    <% @products.each do |product| %>
-      <% if !product.retired? && product.categories.include?(mark) %>
-        <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
-        <br>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %> -->
