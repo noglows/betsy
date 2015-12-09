@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
       else
         @user_name = User.find(@user_id).first_name
       end
-    @categoies = Category.all
+    @categories = Category.all
     @merchants = User.all
     case params[:order]
     when "prod"
