@@ -21,4 +21,7 @@
 
 <br>
 
-<%= link_to "Add a New Product", new_user_product_path(@user.id) %>
+<%= link_to "Add a New Product", new_user_product_path(@user.id), class:"btn btn-default" %>
+<br>
+<br>
+<%= link_to "View Orders", user_orders_path(@user.id), class:"btn btn-default" %>

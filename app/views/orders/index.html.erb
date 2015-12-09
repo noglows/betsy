@@ -1,0 +1,51 @@
+<h1>Order Fulfillment</h1>
+
+<h2>Revenue Stats</h2>
+<table class="table">
+  <tr>
+    <td><strong>Total Revenue (exluding cancelled orders)</strong></td>
+    <td><strong>$<%= @user.revenue %></strong></td>
+  </tr>
+  <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+    <tr>
+      <td>Revenue for <%= status %> orders</td>
+      <td>$<%= @user.revenue_by_status(status) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<h2>Order Stats</h2>
+<table class="table">
+  <tr>
+    <td><strong>Total Orders</strong></td>
+    <td><strong><%= @user.orders.length %></strong></td>
+  </tr>
+  <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+    <tr>
+      <td><%= status.capitalize %> orders</td>
+      <td><%= @user.num_by_status(status) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<h2>All Orders</h2>
+<br>
+<br>
+
+<div class="col-md-2"></div>
+<div class="col-md-8">
+  <table class="table">
+    <% @user.orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= link_to order.updated_at, user_order_path(@user.id, order.id) %></td>
+        <td><%= order.status %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div class="col-md-2"></div>
