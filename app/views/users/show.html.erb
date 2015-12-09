@@ -4,9 +4,17 @@
 <table class="table">
   <% @user.products.each do |product| %>
   <tr>
-    <td><%= product.name %></td>
+    <% if product.retired == true %>
+      <td><strike><%= product.name %></strike></td>
+    <% else %>
+      <td><%= product.name %></td>
+    <% end %>
     <td><%= link_to "Edit", edit_user_product_path(@user.id, product.id) %></td>
-    <td><%= link_to "Delete", user_product_path(@user.id, product.id), method: :delete %></td>
+    <% if product.retired == true %>
+      <td></td>
+    <% else %>
+      <td><%= link_to "Retire", user_product_retire_path(@user.id, product.id), method: :post %></td>
+    <% end %>
   </tr>
   <% end %>
 </table>

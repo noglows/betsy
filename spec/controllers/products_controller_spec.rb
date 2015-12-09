@@ -10,12 +10,6 @@ RSpec.describe ProductsController, type: :controller do
       get :index
       expect(response.status).to eq 200
     end
-
-    it "shows the proper user_id" do
-      @user_id = 1
-      get :index
-      expect(response.status).to eq 200
-    end
   end
 
   describe "GET 'new'" do
@@ -39,6 +33,12 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
+  describe "POST 'review'" do
+    it "creates a new review of a product" do
+      last_review = Review.last()
+      expect(subject).to
+    end
+  end
 
   describe "POST 'create'" do
     let(:params) do
@@ -63,8 +63,8 @@ RSpec.describe ProductsController, type: :controller do
       }
     end
 
-    it "creates an product" do
-      last_product = Album.last
+    it "creates a product" do
+      last_product = Product.last
       post :create, params
       expect(Product.last).to_not eq last_product
     end
@@ -75,11 +75,14 @@ RSpec.describe ProductsController, type: :controller do
       expect(Product.last).to eq last_product
     end
 
-    it "redirects to products index page" do
+    it "redirects to products index page when good params are passed" do
       post :create, params
       # Success case to index page
       expect(subject).to redirect_to products_path
       # Error case to
+    end
+
+    it "renders the new template when bad params are passed" do
       post :create, bad_params
       expect(subject).to render_template :new
     end
