@@ -1,24 +1,41 @@
 <h1><%= @product.name %></h1>
+<div class="row">
+    <%= image_tag @product.image_url, class: "img-responsive" %>
+</div>
 <br>
 <%= @product.description %>
 <br>
 <% if @product.retired %>
-  Product Unavailable
+  Status: Unavailable
 <% else %>
-  Available
+  Status: Available
 <% end %>
 <br>
-<div class="row">
-    <%= image_tag @product.image_url, class: "img-responsive" %>
-</div>
+<br>
 
 <%= form_for @review, url: product_review_path(@product) do |f| %>
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="btn-group" data-toggle="buttons">
+        <% 1.upto(5) do |i| %>
+          <%= f.label :rating, class: "btn btn-info" do %>
+            <%= f.radio_button :rating, i %>
+            <%= i %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
   <div class="form-group">
-  <%= f.label :review_text, "Review" %>
+  <%= f.label :review_text, "Write a Review" %>
   <%= f.text_area :review_text, class: "form-control"%>
   </div>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
+<br>
 
 <% @reviews.each do |review| %>
-  <%= review.
+  <%= review.rating %>
+  <%= review.review_text %>
+  <br>
+<% end %>

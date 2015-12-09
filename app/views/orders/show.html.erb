@@ -1,0 +1,35 @@
+<h1>Order Details</h1>
+
+<h3><%= @order.created_at %></h3>
+<h3><%= @order.status %></h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Unit Price</th>
+      <th>Quantity</th>
+      <th>Item Total</th>
+    </tr>
+  </thead>
+  <% @order.order_items.each do |order_item| %>
+    <tr>
+      <td><%= order_item.product.name %></td>
+      <td><%= order_item.product.price %></td>
+      <td><%= order_item.quantity %></td>
+      <td><%= order_item.quantity * order_item.product.price %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><strong>Total</strong></td>
+    <td><%= @order.total %></td>
+  </tr>
+</table>
