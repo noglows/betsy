@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'products#index'
 
   resources :products do
-    post "/reviews/:id/create" , to: "products#review"
+    post "/review" , to: "products#review"
   end
 
   resources :orders, only: [:show, :update]

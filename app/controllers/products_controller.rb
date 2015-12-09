@@ -9,19 +9,57 @@ class ProductsController < ApplicationController
         @user_name = User.find(@user_id).first_name
       end
 
-    @categories = Category.all
-    @markets = User.all
+
     case params[:order]
     when "prod"
       @order = "prod"
+      @sort_by = [a..z]
       @products = Product.order(:name)
     when "mart"
       @order = "mart"
+      @sort_by = User.all
       @products = Product.order(name)
     when "cat"
       @order = "cat"
+      @sort_by = Category.all
       @products = Product.order(:name)
     end
+  end
+
+  def show
+    @product = Product.find(params[:id])
+    @review = Review.new
+    @reviews = Review.all
+  end
+
+  def review
+    Review.create(review_params)
+
+    redirect_to product_path(params[:product_id])
+  end
+
+  def new
+    @product = Product.new
+  end
+
+  def create
+    @user_id = session[:user_id]
+    @product = Product.new(product_params)
+    if @product.save
+      redirect_to user_path(@user_id)
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def review_params
+    params.require(:review).permit(:review_text).merge(product_id: params[:product_id])
+  end
+
+  def product_params
+    params.require(:product).permit(:name, :description, :price, :inventory_total, :retired, :image_url, :user_id)
   end
 
 end

@@ -24,14 +24,16 @@
 </div>
 
 <br>
-<% if @order = "prod" %>
+<!-- <% if @order = "prod" %> -->
+
   <% @products.each do |product| %>
     <% if !product.retired? %>
       <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
       <br>
     <% end %>
   <% end %>
-<% elsif @order = "cat" %>
+
+<!-- <% elsif @order = "cat" %>
   <% @categories.each do |cat| %>
     <% @products.each do |product| %>
       <% if !product.retired? && product.categories.include?(cat) %>
@@ -49,4 +51,4 @@
       <% end %>
     <% end %>
   <% end %>
-<% end %>
+<% end %> -->
