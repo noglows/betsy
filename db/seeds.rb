@@ -70,7 +70,7 @@ end
 seed_orders = [
   { status: "pending" },
   { status: "complete" },
-  { status: "cancelled" },
+  { status: "complete" },
   { status: "paid" },
   { status: "pending" },
   { status: "pending" }

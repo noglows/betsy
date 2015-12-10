@@ -11,11 +11,13 @@ class User < ActiveRecord::Base
 
   # switch orders
   def revenue
+    #binding.pry
     revenue = 0
-    order_items.each do |oi|
-      if oi.order.status != "cancelled"
-        product = order_item.product
-        revenue += (product.price * order_item.quantity)
+    products.each do |product|
+      product.order_items.each do |oi|
+        if oi.order.status != "cancelled"
+          revenue += (product.price * oi.quantity)
+        end
       end
     end
     return revenue
@@ -23,13 +25,10 @@ class User < ActiveRecord::Base
 
   def revenue_by_status(status)
     revenue = 0
-    order_items.each do |oi|
-      status_orders = oi.orders.where(status: status)
-      status_orders.each do |order|
-        order_items = order.order_items
-        order_items.each do |order_item|
-          product = order_item.product
-          revenue += (product.price * order_item.quantity)
+    products.each do |product|
+      product.order_items.each do |oi|
+        if oi.order.status == status
+            revenue += (product.price * oi.quantity)
         end
       end
     end
@@ -38,11 +37,13 @@ class User < ActiveRecord::Base
 
   def num_orders
     orders = []
-    order_items.each do |oi|
-      if orders.includes? oi.order
-        next
-      else
-        orders.push(oi.order)
+    products.each do |product|
+      product.order_items.each do |oi|
+        if orders.include? oi.order.id
+          next
+        else
+          orders.push(oi.order.id)
+        end
       end
     end
     return orders.length
@@ -50,16 +51,19 @@ class User < ActiveRecord::Base
 
   def num_orders_by_status(status)
     orders = []
-    order_items.each do |oi|
-      if oi.order.status == status
-        if orders.includes? oi.order
-          next
-        else
-          orders.push(oi.order)
+    products.each do |product|
+      product.order_items.each do |oi|
+        if oi.order.status == status
+          if orders.include? oi.order
+            next
+          else
+            orders.push(oi.order)
+          end
         end
       end
     end
     return orders.length
   end
+
 
 end
