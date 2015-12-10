@@ -6,7 +6,7 @@
 <br>
 
 <div class="btn-group" role="group" aria-label="...">
-  <%= link_to(products_path(order: 'prod'), :class => "btn btn-default") do %>
+  <%= link_to(products_path(:type => 'cat', :class => "btn btn-default")) do %>
      by product
   <% end %>
 
@@ -17,7 +17,7 @@
     </button>
     <ul class="dropdown-menu">
       <% @categories.each do |cat| %>
-        <li><%= link_to(root_path(order: cat.id)) do %>
+        <li><%= link_to(root_path(:type => 'cat', :order => cat.id)) do %>
         <%= cat.name %></li>
         <% end %>
       <% end %>
@@ -30,7 +30,7 @@
     </button>
     <ul class="dropdown-menu">
       <% @merchants.each do |merch| %>
-        <li><%= link_to(root_path(order: merch.id)) do %>
+        <li><%= link_to(root_path(:type => 'merch',:order => merch.id)) do %>
         <%= merch.first_name %> <%= merch.last_name %></li>
         <% end %>
       <% end %>

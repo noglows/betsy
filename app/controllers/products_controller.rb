@@ -1,7 +1,10 @@
+require 'pry'
+
 class ProductsController < ApplicationController
   before_action :current_user
 
   def index
+    @products = Product.order(:created_at)
     @user_id = session[:user_id]
       if @user_id.nil?
         @user_name = "Guest"
@@ -10,16 +13,14 @@ class ProductsController < ApplicationController
       end
     @categories = Category.all
     @merchants = User.all
-    case params[:order]
-    when "prod"
+    case params[:type]
+    when 'merch'
+      @products = Product.where("user_id = #{params[:order]}")
+    when "cat"
+      @products = Product.order("categories: params[:order]")
+    else
       @order = "prod"
       @products = Product.order(:created_at)
-    when "mart"
-      @order = "mart"
-      @products = Product.where(user: params[:order])
-    when "cat"
-      @order = "cat"
-      @products = Product.order(category: params[:order])
     end
   end
 
