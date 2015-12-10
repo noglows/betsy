@@ -1,0 +1,7 @@
+You have <%= @order_items.length %> items in your cart!
+<br>
+<% @order_items.each do |item| %>
+<p>
+  <%= item.product.name %>
+</p>
+<% end %>

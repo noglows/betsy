@@ -11,6 +11,13 @@
   Status: Available
 <% end %>
 <br>
+<%= form_for [@product, @order_item], controller: :order_items, action: :create do |f| %>
+  <%# link_to "Add to Cart", product_order_items_path(@product), method: :post, class: "btn btn-success" %>
+  <%= f.label :quantity %>
+  <%= f.number_field :quantity, min: 1, value: 1 %>
+  <%= f.submit "Add to Cart", class: "btn btn-success" %>
+<% end %>
+<br>
 <br>
 
 <%= form_for @review, url: product_review_path(@product) do |f| %>
