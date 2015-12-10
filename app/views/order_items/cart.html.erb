@@ -1,0 +1,25 @@
+<h2>You have <%= @order_items.length %> items in your cart!</h2>
+<br>
+<table class="table table-hover">
+  <tr>
+    <th>
+      Item
+    </th>
+    <th>
+      Quantity
+    </th>
+  </tr>
+  <% @order_items.each do |item| %>
+  <tr>
+    <td>
+      <%= item.product.name %>
+    </td>
+    <td>
+      <%= form_for [item.product, item], controller: :order_items, action: :update do |f| %>
+        <%= f.select :quantity, (0..item.product.inventory_total) %>
+        <%= f.submit "Update", class: "btn btn-default" %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>

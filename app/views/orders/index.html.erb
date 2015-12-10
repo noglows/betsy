@@ -1,52 +1,91 @@
 <h1>Order Fulfillment</h1>
 
 <h2>Revenue Stats</h2>
-<table class="table">
-  <tr>
-    <td><strong>Total Revenue (exluding cancelled orders)</strong></td>
-    <td><strong>$<%= @user.revenue %></strong></td>
-  </tr>
-  <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+<br>
+<div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+  <table class="table">
     <tr>
-      <td>Revenue for <%= status %> orders</td>
-      <td>$<%= @user.revenue_by_status(status) %></td>
+      <td><strong>Total Revenue (exluding cancelled orders)</strong></td>
+      <td><strong><%= cents_to_dollars(@user.revenue) %></strong></td>
     </tr>
-  <% end %>
-</table>
+    <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+      <tr>
+        <td>Revenue for <%= status %> orders</td>
+        <td><%= cents_to_dollars(@user.revenue_by_status(status)) %></td>
+      </tr>
+    <% end %>
+  </table>
+  </div>
+  <div class="col-lg-4"></div>
+</div>
 
 <br>
 
 <h2>Order Stats</h2>
-<table class="table">
-  <tr>
-    <td><strong>Total Orders</strong></td>
-    <td><strong><%= @user.num_orders %></strong></td>
-  </tr>
-  <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+<br>
+<div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+  <table class="table">
     <tr>
-      <td><%= status.capitalize %> orders</td>
-      <td><%= @user.num_orders_by_status(status) %></td>
+      <td><strong>Total Orders</strong></td>
+      <td><strong><%= @user.num_orders %></strong></td>
     </tr>
-  <% end %>
-</table>
+    <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+      <tr>
+        <td><%= status.capitalize %> orders</td>
+        <td><%= @user.num_orders_by_status(status) %></td>
+      </tr>
+    <% end %>
+  </table>
+  </div>
+  <div class="col-lg-4"></div>
+</div>
 
 <br>
 
 
 <h2>All Orders</h2>
 <br>
-<br>
 
-<div class="col-md-2"></div>
-<div class="col-md-8">
-  <table class="table">
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.id %></td>
-        <td><%= link_to order.updated_at, user_order_path(@user.id, order.id) %></td>
-        <td><%= order.status %></td>
-      </tr>
-    <% end %>
-  </table>
+
+<%= link_to(user_orders_path(sort:'all'), :class => "btn btn-default", :id => 'all-button') do %>
+ All Orders
+<% end %>
+<%= link_to(user_orders_path(sort:'pending'), :class => "btn btn-default", :id => 'pending-button') do %>
+  Pending
+<% end %>
+<%= link_to(user_orders_path(sort:'paid'), :class => "btn btn-default", :id => 'paid-button') do %>
+  Paid
+<% end %>
+<%= link_to(user_orders_path(sort:'complete'), :class => "btn btn-default", :id => 'complete-button') do %>
+  Complete
+<% end %>
+<%= link_to(user_orders_path(sort:'cancelled'), :class => "btn btn-default", :id => 'cancelled-button') do %>
+  Cancelled
+<% end %>
+
+<br>
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+    <table class="table">
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= link_to readable_date(order.updated_at), user_order_path(@user.id, order.id) %></td>
+          <td><%= order.status.capitalize %></td>
+          <td><%= cents_to_dollars(order.total(@user.id)) %></td>
+          <% if order.status == 'paid' %>
+            <td><%= link_to "Mark as Shipped", user_order_ship_path(@user.id, order.id), method: :post %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="col-lg-2"></div>
 </div>
-<div class="col-md-2"></div>
