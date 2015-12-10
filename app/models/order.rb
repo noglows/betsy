@@ -1,9 +1,9 @@
 class Order < ActiveRecord::Base
   has_many :order_items
-  belongs_to :user
+  #belongs_to :user
 
   validates :status, presence: true
-  validates :user_id, presence: true
+  #validates :user_id, presence: true
 
   def total
     revenue = 0
@@ -12,5 +12,5 @@ class Order < ActiveRecord::Base
     end
     return revenue
   end
-  
+
 end

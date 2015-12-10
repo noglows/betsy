@@ -34,9 +34,19 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "POST 'review'" do
+    let(:params) do
+      {
+        review:{
+          rating: "3",
+          review_text: "An average rating",
+          user_id: 1
+        }
+      }
+    end
     it "creates a new review of a product" do
-      last_review = Review.last()
-      expect(subject).to
+      post :review, id: product.id
+      last_review = Review.last
+      expect(last_review.review_text).to eq "An average rating"
     end
   end
 
@@ -134,25 +144,6 @@ RSpec.describe ProductsController, type: :controller do
       # Error case to
       patch :update, bad_params
       expect(subject).to render_template :edit
-    end
-  end
-
-  describe "DELETE 'destroy'" do
-    let(:params) do
-      {
-        id: product.id
-      }
-    end
-
-    it "deletes a product" do
-      expect(Product.all).to include(product)
-      delete :destroy, params
-      expect(Product.all).to_not include(product)
-    end
-
-    it "renders the all products view" do
-      get :index
-      expect(subject).to render_template :index
     end
   end
 
