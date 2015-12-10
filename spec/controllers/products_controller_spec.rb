@@ -39,12 +39,12 @@ RSpec.describe ProductsController, type: :controller do
         review:{
           rating: "3",
           review_text: "An average rating",
-          user_id: 1
         }
       }
     end
+
     it "creates a new review of a product" do
-      post :review, id: product.id
+      post :review, params.merge(product_id: 1)
       last_review = Review.last
       expect(last_review.review_text).to eq "An average rating"
     end
@@ -86,9 +86,9 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     it "redirects to products index page when good params are passed" do
-      post :create, params
+      post :create, params.merge(id: 1)
       # Success case to index page
-      expect(subject).to redirect_to products_path
+      expect(subject).to redirect_to user_path(params[:id])
       # Error case to
     end
 
@@ -130,7 +130,7 @@ RSpec.describe ProductsController, type: :controller do
       expect(product.attributes).to_not eq before_update
     end
 
-    it "does not update the album with bad params" do
+    it "does not update the product with bad params" do
       before_update = product.attributes
       patch :update, bad_params
       product.reload
