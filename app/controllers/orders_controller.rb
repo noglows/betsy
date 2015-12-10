@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
     @orders = []
     @user.products.each do |product|
       product.order_items.each do |oi|
-        if ['pending','paid','cancelled'].include? params[:sort]
+        if ['pending','paid','cancelled','complete'].include? params[:sort]
           if oi.order.status == params[:sort]
             if @orders.include? oi.order
               next
@@ -40,5 +40,14 @@ class OrdersController < ApplicationController
 
   def update
     @user = User.find(user_id)
+  end
+
+  def ship
+    user_id = params[:user_id]
+    order_id = params[:order_id]
+    order = Order.find(order_id)
+    order.status = "complete"
+    order.save
+    redirect_to user_orders_path(user_id)
   end
 end

@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :update]
 
   resources :users do
-    resources :orders
+    resources :orders do
+      post "/ship", to: "orders#ship"
+    end
     resources :products do
       post "/retire", to: "products#retire"
     end
