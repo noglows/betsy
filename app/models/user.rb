@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :products
-  has_many :orders
+  #has_many :orders
+  has_many :order_items
 
   has_secure_password
 
@@ -8,15 +9,15 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates :email, email_format: { message: "doesn't look like an email address" }
 
+  # switch orders
   def revenue
+    #binding.pry
     revenue = 0
-    orders.each do |order|
-      if order.status != "cancelled"
-        order_items = order.order_items
-        order_items.each do |order_item|
-          product = order_item.product
-          revenue += (product.price * order_item.quantity)
-          end
+    products.each do |product|
+      product.order_items.each do |oi|
+        if oi.order.status != "cancelled"
+          revenue += (product.price * oi.quantity)
+        end
       end
     end
     return revenue
@@ -24,20 +25,45 @@ class User < ActiveRecord::Base
 
   def revenue_by_status(status)
     revenue = 0
-    status_orders = orders.where(status: status)
-    status_orders.each do |order|
-      order_items = order.order_items
-      order_items.each do |order_item|
-        product = order_item.product
-        revenue += (product.price * order_item.quantity)
+    products.each do |product|
+      product.order_items.each do |oi|
+        if oi.order.status == status
+            revenue += (product.price * oi.quantity)
         end
       end
+    end
     return revenue
   end
 
-  def num_by_status(status)
-    status_orders = orders.where(status: status)
-    return status_orders.length
+  def num_orders
+    orders = []
+    products.each do |product|
+      product.order_items.each do |oi|
+        if orders.include? oi.order.id
+          next
+        else
+          orders.push(oi.order.id)
+        end
+      end
+    end
+    return orders.length
   end
+
+  def num_orders_by_status(status)
+    orders = []
+    products.each do |product|
+      product.order_items.each do |oi|
+        if oi.order.status == status
+          if orders.include? oi.order
+            next
+          else
+            orders.push(oi.order)
+          end
+        end
+      end
+    end
+    return orders.length
+  end
+
 
 end

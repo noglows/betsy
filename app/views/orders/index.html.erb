@@ -20,17 +20,18 @@
 <table class="table">
   <tr>
     <td><strong>Total Orders</strong></td>
-    <td><strong><%= @user.orders.length %></strong></td>
+    <td><strong><%= @user.num_orders %></strong></td>
   </tr>
   <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
     <tr>
       <td><%= status.capitalize %> orders</td>
-      <td><%= @user.num_by_status(status) %></td>
+      <td><%= @user.num_orders_by_status(status) %></td>
     </tr>
   <% end %>
 </table>
 
 <br>
+
 
 <h2>All Orders</h2>
 <br>
@@ -39,7 +40,7 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
   <table class="table">
-    <% @user.orders.each do |order| %>
+    <% @orders.each do |order| %>
       <tr>
         <td><%= order.id %></td>
         <td><%= link_to order.updated_at, user_order_path(@user.id, order.id) %></td>

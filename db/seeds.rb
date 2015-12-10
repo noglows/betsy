@@ -46,25 +46,34 @@ seed_products.each do |seed|
 end
 
 seed_reviews = [
-  {rating: 3, review_text: "Adorable, but the jokes got real old real fast", product_id: 3, user_id: 4},
-  {rating: 5, review_text: "He is too cool for school. Everyone loves the Fonz!", product_id: 4, user_id: 1},
-  {rating: 1, review_text: "This made my guitar sound fuzzy, but the pedal itself wasn't fuzzy, which was a total bummer.", product_id: 5, user_id: 3},
-  {rating: 2, review_text: "I liked the calls, but not the whats, the mas, or the its in this candy bar. Reeses are better", product_id: 6, user_id: 2},
-  {rating: 4, review_text: "This bunny was really fuzzy. I would have liked just a little more fuzz. I'm picky.", product_id: 1, user_id: 1},
-  {rating: 5, review_text: "Gotta love the Woz", product_id: 2, user_id: 5}
+  {rating: 3, review_text: "Adorable, but the jokes got real old real fast", product_id: 3 },
+  {rating: 5, review_text: "He is too cool for school. Everyone loves the Fonz!", product_id: 4 },
+  {rating: 1, review_text: "This made my guitar sound fuzzy, but the pedal itself wasn't fuzzy, which was a total bummer.", product_id: 5 },
+  {rating: 2, review_text: "I liked the calls, but not the whats, the mas, or the its in this candy bar. Reeses are better", product_id: 6 },
+  {rating: 4, review_text: "This bunny was really fuzzy. I would have liked just a little more fuzz. I'm picky.", product_id: 1 },
+  {rating: 5, review_text: "Gotta love the Woz", product_id: 2 }
 ]
 
 seed_reviews.each do |seed|
   Review.create(seed)
 end
 
+# seed_orders = [
+#   { status: "pending", user_id: 1 },
+#   { status: "complete", user_id: 2 },
+#   { status: "cancelled", user_id: 3 },
+#   { status: "paid", user_id: 4 },
+#   { status: "pending", user_id: 5 },
+#   { status: "pending", user_id: 5 }
+# ]
+
 seed_orders = [
-  { status: "pending", user_id: 1 },
-  { status: "complete", user_id: 2 },
-  { status: "cancelled", user_id: 3 },
-  { status: "paid", user_id: 4 },
-  { status: "pending", user_id: 5 },
-  { status: "pending", user_id: 5 }
+  { status: "pending" },
+  { status: "complete" },
+  { status: "complete" },
+  { status: "paid" },
+  { status: "pending" },
+  { status: "pending" }
 ]
 
 seed_orders.each do |seed|
@@ -81,6 +90,7 @@ seed_order_items = [
   { quantity: 7, order_id: 1, product_id: 5 },
   { quantity: 2, order_id: 4, product_id: 1 },
   { quantity: 5, order_id: 6, product_id: 6 },
+  { quantity: 4, order_id: 4, product_id: 6 }
 ]
 
 seed_order_items.each do |seed|
