@@ -16,9 +16,9 @@
     <% if order_item.product.user.id == @user.id %>
       <tr>
         <td><%= link_to order_item.product.name, user_product_path(order_item.product.user_id, order_item.product.id) %></td>
-        <td><%= order_item.product.price %></td>
+        <td><%= cents_to_dollars(order_item.product.price) %></td>
         <td><%= order_item.quantity %></td>
-        <td><%= order_item.quantity * order_item.product.price %></td>
+        <td><%= cents_to_dollars(order_item.quantity * order_item.product.price) %></td>
       </tr>
     <% end %>
   <% end %>
@@ -32,7 +32,7 @@
     <td></td>
     <td></td>
     <td><strong>Total</strong></td>
-    <td><%= @order.total(@user.id) %></td>
+    <td><%= cents_to_dollars(@order.total(@user.id)) %></td>
   </tr>
 </table>
 
