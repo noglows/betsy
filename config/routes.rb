@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   #
   # get 'order_items/destroy'
 
-  get "/cart" => "orders#cart"
+  get "/cart" => "order_items#cart"
 
   root 'products#index'
 

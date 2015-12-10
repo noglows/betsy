@@ -28,10 +28,6 @@ class OrdersController < ApplicationController
     @cookie = true unless cookies[:order].nil?
   end
 
-  def cart
-    @order_items = my_order.order_items
-  end
-
   def update
     @user = User.find(user_id)
   end

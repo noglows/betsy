@@ -13,7 +13,11 @@ class OrderItemsController < ApplicationController
       @order.order_items << OrderItem.create(order_item_params)
     end
 
-    redirect_to product_path(params[:product_id])
+    redirect_to cart_path
+  end
+
+  def cart
+    @order_items = my_order.order_items
   end
 
   def update
