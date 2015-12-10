@@ -31,6 +31,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @review = Review.new
     @reviews = Review.all.reverse
+    @order_item = my_order.order_items.new
   end
 
   def review
@@ -82,9 +83,6 @@ class ProductsController < ApplicationController
     product.retired = true
     product.save
     redirect_to user_path(user_id)
-  end
-
-  def order
   end
 
   private
