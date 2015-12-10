@@ -9,7 +9,7 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <% @categoies.each do |cat| %>
+      <% @categories.each do |cat| %>
         <li><%= link_to(root_path(order: cat.id)) do %>
         <%= cat.name %></li>
         <% end %>
@@ -35,7 +35,7 @@
 <br>
 <% @products.each do |product| %>
   <% if !product.retired? %>
-    <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
+    <%= link_to product.name + " $" + product.price.to_s, product_path(product.id) %>
     <br>
   <% end %>
 <% end %>
