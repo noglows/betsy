@@ -9,7 +9,7 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <% @categoies.each do |cat| %>
+      <% @categories.each do |cat| %>
         <li><%= link_to(root_path(order: cat.id)) do %>
         <%= cat.name %></li>
         <% end %>
