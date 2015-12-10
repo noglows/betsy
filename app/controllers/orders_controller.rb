@@ -4,6 +4,19 @@ class OrdersController < ApplicationController
   def index
     user_id = params[:user_id]
     @user = User.find(user_id)
+    @orders = []
+    @user.products.each do |product|
+      product.order_items.each do |oi|
+        if @orders.include? oi.order
+          next
+        else
+          @orders.push(oi.order)
+        end
+      end
+    end
+    @orders.sort_by! { |obj| obj.updated_at }
+    return @orders
+
   end
 
   def show
@@ -19,6 +32,6 @@ class OrdersController < ApplicationController
   end
 
   def update
-
+    @user = User.find(user_id)
   end
 end

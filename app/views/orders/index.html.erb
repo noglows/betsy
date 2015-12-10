@@ -40,13 +40,12 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
   <table class="table">
-    <% @user.order_items.each do |oi| %>
-      <% order = oi.order %>
-        <tr>
-          <td><%= order.id %></td>
-          <td><%= link_to order.updated_at, user_order_path(@user.id, order.id) %></td>
-          <td><%= order.status %></td>
-        </tr>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= link_to order.updated_at, user_order_path(@user.id, order.id) %></td>
+        <td><%= order.status %></td>
+      </tr>
     <% end %>
   </table>
 </div>
