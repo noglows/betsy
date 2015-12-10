@@ -7,10 +7,20 @@ class OrdersController < ApplicationController
     @orders = []
     @user.products.each do |product|
       product.order_items.each do |oi|
-        if @orders.include? oi.order
-          next
+        if params[:sort] != 'all'
+          if oi.order.status == params[:sort]
+            if @orders.include? oi.order
+              next
+            else
+              @orders.push(oi.order)
+            end
+          end
         else
-          @orders.push(oi.order)
+          if @orders.include? oi.order
+            next
+          else
+            @orders.push(oi.order)
+          end
         end
       end
     end
