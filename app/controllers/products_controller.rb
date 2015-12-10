@@ -84,6 +84,9 @@ class ProductsController < ApplicationController
     redirect_to user_path(user_id)
   end
 
+  def order
+  end
+
   private
 
   def review_params
