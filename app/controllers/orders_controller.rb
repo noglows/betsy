@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
     @orders = []
     @user.products.each do |product|
       product.order_items.each do |oi|
-        if params[:sort] != 'all'
+        if ['pending','paid','cancelled'].include? params[:sort]
           if oi.order.status == params[:sort]
             if @orders.include? oi.order
               next
