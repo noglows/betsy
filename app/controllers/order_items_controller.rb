@@ -3,11 +3,21 @@ class OrderItemsController < ApplicationController
   def create
     my_order
     @order.save
-    current_user.cookies[:order] = @order.id
+    cookies[:order] = @order.id
 
-    @order.order_items << OrderItem.create(order_item_params)
+    item = @order.order_items.where(product_id: params[:product_id])
 
-    redirect_to product_path(params[:product_id])
+    unless item.empty?
+      item.first.increment!(:quantity, by = order_item_params[:quantity].to_i)
+    else
+      @order.order_items << OrderItem.create(order_item_params)
+    end
+
+    redirect_to cart_path
+  end
+
+  def cart
+    @order_items = my_order.order_items
   end
 
   def update

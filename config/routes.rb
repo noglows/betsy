@@ -6,20 +6,21 @@ Rails.application.routes.draw do
   #
   # get 'order_items/destroy'
 
-  get "/cart" => "orders#cart"
+  get "/cart" => "order_items#cart"
 
   root 'products#index'
 
   resources :products do
     post "/review", to: "products#review"
-    # post "/order" => "products#order"
     resources :order_items
   end
 
   resources :orders, only: [:show, :update]
 
   resources :users do
-    resources :orders
+    resources :orders do
+      post "/ship", to: "orders#ship"
+    end
     resources :products do
       post "/retire", to: "products#retire"
     end
