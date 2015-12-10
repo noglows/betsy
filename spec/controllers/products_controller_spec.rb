@@ -39,12 +39,12 @@ RSpec.describe ProductsController, type: :controller do
         review:{
           rating: "3",
           review_text: "An average rating",
-          user_id: 1
         }
       }
     end
+
     it "creates a new review of a product" do
-      post :review, id: product.id
+      post :review, params.merge(product_id: 1)
       last_review = Review.last
       expect(last_review.review_text).to eq "An average rating"
     end
@@ -75,7 +75,7 @@ RSpec.describe ProductsController, type: :controller do
 
     it "creates a product" do
       last_product = Product.last
-      post :create, params
+      post :create, params.merge(id)
       expect(Product.last).to_not eq last_product
     end
 
@@ -130,7 +130,7 @@ RSpec.describe ProductsController, type: :controller do
       expect(product.attributes).to_not eq before_update
     end
 
-    it "does not update the album with bad params" do
+    it "does not update the product with bad params" do
       before_update = product.attributes
       patch :update, bad_params
       product.reload
