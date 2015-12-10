@@ -15,7 +15,7 @@
   <% @order.order_items.each do |order_item| %>
     <% if order_item.product.user.id == @user.id %>
       <tr>
-        <td><%= order_item.product.name %></td>
+        <td><%= link_to order_item.product.name, user_product_path(order_item.product.user_id, order_item.product.id) %></td>
         <td><%= order_item.product.price %></td>
         <td><%= order_item.quantity %></td>
         <td><%= order_item.quantity * order_item.product.price %></td>
@@ -35,3 +35,5 @@
     <td><%= @order.total(@user.id) %></td>
   </tr>
 </table>
+
+<%= link_to "Mark as Shipped", user_order_ship_path(@user.id, @order.id), method: :post, class:"btn btn-default" %>
