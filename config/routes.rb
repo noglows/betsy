@@ -12,7 +12,6 @@ Rails.application.routes.draw do
 
   resources :products do
     post "/review", to: "products#review"
-    # post "/order" => "products#order"
     resources :order_items
   end
 
