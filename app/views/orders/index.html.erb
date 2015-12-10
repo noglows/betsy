@@ -43,7 +43,7 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= order.id %></td>
-        <td><%= link_to order.updated_at, user_order_path(@user.id, order.id) %></td>
+        <td><%= link_to readable_date(order.updated_at), user_order_path(@user.id, order.id) %></td>
         <td><%= order.status %></td>
       </tr>
     <% end %>
