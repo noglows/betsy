@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
   def create
     my_order
     @order.save
-    cookies[:order] = @order.id
+    current_user.cookies[:order] = @order.id
 
     @order.order_items << OrderItem.create(order_item_params)
 

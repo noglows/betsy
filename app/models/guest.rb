@@ -1,8 +1,8 @@
 class Guest
-  attr_accessor :order
+  attr_accessor :cookies
 
-  def initialize(cookie)
-    @cookie = cookie
+  def initialize(cookies)
+    @cookies = cookies
   end
 
 end

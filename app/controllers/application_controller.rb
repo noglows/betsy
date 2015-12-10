@@ -20,6 +20,6 @@ class ApplicationController < ActionController::Base
   end
 
   def guest_user
-    @guest ||= Guest.new(nil)
+    @guest ||= Guest.new(cookies)
   end
 end
