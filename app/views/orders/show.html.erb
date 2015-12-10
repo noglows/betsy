@@ -13,12 +13,14 @@
     </tr>
   </thead>
   <% @order.order_items.each do |order_item| %>
-    <tr>
-      <td><%= order_item.product.name %></td>
-      <td><%= order_item.product.price %></td>
-      <td><%= order_item.quantity %></td>
-      <td><%= order_item.quantity * order_item.product.price %></td>
-    </tr>
+    <% if order_item.product.user.id == @user.id %>
+      <tr>
+        <td><%= order_item.product.name %></td>
+        <td><%= order_item.product.price %></td>
+        <td><%= order_item.quantity %></td>
+        <td><%= order_item.quantity * order_item.product.price %></td>
+      </tr>
+    <% end %>
   <% end %>
   <tr>
     <td></td>
@@ -30,6 +32,6 @@
     <td></td>
     <td></td>
     <td><strong>Total</strong></td>
-    <td><%= @order.total %></td>
+    <td><%= @order.total(@user.id) %></td>
   </tr>
 </table>

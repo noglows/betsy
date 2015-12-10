@@ -75,7 +75,7 @@ RSpec.describe ProductsController, type: :controller do
 
     it "creates a product" do
       last_product = Product.last
-      post :create, params.merge(id)
+      post :create, params
       expect(Product.last).to_not eq last_product
     end
 
@@ -86,9 +86,9 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     it "redirects to products index page when good params are passed" do
-      post :create, params
+      post :create, params.merge(id: 1)
       # Success case to index page
-      expect(subject).to redirect_to products_path
+      expect(subject).to redirect_to user_path(params[:id])
       # Error case to
     end
 
