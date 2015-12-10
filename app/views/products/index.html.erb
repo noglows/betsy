@@ -42,7 +42,7 @@
 <br>
 <% @products.each do |product| %>
   <% if !product.retired? %>
-    <%= link_to product.name + " $" + product.price.to_s, product_path(product.id) %>
+    <%= link_to product.name + " " + cents_to_dollars(product.price), product_path(product.id) %>
     <br>
   <% end %>
 <% end %>

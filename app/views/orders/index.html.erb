@@ -8,12 +8,12 @@
   <table class="table">
     <tr>
       <td><strong>Total Revenue (exluding cancelled orders)</strong></td>
-      <td><strong>$<%= @user.revenue %></strong></td>
+      <td><strong><%= cents_to_dollars(@user.revenue) %></strong></td>
     </tr>
     <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
       <tr>
         <td>Revenue for <%= status %> orders</td>
-        <td>$<%= @user.revenue_by_status(status) %></td>
+        <td><%= cents_to_dollars(@user.revenue_by_status(status)) %></td>
       </tr>
     <% end %>
   </table>
@@ -77,7 +77,7 @@
           <td><%= order.id %></td>
           <td><%= link_to readable_date(order.updated_at), user_order_path(@user.id, order.id) %></td>
           <td><%= order.status.capitalize %></td>
-          <td>$<%= order.total(@user.id) %></td>
+          <td><%= cents_to_dollars(order.total(@user.id)) %></td>
           <% if order.status == 'paid' %>
             <td><%= link_to "Mark as Shipped", user_order_ship_path(@user.id, order.id), method: :post %></td>
           <% else %>
