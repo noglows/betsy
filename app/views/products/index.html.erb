@@ -35,7 +35,7 @@
 <br>
 <% @products.each do |product| %>
   <% if !product.retired? %>
-    <a href="product_route(product.id)"> <%= product.name %> $<%= product.price %> </a>
-    <br>
+  <%= link_to product.name + " $" + product.price.to_s, product_path(product.id) %>
+  <br>
   <% end %>
 <% end %>
