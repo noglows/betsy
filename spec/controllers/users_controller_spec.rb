@@ -37,10 +37,20 @@ RSpec.describe UsersController, type: :controller do
       expect(User.last).to_not eq last_user
     end
 
+    it "redirects to root path when a user is successfully created" do
+      post :create, params
+      expect(subject).to redirect_to root_path
+    end
+
     it "does not create a user with bad params" do
       last_user  = User.last
       post :create, bad_params
       expect(User.last).to eq last_user
+    end
+
+    it "renders the create user page when bad params are used to try to create a user" do
+      post :create, bad_params
+      expect(subject).to render_template :new
     end
   end
 

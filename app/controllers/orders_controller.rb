@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
     user_id = params[:user_id]
     order_id = params[:id]
     @order = Order.find(order_id)
+    @user = User.find(user_id)
 
     @cookie = true unless cookies[:order].nil?
   end
