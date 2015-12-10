@@ -17,7 +17,11 @@ class ProductsController < ApplicationController
     when 'merch'
       @products = Product.where("user_id = #{params[:order]}")
     when "cat"
-      @products = Product.order("categories: params[:order]")
+      prod = Product.all
+      @products = prod.select {|product|
+        rows = product.categories.where("category_id = #{params[:order]}")
+        !rows.to_a.empty?
+      }
     else
       @order = "prod"
       @products = Product.order(:created_at)
