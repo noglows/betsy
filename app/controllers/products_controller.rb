@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   before_action :current_user
 
   def index
-    @products = Product.all
     @user_id = session[:user_id]
       if @user_id.nil?
         @user_name = "Guest"
@@ -14,16 +13,13 @@ class ProductsController < ApplicationController
     case params[:order]
     when "prod"
       @order = "prod"
-      @sort_by = nil
-      @products = Product.order(:name)
+      @products = Product.order(:created_at)
     when "mart"
       @order = "mart"
-      @sort_by = User.all
-      @products = Product.order(name)
+      @products = Product.where(user: params[:order])
     when "cat"
       @order = "cat"
-      @sort_by = Category.all
-      @products = Product.order(:name)
+      @products = Product.order(category: params[:order])
     end
   end
 
