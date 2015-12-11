@@ -86,6 +86,7 @@ RSpec.describe ProductsController, type: :controller do
     before :each do
       session[:user_id] = user.id
     end
+
     it "creates a product with good params" do
       last_product = Product.last
       post :create, params
@@ -112,6 +113,14 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "PATCH 'update'" do
+    let(:user) do
+      User.create(first_name: "Someone",
+                  last_name: "Else",
+                  email: "7@7.co",
+                  password: "pass",
+                  password_confirmation: "pass")
+    end
+
     let(:params) do
       {
         product:{
@@ -122,7 +131,8 @@ RSpec.describe ProductsController, type: :controller do
           image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
           user_id: 4
         },
-        id: product.id
+        id: product.id,
+        categories: []
       }
     end
 
@@ -132,30 +142,38 @@ RSpec.describe ProductsController, type: :controller do
           name: nil,
           price: nil
         },
-        id: product.id
+        id: product.id,
+        categories: []
       }
+    end
+
+    before :each do
+      session[:user_id] = user.id
     end
 
     it "updates the product with good params" do
       before_update = product.attributes
-      patch :update, params
+      patch :update, params, id: product.id
       product.reload
       expect(product.attributes).to_not eq before_update
     end
 
     it "does not update the product with bad params" do
       before_update = product.attributes
-      patch :update, bad_params
+      patch :update, bad_params, id: product.id
       product.reload
       expect(product.attributes).to eq before_update
     end
 
-    it "redirects to the product's show page after a successful update" do
-      patch :update, params
+    it "redirects to the user page after a successful update" do
+      patch :update, params, id: product.id
       # Success case to index page
-      expect(subject).to redirect_to product_path
+      expect(subject).to redirect_to user_path(user.id)
+    end
+
+    it "renders the template to update a product with bad params" do
       # Error case to
-      patch :update, bad_params
+      patch :update, bad_params, id: product.id
       expect(subject).to render_template :edit
     end
   end
