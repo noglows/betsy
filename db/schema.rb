@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 20151211180308) do
     t.string   "mailing_address"
     t.string   "name_on_card"
     t.string   "card_number"
-    t.integer  "card_exp"
-    t.integer  "card_cvv"
-    t.integer  "zip"
+    t.string   "card_exp"
+    t.string   "card_cvv"
+    t.string   "zip"
   end
 
   create_table "products", force: :cascade do |t|
