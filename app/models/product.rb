@@ -9,4 +9,8 @@ class Product < ActiveRecord::Base
   validates :price, presence: true
   validates :price, numericality: { greater_than: 0 }
   validates :user_id, presence: true
+
+  def average_rating
+    sum = self.reviews.average(:rating).to_f
+  end
 end

@@ -68,8 +68,9 @@ end
 # ]
 
 seed_orders = [
+
   { status: "pending", email: "caprina.keller@test.com", mailing_address: "3158 Union Street, Reisterstown, MD", name_on_card: "Caprina Keller", last_four: "1911", card_exp: "0324", zip: "22136"
- },
+  },
 
   { status: "complete", email: "brennan.vanleeuwenhoek@test.com", mailing_address: "8660 Cherry Street, Cumming, GA ", name_on_card: "Brennan Van Leeuwenhoek", last_four: "7751", card_exp: "0815", zip: "30040"
   },

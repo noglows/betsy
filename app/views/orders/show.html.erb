@@ -1,7 +1,31 @@
 <h1>Order Details</h1>
 
-<h3><%= readable_date(@order.created_at) %></h3>
+<h2><%= readable_date(@order.created_at) %></h2>
 <h3><%= @order.status %></h3>
+<br>
+<h2>Customer Details</h2>
+<table class="table">
+  <tr>
+    <td>Name</td>
+    <td><%= @order.name_on_card %></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><%= @order.email %></td>
+  </tr>
+  <tr>
+    <td>Mailing Address</td>
+    <td><%= @order.mailing_address %></td>
+  </tr>
+  <tr>
+    <td>Last 4 Digits of Credit Card</td>
+    <td><%= @order.card_number[-4..-1] %></td>
+  </tr>
+  <tr>
+    <td>Credit Card Expiration</td>
+    <td><%= cc_expiration(@order.card_exp) %></td>
+  </tr>
+</table>
 
 <table class="table">
   <thead>
@@ -35,5 +59,6 @@
     <td><%= cents_to_dollars(@order.total(@user.id)) %></td>
   </tr>
 </table>
+
 
 <%= link_to "Mark as Shipped", user_order_ship_path(@user.id, @order.id), method: :post, class:"btn btn-default" %>
