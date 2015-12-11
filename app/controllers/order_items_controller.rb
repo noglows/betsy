@@ -19,10 +19,14 @@ class OrderItemsController < ApplicationController
   end
 
   def cart
-    @order_items = my_order.order_items
+    @order_items = my_order.order_items.where('quantity != 0')
   end
 
   def update
+    order_item = OrderItem.find(params[:id])
+    order_item.update(quantity: order_item_params[:quantity])
+
+    redirect_to cart_path
   end
 
   def destroy

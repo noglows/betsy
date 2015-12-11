@@ -3,7 +3,7 @@
     <%= image_tag @product.image_url, class: "img-responsive" %>
 </div>
 <br>
-<%= @product.description %>
+<%= @product.description %><h1> Rating: <%= @product.average_rating %></h1>
 <br>
 <% if @product.retired %>
   Status: Unavailable
