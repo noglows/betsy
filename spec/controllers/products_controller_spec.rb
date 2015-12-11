@@ -51,6 +51,14 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "POST 'create'" do
+    let(:user) do
+      User.create(first_name: "Someone",
+                  last_name: "Else",
+                  email: "7@7.co",
+                  password: "pass",
+                  password_confirmation: "pass")
+    end
+
     let(:params) do
       {
         product:{
@@ -60,7 +68,8 @@ RSpec.describe ProductsController, type: :controller do
           retired: false,
           image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
           user_id: 4
-        }
+        },
+        categories: []
       }
     end
 
@@ -69,11 +78,15 @@ RSpec.describe ProductsController, type: :controller do
         product:{
           name: nil,
           price: nil
-        }
+        },
+        categories: []
       }
     end
 
-    it "creates a product" do
+    before :each do
+      session[:user_id] = user.id
+    end
+    it "creates a product with good params" do
       last_product = Product.last
       post :create, params
       expect(Product.last).to_not eq last_product
@@ -88,7 +101,7 @@ RSpec.describe ProductsController, type: :controller do
     it "redirects to products index page when good params are passed" do
       post :create, params.merge(id: 1)
       # Success case to index page
-      expect(subject).to redirect_to user_path(params[:id])
+      expect(subject).to redirect_to user_path(user.id)
       # Error case to
     end
 
@@ -144,6 +157,19 @@ RSpec.describe ProductsController, type: :controller do
       # Error case to
       patch :update, bad_params
       expect(subject).to render_template :edit
+    end
+  end
+
+  describe "POST 'retire'" do
+    it "sets the status of a product to retired" do
+      post :retire, product_id: product.id, user_id: 2
+      product.reload
+      expect(product.retired).to eq true
+    end
+
+    it "redirects to the user path" do
+      post :retire, product_id: product.id, user_id: 2
+      expect(subject).to redirect_to user_path(2)
     end
   end
 

@@ -5,10 +5,17 @@
   <% @user.products.each do |product| %>
   <tr>
     <% if product.retired == true %>
-      <td><strike><%= product.name %></strike></td>
+      <td><strike><%= link_to product.name, user_product_path(@user.id, product.id) %></strike></td>
     <% else %>
-      <td><%= product.name %></td>
+      <td><%= link_to product.name, user_product_path(@user.id, product.id) %></td>
     <% end %>
+    <td>
+      <% product.categories.each do |category| %>
+      <div class="row">
+        <%= category.name %>
+      </div>
+      <% end %>
+    </td>
     <td><%= link_to "Edit", edit_user_product_path(@user.id, product.id) %></td>
     <% if product.retired == true %>
       <td></td>
