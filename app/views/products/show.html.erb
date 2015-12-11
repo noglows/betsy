@@ -26,7 +26,7 @@
     <div class="col-sm-9">
       <div class="btn-group" data-toggle="buttons">
         <% 1.upto(5) do |i| %>
-          <%= f.label :rating, class: "btn btn-info" do %>
+          <%= f.label :rating, class: "btn btn-warning" do %>
             <%= f.radio_button :rating, i %>
             <%= i %>
           <% end %>
