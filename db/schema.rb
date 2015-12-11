@@ -39,9 +39,8 @@ ActiveRecord::Schema.define(version: 20151211180308) do
     t.string   "email"
     t.string   "mailing_address"
     t.string   "name_on_card"
-    t.string   "card_number"
+    t.string   "last_four"
     t.string   "card_exp"
-    t.string   "card_cvv"
     t.string   "zip"
   end
 
