@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :update]
 
   resources :users do
+    post "/categories/new", to: "users#new_category"
     resources :orders do
       post "/ship", to: "orders#ship"
     end

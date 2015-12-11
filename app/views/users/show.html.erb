@@ -28,7 +28,30 @@
 
 <br>
 
+<%= link_to "View Orders", user_orders_path(@user.id), class:"btn btn-default" %>
+<br>
+<br>
+
 <%= link_to "Add a New Product", new_user_product_path(@user.id), class:"btn btn-default" %>
 <br>
 <br>
-<%= link_to "View Orders", user_orders_path(@user.id), class:"btn btn-default" %>
+<hr>
+<% if !flash.now[:error].nil? %>
+  <%= flash.now[:error] %>
+<% end %>
+<% if !session[:message].nil? %>
+  <%= session[:message] %>
+  <% session[:message] = nil %>
+<% end %>
+
+
+<%= form_for :category, method: :post, url:user_categories_new_path(@user.id) do |f| %>
+  <div class="form-group">
+  <%= f.label :name, "Category Name" %> <br>
+  <%= f.text_field :name, class:"form-control" %> <br>
+  </div>
+  <%= f.submit "Make New Category", class:"btn btn-default" %>
+<% end %>
+
+<br>
+<br>

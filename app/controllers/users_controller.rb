@@ -18,11 +18,28 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(session[:user_id])
+    @category = Category.new
+  end
+
+  def new_category
+    user_id = params[:user_id]
+    @category = Category.new(category_params)
+    if @category.save
+      session[:message] = "You have created a new category: #{@category.name}"
+      redirect_to user_path(user_id)
+    else
+      flash[:error] = "Sorry, you didn't successfully create a new category"
+      redirect_to user_path(user.id)
+    end
   end
 
   private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
+
+  def category_params
+    params.require(:category).permit(:name)
   end
 end
