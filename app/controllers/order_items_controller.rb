@@ -5,15 +5,15 @@ class OrderItemsController < ApplicationController
     @order.save
     cookies[:order] = @order.id
 
-    item = @order.order_items.where(product_id: params[:product_id])
+    item = @order.order_items.where(product_id: params[:product_id]).first
 
-    unless item.empty?
-      item.first.increment!(:quantity, by = order_item_params[:quantity].to_i)
+    unless item.nil?
+      item.update(quantity: order_item_params[:quantity])
     else
       @order.order_items << item = OrderItem.create(order_item_params)
     end
 
-    item.product.decrement!(:inventory_total, by = order_item_params[:quantity].to_i)
+    # item.product.decrement!(:inventory_total, by = order_item_params[:quantity].to_i)
 
     redirect_to cart_path
   end
