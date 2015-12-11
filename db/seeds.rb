@@ -68,7 +68,7 @@ end
 # ]
 
 seed_orders = [
-  { status: "pending", email: "caprina.keller@test.com", mailing_address: "3158 Union Street, Reisterstown, MD", name_on_card: "Caprina Keller", card_number: 4974457119431911, card_exp: 0324, card_cvv: 636, zip: 22136
+  { status: "pending", email: "caprina.keller@test.com", mailing_address: "3158 Union Street, Reisterstown, MD", name_on_card: "Caprina Keller", card_number: "4974457119431911", card_exp: "0324", card_cvv: "636", zip: "22136"
  },
 
   { status: "complete", email: "brennan.vanleeuwenhoek@test.com", mailing_address: "8660 Cherry Street, Cumming, GA ", name_on_card: "Brennan Van Leeuwenhoek", card_number: "9978935179777751", card_exp: "0815", card_cvv: "715", zip: "30040" },
@@ -79,7 +79,7 @@ seed_orders = [
 
   { status: "pending", email: "umberto.mikkelsen@test.com", mailing_address: "9290 Chestnut Street, Winder, GA", name_on_card: "Umberto Mikkelsen", card_number: "5677948522193595", card_exp: "1118", card_cvv: "271", zip: "30680" },
 
-  { status: "pending", email: "iephthae.jokumsen@test.com", mailing_address: "2367 Pin Oak Drive, Brookline, MA", name_on_card: "Iephthae Jokumsen", card_number: "9722846231516641", card_exp: "1213", card_cvv: "944", zip: "02446" }
+  { status: "pending", email: "iephthae.jokumsen@test.com", mailing_address: "2367 Pin Oak Drive, Brookline, MA", name_on_card: "Iephthae  Jokumsen", card_number: "9722846231516641", card_exp: "1213", card_cvv: "944", zip: "02446" }
 ]
 
 seed_orders.each do |seed|
