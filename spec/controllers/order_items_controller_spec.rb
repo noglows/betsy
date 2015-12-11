@@ -4,10 +4,10 @@ RSpec.describe OrderItemsController, type: :controller do
 let(:order_id)do
   OrderItem.create(quantity: 12, order_id: 1, product_id: 6)
 end
-  describe "GET 'new'" do
-    it "renders the new view" do
-      get :new
-      expect(subject).to render_template :new, { :id => 1 }
+  describe "GET 'cart'" do
+    it "renders the cart view" do
+      get :cart
+      expect(subject).to render_template :cart, { :id => 1 }
     end
   end
 
