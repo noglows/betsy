@@ -37,6 +37,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Validate email address
 gem 'validates_email_format_of'
 
+# FONT AWEEEESOMMEEEE. So. Awesome.
+gem 'font-awesome-rails', '~> 4.5'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
