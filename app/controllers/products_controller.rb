@@ -44,6 +44,8 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @action = "create"
+    @categories = @product.categories
+    @all_categories = Category.all
   end
 
   def create
