@@ -44,6 +44,7 @@
   <% session[:message] = nil %>
 <% end %>
 
+<div class="col-md-4">
 
 <%= form_for :category, method: :post, url:user_categories_new_path(@user.id) do |f| %>
   <div class="form-group">
@@ -52,6 +53,8 @@
   </div>
   <%= f.submit "Make New Category", class:"btn btn-default" %>
 <% end %>
+
+</div>
 
 <br>
 <br>
