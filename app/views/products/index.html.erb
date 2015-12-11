@@ -6,9 +6,11 @@
 <br>
 
 <div class="btn-group" role="group" aria-label="...">
-  <%= link_to(products_path(:class => "btn btn-default")) do %>
+  <button type="button" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+  <%= link_to(root_path) do %>
      by product
   <% end %>
+</button>
 
   <div class="btn-group" role="group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
