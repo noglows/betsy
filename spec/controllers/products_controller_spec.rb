@@ -73,7 +73,7 @@ RSpec.describe ProductsController, type: :controller do
       }
     end
 
-    it "creates a product" do
+    it "creates a product with good params" do
       last_product = Product.last
       post :create, params
       expect(Product.last).to_not eq last_product
@@ -144,6 +144,27 @@ RSpec.describe ProductsController, type: :controller do
       # Error case to
       patch :update, bad_params
       expect(subject).to render_template :edit
+    end
+  end
+
+  describe "POST 'retire'" do
+    let(:params) do
+      {
+        product:{
+          name: "For Sea Was He",
+          description: "A gregarious, lovable sailor",
+          price: 2500,
+          retired: false,
+          image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
+          user_id: 4
+        },
+        id: product.id
+      }
+    end
+
+    it "sets the status of a product to retired" do
+      post :retire, id => product.id, user_id
+      expect(subject.retired).to eq true
     end
   end
 

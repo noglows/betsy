@@ -17,7 +17,11 @@ class ProductsController < ApplicationController
     when 'merch'
       @products = Product.where("user_id = #{params[:order]}")
     when "cat"
-      @products = Product.order("categories: params[:order]")
+      prod = Product.all
+      @products = prod.select {|product|
+        rows = product.categories.where("category_id = #{params[:order]}")
+        !rows.to_a.empty?
+      }
     else
       @order = "prod"
       @products = Product.order(:created_at)
@@ -27,7 +31,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @review = Review.new
-    @reviews = Review.all.reverse
+    @reviews = Review.where("product_id = #{params[:id]}").reverse
     @order_item = my_order.order_items.new
   end
 
