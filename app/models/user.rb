@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
 
   # switch orders
   def revenue
-    #binding.pry
     revenue = 0
     products.each do |product|
       product.order_items.each do |oi|
