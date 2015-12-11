@@ -29,6 +29,10 @@ class OrdersController < ApplicationController
 
   end
 
+  def new
+    @order = Order.new
+  end
+
   def show
     user_id = params[:user_id]
     order_id = params[:id]
