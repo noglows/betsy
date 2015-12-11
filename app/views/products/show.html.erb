@@ -7,7 +7,7 @@
 <br>
 <% if @product.retired %>
   Status: Unavailable
-<% else %>
+<% elsif @product.inventory_total > 0 %>
   Status: Available
   <br>
   <%= form_for [@product, @order_item], controller: :order_items, action: :create do |f| %>
@@ -15,6 +15,8 @@
     <%= f.select :quantity, (1..@product.inventory_total) %>
     <%= f.submit "Add to Cart", class: "btn btn-success" %>
   <% end %>
+<% else %>
+  <h2>OUT OF STOCK!</h2>
 <% end %>
 <br>
 <br>
