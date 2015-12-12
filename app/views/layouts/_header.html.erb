@@ -11,11 +11,14 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
         <li class="navbar-text">
-          <% if @current_user %>
-            Welcome, <%= @current_user.first_name %>
-          <% end %>
+            Welcome, <%= current_user.first_name %>
         </li>
+        <li>
+          <%= link_to "Account Page", user_path(@current_user.id) %>
+        </li>
+        <% end %>
         <li>
           <%= link_to "Shopping Cart", cart_path %>
         </li>

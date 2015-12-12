@@ -5,12 +5,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.order(:created_at)
-    @user_id = session[:user_id]
-      if @user_id.nil?
-        @user_name = "Guest"
-      else
-        @user_name = User.find(@user_id).first_name
-      end
     @categories = Category.all
     @merchants = User.all
     case params[:type]

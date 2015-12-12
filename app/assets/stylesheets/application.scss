@@ -16,6 +16,25 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.wrapper {
+body {
   margin-top: 75px;
+  background-color: #f9ecf9;
+}
+
+.sidebar {
+  width: 20%;
+}
+
+.photo-gallery {
+  width: 75%;
+}
+
+div.col-sm-6 img {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.caption {
+  background-color: #fff;
 }
