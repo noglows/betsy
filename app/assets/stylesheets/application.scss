@@ -22,7 +22,9 @@ body {
 }
 
 .sidebar {
+  position: relative;
   width: 20%;
+  min-height: 100%;
 }
 
 .photo-gallery {
@@ -35,6 +37,6 @@ div.col-sm-6 img {
   object-fit: cover;
 }
 
-.caption {
+.sidebar, .caption {
   background-color: #fff;
 }

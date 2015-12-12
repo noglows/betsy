@@ -1,0 +1,37 @@
+<div class="accordion" id="accordion1">
+  <%= link_to "By Product", root_path %>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+        By Category <span class="caret"></span>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <ul>
+          <% @categories.each do |cat| %>
+            <li><%= link_to(root_path(:type => 'cat', :order => cat.id)) do %>
+            <%= cat.name %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+        By Merchant <span class="caret"></span>
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <ul>
+          <% @merchants.each do |merch| %>
+            <li><%= link_to(root_path(:type => 'merch',:order => merch.id)) do %>
+            <%= merch.first_name %> <%= merch.last_name %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
