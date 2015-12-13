@@ -1,36 +1,46 @@
-<div class="accordion" id="accordion">
-  <%= link_to "By Product", root_path %>
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-        By Category <span class="caret"></span>
-      </a>
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= link_to "By Product", root_path %>
+      </h4>
     </div>
-    <div id="collapseOne" class="accordion-body collapse panel-collapse in">
-      <div class="accordion-inner">
-        <ul>
-          <% @categories.each do |cat| %>
-            <li><%= link_to(root_path(:type => 'cat', :order => cat.id)) do %>
-            <%= cat.name %></li>
-            <% end %>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          By Category <span class="glyphicon glyphicon-collapse-down pull-right"></span>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse innie">
+      <div class="panel-body">
+        <% @categories.each do |cat| %>
+          <%= link_to(root_path(:type => 'cat', :order => cat.id)) do %>
+            <%= cat.name %>
           <% end %>
-        </ul>
+          <hr />
+        <% end %>
       </div>
     </div>
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-        By Merchant <span class="caret"></span>
-      </a>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          By Merchant <span class="glyphicon glyphicon-collapse-down pull-right"></span>
+        </a>
+      </h4>
     </div>
-    <div id="collapseTwo" class="accordion-body collapse panel-collapse">
-      <div class="accordion-inner">
-        <ul>
-          <% @merchants.each do |merch| %>
-            <li><%= link_to(root_path(:type => 'merch',:order => merch.id)) do %>
-            <%= merch.first_name %> <%= merch.last_name %></li>
-            <% end %>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        <% @merchants.each do |merch| %>
+          <%= link_to(root_path(:type => 'merch',:order => merch.id)) do %>
+            <%= merch.first_name %> <%= merch.last_name %>
           <% end %>
-        </ul>
+          <hr />
+        <% end %>
       </div>
     </div>
   </div>

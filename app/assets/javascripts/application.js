@@ -16,3 +16,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+  $("#accordion").on("hide.bs.collapse", function(){
+    $(".glyphicon").replaceWith('<span class="glyphicon glyphicon-collapse-down pull-right"></span>');
+  });
+  $("#accordion").on("show.bs.collapse", function(){
+    $(".glyphicon").replaceWith('<span class="glyphicon glyphicon-collapse-up pull-right"></span>');
+  });
+});

@@ -23,12 +23,16 @@ body {
 
 .sidebar {
   position: relative;
-  width: 20%;
+  width: 18%;
   min-height: 100%;
 }
 
+.sidebar hr {
+  margin: 1px;
+}
+
 .photo-gallery {
-  width: 75%;
+  width: 82%;
 }
 
 div.col-sm-6 img {
@@ -37,6 +41,6 @@ div.col-sm-6 img {
   object-fit: cover;
 }
 
-.sidebar, .caption {
+.caption {
   background-color: #fff;
 }
