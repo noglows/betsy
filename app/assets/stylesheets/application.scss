@@ -22,9 +22,11 @@ body {
 }
 
 .sidebar {
-  position: relative;
-  width: 20%;
-  min-height: 100%;
+  display: table-cell;
+}
+
+.panel-title {
+  font-size: 14px;
 }
 
 .sidebar hr {
@@ -32,10 +34,17 @@ body {
 }
 
 .photo-gallery {
+  display: inline-block;
   width: 80%;
 }
 
-div.col-sm-6 img {
+@media(max-width:992px){
+  .photo-gallery {
+    width: 100%;
+  }
+}
+
+div.col-sm-4 img {
   height: 250px;
   width: 100%;
   object-fit: cover;

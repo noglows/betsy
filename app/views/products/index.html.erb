@@ -1,24 +1,24 @@
-<div class="sidebar pull-left">
-  <%= render "sidebar" %>
-</div>
-
-
-<div class="container photo-gallery pull-right">
-  <% @products.each_with_index do |product, index| %>
-    <% if !product.retired? %>
-      <% if index % 4 == 0 %>
-        <div class="row">
-      <% end %>
-      <div class="col-md-4 col-sm-6 col-xs-12 thumb">
-        <%= image_tag(product.image_url, class: "img-responsive") %>
-        <div class="caption">
-          <%= link_to product.name + " " + cents_to_dollars(product.price), product_path(product.id) %>
+<div class="row">
+  <div class="sidebar col-md-2 hidden-sm hidden-xs">
+    <%= render "sidebar" %>
+  </div>
+  <div class="container photo-gallery">
+    <% @products.each_with_index do |product, index| %>
+      <% if !product.retired? %>
+        <% if index % 4 == 0 %>
+          <div class="row">
+        <% end %>
+        <div class="col-sm-4 col-xs-12">
+          <%= link_to image_tag(product.image_url, class: "img-responsive"), product_path(product.id) %>
+          <div class="caption">
+            <%= link_to product.name + " " + cents_to_dollars(product.price), product_path(product.id) %>
+          </div>
+          <br>
         </div>
-        <br>
-      </div>
-      <% if index % 4 == 3 %>
-      </div>
+        <% if index % 4 == 3 %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
