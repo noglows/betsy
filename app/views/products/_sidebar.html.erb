@@ -1,20 +1,20 @@
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <%= link_to "By Product", root_path %>
-      </h4>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <%= link_to "By Product", root_path %>
+    </h4>
   </div>
+</div>
+<div class="panel-group" id="accordion1">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          By Category <span class="glyphicon glyphicon-collapse-down pull-right"></span>
+          <span class="glyphicon glyphicon-collapse-down pull-right"></span> By Category
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse innie">
+    <div id="collapseOne" class="panel-collapse collapse">
       <div class="panel-body">
         <% @categories.each do |cat| %>
           <%= link_to(root_path(:type => 'cat', :order => cat.id)) do %>
@@ -25,11 +25,13 @@
       </div>
     </div>
   </div>
+</div>
+<div class="panel-group" id="accordion2">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-          By Merchant <span class="glyphicon glyphicon-collapse-down pull-right"></span>
+          <span class="glyphicon glyphicon-collapse-down pull-right"></span> By Merchant
         </a>
       </h4>
     </div>
