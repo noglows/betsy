@@ -2,6 +2,10 @@
   <div class="sidebar col-md-2 hidden-sm hidden-xs">
     <%= render "sidebar" %>
   </div>
+  <div class="dropdown visible-sm visible-xs">
+    <%= render "dropdown" %>
+  </div>
+
   <div class="container photo-gallery">
     <% @products.each_with_index do |product, index| %>
       <% if !product.retired? %>
