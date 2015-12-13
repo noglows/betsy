@@ -1,12 +1,12 @@
-<div class="accordion" id="accordion1">
+<div class="accordion" id="accordion">
   <%= link_to "By Product", root_path %>
   <div class="accordion-group">
     <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
         By Category <span class="caret"></span>
       </a>
     </div>
-    <div id="collapseOne" class="accordion-body collapse">
+    <div id="collapseOne" class="accordion-body collapse panel-collapse in">
       <div class="accordion-inner">
         <ul>
           <% @categories.each do |cat| %>
@@ -18,11 +18,11 @@
       </div>
     </div>
     <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
         By Merchant <span class="caret"></span>
       </a>
     </div>
-    <div id="collapseTwo" class="accordion-body collapse">
+    <div id="collapseTwo" class="accordion-body collapse panel-collapse">
       <div class="accordion-inner">
         <ul>
           <% @merchants.each do |merch| %>

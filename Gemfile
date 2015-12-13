@@ -37,6 +37,8 @@ gem 'bcrypt', '~> 3.1.7'
 # Validate email address
 gem 'validates_email_format_of'
 
+gem 'jquery-cookie-rails', '~> 1.3', '>= 1.3.1.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
