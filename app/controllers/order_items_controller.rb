@@ -20,7 +20,7 @@ class OrderItemsController < ApplicationController
   end
 
   def cart
-    @order_items = my_order.order_items.where('quantity != 0')
+    @order_items = my_order.order_items
   end
 
   def update
@@ -37,8 +37,9 @@ class OrderItemsController < ApplicationController
 
   def destroy
     order_item = OrderItem.find(params[:id])
-
     order_item.destroy
+
+    redirect_to cart_path
   end
 
 private
