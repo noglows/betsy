@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214225613) do
+ActiveRecord::Schema.define(version: 20151214234153) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20151214225613) do
     t.string   "mailing_address"
     t.string   "name_on_card"
     t.string   "last_four"
-    t.string   "card_exp"
+    t.date     "card_exp"
     t.string   "zip"
   end
 

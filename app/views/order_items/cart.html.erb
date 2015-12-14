@@ -1,7 +1,7 @@
-<% if @order_items.length == 1 %>
-  <h2>You have <%= @order_items.length %> item in your cart!</h2>
+<% if @instock.length == 1 %>
+  <h2>You have <%= @instock.length %> item in your cart!</h2>
 <% else %>
-  <h2>You have <%= @order_items.length %> items in your cart!</h2>
+  <h2>You have <%= @instock.length %> items in your cart!</h2>
 <% end %>
 <br>
 <table class="table table-hover cart">
@@ -15,8 +15,7 @@
     <th>
     </th>
   </tr>
-  <% @order_items.each do |item| %>
-    <% if item.enough_inventory? %>
+  <% @instock.each do |item| %>
     <tr>
       <td>
         <%= item.product.name %>
@@ -31,14 +30,12 @@
         <% end %>
       </td>
     </tr>
-    <% end %>
   <% end %>
 </table>
-<%= link_to "Checkout", checkout_path, class: "btn btn-default btn-block" unless @order_items.empty? %>
+<%= link_to "Checkout", checkout_path, class: "btn btn-default btn-block" unless @instock.empty? %>
 
 <table class="table table-hover cart">
-  <% @order_items.each do |item| %>
-    <% unless item.enough_inventory? %>
+  <% @outofstock.each do |item| %>
     <h6>You selected <%= item.quantity %> but only <%= item.product.inventory_total %> are currently available.</h6>
     <tr>
       <td>
@@ -54,7 +51,6 @@
         <% end %>
       </td>
     </tr>
-    <% end %>
   <% end %>
 </table>
 <%= link_to "Continue Shopping", root_path, class: "btn btn-default btn-block" %>
