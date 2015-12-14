@@ -1,6 +1,5 @@
 class OrderItem < ActiveRecord::Base
   belongs_to :order
-
   belongs_to :product
 
   validates :quantity, presence: true
@@ -9,4 +8,7 @@ class OrderItem < ActiveRecord::Base
   validates :product_id, presence: true
   validates :order_id, presence: true
 
+  def enough_inventory?
+    self.quantity <= self.product.inventory_total
+  end
 end

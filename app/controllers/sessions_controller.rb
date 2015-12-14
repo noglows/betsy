@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
         redirect_to root_path
       else
         # user is not Authenticated
-        flash.now[:error] = "Hmmm, that password doesn't seem quite right..."
+        flash.now[:error] = "Hmmm, that password/email combination doesn't seem quite right..."
         render :new
       end
     else
