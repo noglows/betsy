@@ -24,12 +24,22 @@ def require_login
   end
 end
 
-def check_user
+def check_user_product
   if @current_user != nil
     product = params[:product_id]
     if Product.find(product).user == @current_user
       flash[:error] = "You can't review your own products"
       redirect_to user_product_path(@current_user.id, product)
+    end
+  end
+end
+
+def check_user_id
+  if @current_user != nil
+    user = params[:id]
+    if @current_user.id != user
+      flash[:error] = "You can't view another user's content"
+      redirect_to user_path(@current_user.id)
     end
   end
 end
