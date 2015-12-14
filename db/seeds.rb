@@ -93,16 +93,16 @@ seed_orders.each do |seed|
 end
 
 seed_order_items = [
-  { quantity: 1, order_id: 3, product_id: 2 },
-  { quantity: 12, order_id: 1, product_id: 6 },
-  { quantity: 2, order_id: 2, product_id: 4 },
-  { quantity: 4, order_id: 4, product_id: 5 },
-  { quantity: 3, order_id: 5, product_id: 6 },
-  { quantity: 2, order_id: 3, product_id: 2 },
-  { quantity: 7, order_id: 1, product_id: 5 },
-  { quantity: 2, order_id: 4, product_id: 1 },
-  { quantity: 5, order_id: 6, product_id: 6 },
-  { quantity: 4, order_id: 4, product_id: 6 }
+  { quantity: 1, order_id: 3, product_id: 2, shipped: false },
+  { quantity: 12, order_id: 1, product_id: 6, shipped: false },
+  { quantity: 2, order_id: 2, product_id: 4, shipped: false },
+  { quantity: 4, order_id: 4, product_id: 5, shipped: false },
+  { quantity: 3, order_id: 5, product_id: 6, shipped: false },
+  { quantity: 2, order_id: 3, product_id: 2, shipped: false },
+  { quantity: 7, order_id: 1, product_id: 5, shipped: false },
+  { quantity: 2, order_id: 4, product_id: 1, shipped: false },
+  { quantity: 5, order_id: 6, product_id: 6, shipped: false },
+  { quantity: 4, order_id: 4, product_id: 6, shipped: false }
 ]
 
 seed_order_items.each do |seed|
