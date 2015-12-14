@@ -1,4 +1,5 @@
 class OrderItemsController < ApplicationController
+  before_action :current_user
 
   def create
     my_order
