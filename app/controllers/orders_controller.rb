@@ -26,12 +26,7 @@ class OrdersController < ApplicationController
     end
     @orders.sort_by! { |obj| obj.updated_at }
     return @orders
-
   end
-
-  # def new
-  #   @order = Order.new
-  # end
 
   def show
     user_id = params[:user_id]
@@ -42,9 +37,10 @@ class OrdersController < ApplicationController
     @cookie = true unless cookies[:order].nil?
   end
 
-  # def update
-  #   @user = User.find(user_id)
-  # end
+  def checkout
+    my_order
+    redirect_to root_path if @order.new_record?
+  end
 
   def ship
     user_id = params[:user_id]

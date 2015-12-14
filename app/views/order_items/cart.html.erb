@@ -21,8 +21,10 @@
     <td>
       <%= form_for [item.product, item], controller: :order_items, action: :update do |f| %>
         <%= f.select :quantity, (0..item.product.inventory_total) %>
-        <%= f.submit "Update", class: "btn btn-default" %>
-        <%= link_to "Remove", product_order_item_path(item.product, item), method: :delete, class: "btn btn-default" %>
+        <td>
+          <%= f.submit "Update", class: "btn btn-default" %>
+          <%= link_to "Remove", product_order_item_path(item.product, item), method: :delete, class: "btn btn-default" %>
+        </td>
       <% end %>
     </td>
   </tr>
@@ -30,3 +32,4 @@
 </table>
 
 <%= link_to "Continue Shopping", root_path, class: "btn btn-default btn-block" %>
+<%= link_to "Checkout", checkout_path, class: "btn btn-default btn-block" %>
