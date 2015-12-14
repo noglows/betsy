@@ -11,6 +11,8 @@ class Product < ActiveRecord::Base
   validates :user_id, presence: true
   validates :inventory_total, presence: true
   validates :inventory_total, numericality: { greater_than_or_equal_to: 0}
+  validates :image_url, presence: true
+  validates :image_url, :url => true
 
   def average_rating
     sum = self.reviews.average(:rating).to_f
