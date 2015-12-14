@@ -38,7 +38,6 @@ def check_user_id
   if @current_user != nil
     user = params[:id]
     if @current_user.id != user.to_i
-      binding.pry
       flash[:error] = "You can't view another user's content"
       redirect_to user_path(@current_user.id)
     end
