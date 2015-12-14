@@ -1,4 +1,8 @@
 class OrderItem < ActiveRecord::Base
+
+  after_validation :set_shipped, on: :create
+  #after_save :check_order, on: :ship
+
   belongs_to :order
   belongs_to :product
 
@@ -11,4 +15,9 @@ class OrderItem < ActiveRecord::Base
   def enough_inventory?
     self.quantity <= self.product.inventory_total
   end
+
+  def set_shipped
+    self.shipped = false
+  end
+
 end

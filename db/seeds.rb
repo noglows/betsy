@@ -38,7 +38,10 @@ seed_products = [
   {name: "Fozzie Was-he", description: "A muppet that tells dad jokes", price: 3000, inventory_total: 5, retired: true, image_url: "http://vignette1.wikia.nocookie.net/muppet/images/b/be/Fozzie-pose-60percent.png/revision/latest?cb=20131219191526", user_id: 3, :categories => Category.where(:name => ['stuffed animals', 'stickers'])},
   {name: "Fonzie Was-he", description: "Eeeeyyyyyyy", price: 2000, inventory_total: 8, retired: false, image_url: "http://digilander.libero.it/happydays/foto_attori/fonzie/hdc1.jpg", user_id: 4, :categories => Category.where(:name => ['people', 'socks'])},
   {name: "Fuzzy Wah-Wah pedal", description: "Making some glorious vintage guitar sounds", price: 4000, inventory_total: 50, retired: false, image_url: "http://i.ebayimg.com/images/i/251806872987-0-1/s-l1000.jpg", user_id: 2, :categories => Category.where(:name => ['stuffed animals',  'slippers'])},
-  {name: "Fun Size Whatchamacallit", description: "Caaaaaaaaandy", price: 500, inventory_total: 2000, retired: true, image_url: "http://ecx.images-amazon.com/images/I/41kHr2%2BU6XL._SL500_AA300_.jpg", user_id: 1, :categories => Category.where(:name => ['stuffed animals', 'clothing'])}
+  {name: "Fun Size Whatchamacallit", description: "Caaaaaaaaandy", price: 500, inventory_total: 2000, retired: true, image_url: "http://ecx.images-amazon.com/images/I/41kHr2%2BU6XL._SL500_AA300_.jpg", user_id: 1, :categories => Category.where(:name => ['stuffed animals', 'clothing'])},
+
+  {name: "Jessica's Test 1", description: "This is to test if orders are working as expected", price: 500, inventory_total: 2000, retired: false, image_url: "http://www.annsheybani.com/wp-content/uploads/2012/12/bear.jpg", user_id: 1, :categories => Category.where(:name => ['stuffed animals', 'clothing'])},
+  {name: "Jessica's Test 2", description: "This is the second item to test if orders are working as expected", price: 800, inventory_total: 100, retired: false, image_url: "http://3.bp.blogspot.com/_W90V87w3sr8/TSdKsMMbdsI/AAAAAAAAAmY/DZq_8pArw2g/s1600/brown_bear_3.png", user_id: 2, :categories => Category.where(:name => ['stuffed animals', 'clothing'])}
 ]
 
 seed_products.each do |seed|
@@ -85,6 +88,9 @@ seed_orders = [
   },
 
   { status: "pending", email: "iephthae.jokumsen@test.com", mailing_address: "2367 Pin Oak Drive, Brookline, MA", name_on_card: "Iephthae  Jokumsen", last_four: "6641", card_exp: "1213", zip: "02446"
+  },
+
+  { status: "paid", email: "test@test.com", mailing_address: "2367 Pin Oak Drive, Brookline, MA", name_on_card: "Iephthae  Jokumsen", last_four: "6641", card_exp: "1213", zip: "02446"
   }
 ]
 
@@ -93,7 +99,7 @@ seed_orders.each do |seed|
 end
 
 seed_order_items = [
-  { quantity: 1, order_id: 3, product_id: 2, shipped: false },
+  { quantity: 1, order_id: 3, product_id: 2},
   { quantity: 12, order_id: 1, product_id: 6, shipped: false },
   { quantity: 2, order_id: 2, product_id: 4, shipped: false },
   { quantity: 4, order_id: 4, product_id: 5, shipped: false },
@@ -102,7 +108,11 @@ seed_order_items = [
   { quantity: 7, order_id: 1, product_id: 5, shipped: false },
   { quantity: 2, order_id: 4, product_id: 1, shipped: false },
   { quantity: 5, order_id: 6, product_id: 6, shipped: false },
-  { quantity: 4, order_id: 4, product_id: 6, shipped: false }
+  { quantity: 4, order_id: 4, product_id: 6, shipped: false },
+  { quantity: 5, order_id: 6, product_id: 6, shipped: false },
+  { quantity: 4, order_id: 4, product_id: 6, shipped: false },
+  { quantity: 3, order_id: 7, product_id: 7},
+  { quantity: 4, order_id: 7, product_id: 8}
 ]
 
 seed_order_items.each do |seed|

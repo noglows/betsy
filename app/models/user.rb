@@ -63,5 +63,14 @@ class User < ActiveRecord::Base
     return orders.length
   end
 
+  def find_order_item(order)
+    user_id = self.id
+    order.order_items.each do |oi|
+      if oi.product.user.id = user_id
+        return oi.shipped
+      end
+    end
+  end
+
 
 end
