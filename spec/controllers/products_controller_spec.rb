@@ -107,9 +107,9 @@ RSpec.describe ProductsController, type: :controller do
       # Error case to
     end
 
-    it "renders the new template when bad params are passed" do
+    it "renders the edit template when bad params are passed" do
       post :create, bad_params
-      expect(subject).to render_template :new
+      expect(subject).to render_template :edit
     end
   end
 

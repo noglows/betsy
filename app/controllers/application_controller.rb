@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def my_order
     unless cookies[:order].nil?
-      @order ||= Order.find(cookies[:order])
+      @order ||= Order.find(cookies.signed[:order])
     else
       @order = Order.new(status: "pending")
     end
