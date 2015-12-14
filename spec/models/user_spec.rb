@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
   let(:user_valid) { User.new(email: "test@test.com", password: password) }
 
   describe ".validates" do
+
     it "must have a email" do
       user = User.new(password: password)
       expect(user).to_not be_valid
@@ -25,6 +26,45 @@ RSpec.describe User, type: :model do
       user = User.new(password: password, email: "test")
       expect(user).to_not be_valid
       expect(user.errors.keys).to include :email
+    end
+  end
+
+
+
+
+  describe "user model methods" do
+    before(:each) do
+      @test_user_user ||= User.create(first_name: "Someone",
+                      last_name: "Else",
+                      email: "7@7.co",
+                      password: "pass",
+                      password_confirmation: "pass")
+      @order1 ||= Order.create( status: "test" )
+      @order2 ||= Order.create( status: "test2" )
+      @product1 ||= Product.create(price: 200, user_id: 2, name: "test", inventory_total: 2, image_url: "http://1.bp.blogspot.com/-cXddk5QHswo/UUrwsdxVGOI/AAAAAAAACpA/RP1Xbavhn9w/s1600/Flying+-Birds-+(6).jpg")
+      @product2 ||= Product.create(price: 200, user_id: 2, name: "test2", inventory_total: 2, image_url: "http://1.bp.blogspot.com/-cXddk5QHswo/UUrwsdxVGOI/AAAAAAAACpA/RP1Xbavhn9w/s1600/Flying+-Birds-+(6).jpg")
+      @order_item1 ||= OrderItem.create(quantity: 10, order_id: 1, product_id: 1)
+      @order_item2 ||= OrderItem.create(quantity: 10, order_id: 2, product_id: 1)
+    end
+
+    it "must report accurate revenue" do
+      user = @test_user_user
+      expect(user.revenue).to eq 4000
+    end
+
+    it "must report accurate revenue by status" do
+      user = @test_user_user
+      expect(user.revenue_by_status("test")).to eq 2000
+    end
+
+    it "must report an accurate number of orders" do
+      user = @test_user_user
+      expect(user.num_orders).to eq 2
+    end
+
+    it "must report an accurate number of orders by status" do
+      user = @test_user_user
+      expect(user.num_orders_by_status("test")).to eq 1
     end
   end
 end
