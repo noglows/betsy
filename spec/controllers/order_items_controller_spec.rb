@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe OrderItemsController, type: :controller do
-let(:order_item)do
-  OrderItem.create(quantity: 12, order_id: 1, product_id: 6)
-end
+  let(:order_item)do
+    OrderItem.create(quantity: 12, order_id: 1, product_id: 6)
+  end
+
+  describe "POST 'create'" do
+
+  end
+
   describe "GET 'cart'" do
     it "renders the cart view" do
       get :cart

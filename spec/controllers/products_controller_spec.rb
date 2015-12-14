@@ -174,7 +174,7 @@ RSpec.describe ProductsController, type: :controller do
     it "renders the template to update a product with bad params" do
       # Error case to
       patch :update, bad_params, id: product.id
-      expect(subject).to render_template :edit
+      expect(subject).to render_template :new
     end
   end
 
