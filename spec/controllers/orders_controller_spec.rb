@@ -19,14 +19,14 @@ RSpec.describe OrdersController, type: :controller do
 
   describe "GET 'new'" do
     it "renders the new view" do
-      get :new,
+      get :new
       expect(subject).to render_template :new
     end
   end
 
   describe "GET 'show'" do
     it "renders the show page" do
-    
+
     end
 
   end

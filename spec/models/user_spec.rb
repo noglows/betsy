@@ -45,16 +45,17 @@ RSpec.describe User, type: :model do
       @product2 ||= Product.create(price: 200, user_id: 2, name: "test2", inventory_total: 2, image_url: "http://1.bp.blogspot.com/-cXddk5QHswo/UUrwsdxVGOI/AAAAAAAACpA/RP1Xbavhn9w/s1600/Flying+-Birds-+(6).jpg")
       @order_item1 ||= OrderItem.create(quantity: 10, order_id: 1, product_id: 1)
       @order_item2 ||= OrderItem.create(quantity: 10, order_id: 2, product_id: 1)
+      @order_item3 ||= OrderItem.create(quantity: 20, order_id: 1, product_id: 1)
     end
 
     it "must report accurate revenue" do
       user = @test_user_user
-      expect(user.revenue).to eq 4000
+      expect(user.revenue).to eq 8000
     end
 
     it "must report accurate revenue by status" do
       user = @test_user_user
-      expect(user.revenue_by_status("test")).to eq 2000
+      expect(user.revenue_by_status("test")).to eq 6000
     end
 
     it "must report an accurate number of orders" do
