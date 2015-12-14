@@ -13,4 +13,25 @@ RSpec.describe Order, type: :model do
       expect(order_valid).to be_valid
     end
   end
+
+
+  describe ".total" do
+    before(:each) do
+      @test_user_order = User.create(first_name: "Someone",
+                      last_name: "Else",
+                      email: "7@7.co",
+                      password: "pass",
+                      password_confirmation: "pass")
+      @test_order = Order.create(status: "test")
+      @test_product = Product.create(name: "test", price: 20, user_id: 2, inventory_total: 0, image_url: "http://1.bp.blogspot.com/-cXddk5QHswo/UUrwsdxVGOI/AAAAAAAACpA/RP1Xbavhn9w/s1600/Flying+-Birds-+(6).jpg" )
+      @test_order_item =       OrderItem.create(quantity: 10, order_id: 1, product_id: 1)
+    end
+    it "correctly totals user revenue for an order" do
+      user = @test_user_order.id
+      order = @test_order
+
+      expect(order.total(user)).to eq 200
+
+    end
+  end
 end

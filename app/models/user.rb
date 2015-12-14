@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
       product.order_items.each do |oi|
         if oi.order.status != "cancelled"
           revenue += (product.price * oi.quantity)
+
         end
       end
     end

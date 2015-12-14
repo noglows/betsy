@@ -60,4 +60,16 @@ RSpec.describe Product, type: :model do
       expect(product.errors.keys).to include :image_url
     end
   end
+
+  describe ".average_rating" do
+    before(:each) do
+      @product = Product.create(price: 200, user_id: 1, name: "test", inventory_total: 3, image_url:  "http://1.bp.blogspot.com/-cXddk5QHswo/UUrwsdxVGOI/AAAAAAAACpA/RP1Xbavhn9w/s1600/Flying+-Birds-+(6).jpg")
+      @review1 = Review.create(product_id: 1, rating: 5)
+      @review2 = Review.create(product_id: 1, rating: 3)
+    end
+
+    it "calculates the correct average rating for a product" do
+      expect(@product.average_rating).to eq 4
+    end
+  end
 end

@@ -1,16 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe OrderItemsController, type: :controller do
+  let(:user) do
+    User.create(first_name: "Someone",
+                last_name: "Else",
+                email: "7@7.co",
+                password: "pass",
+                password_confirmation: "pass")
+  end
+
   describe "POST 'create'" do
-    let(:order_item_parameters) do
+    let(:order_item_params) do
       {
         order_item: {
           quantity: 12,
         },
-        product_id: {
-          order_id: nil,
-          product_id: 6
-        },
+        product_id: 6,
       }
     end
     before :each do
@@ -18,9 +23,9 @@ RSpec.describe OrderItemsController, type: :controller do
     end
 
     it "creates a new order instance when one does not already exist" do
-      all_orders = Order.all
-      post :create, product_id: order_item_params
-      expect(all_orders.include?(@order)).to be_false
+      all_orders = Order.all.to_a
+      post :create, order_item_params
+      expect(all_orders).not_to include(Order.all.last)
     end
 
     it "redirects to the cart path when successful" do
@@ -46,7 +51,7 @@ RSpec.describe OrderItemsController, type: :controller do
           order_id: 1,
           product_id: 6
         },
-        id: order_item.id
+        product_id: 5
       }
       end
 
