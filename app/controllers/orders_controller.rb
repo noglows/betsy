@@ -40,7 +40,14 @@ class OrdersController < ApplicationController
   def checkout
     my_order
     @order_items = @order.order_items
-    redirect_to root_path if @order.new_record?
+    redirect_to root_path if @order.new_record? || instock.empty?
+  end
+
+  def update
+    my_order
+    raise
+
+    @order.attributes = order_params
   end
 
   def ship
@@ -50,5 +57,11 @@ class OrdersController < ApplicationController
     order.status = "complete"
     order.save
     redirect_to user_orders_path(user_id)
+  end
+
+  private
+
+  def order_params
+    params.require(:order)
   end
 end

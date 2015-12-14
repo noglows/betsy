@@ -48,12 +48,4 @@ private
   def order_item_params
     params.require(:order_item).permit(:quantity).merge(product_id: params[:product_id])
   end
-
-  def instock
-    my_order.order_items.find_all { |item| item.enough_inventory? }
-  end
-
-  def outofstock
-    my_order.order_items.find_all { |item| !item.enough_inventory? }
-  end
 end

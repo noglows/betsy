@@ -15,4 +15,12 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
+
+  def instock
+    my_order.order_items.find_all { |item| item.enough_inventory? }
+  end
+
+  def outofstock
+    my_order.order_items.find_all { |item| !item.enough_inventory? }
+  end
 end
