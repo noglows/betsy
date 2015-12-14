@@ -19,7 +19,7 @@ RSpec.describe OrderItemsController, type: :controller do
       }
     end
 
-    before :each do
+    before :suite do
       cookies.signed[:order] = nil
     end
 
@@ -29,15 +29,15 @@ RSpec.describe OrderItemsController, type: :controller do
       expect(all_orders).not_to include(Order.all.last)
     end
 
-    before :each do
+    before :suite do
       ord = Order.create(status:"pending")
       cookies.signed[:order] = ord.id
     end
 
-    it "creates a new order instance when one does not already exist" do
-      all_orders = Order.all.length
+    it "does not create a new order instance when one already exists" do
+      last_order = Order.last
       post :create, order_item_params
-      expect(all_orders).to eq(Order.all.length)
+      expect(Order.last).to_not eq last_order
     end
 
     it "redirects to the cart path when successful" do
