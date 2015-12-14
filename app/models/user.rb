@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   has_many :products
-  #has_many :orders
   has_many :order_items
 
   has_secure_password
@@ -9,7 +8,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates :email, email_format: { message: "doesn't look like an email address" }
 
-  # switch orders
   def revenue
     revenue = 0
     products.each do |product|

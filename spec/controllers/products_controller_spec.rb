@@ -66,6 +66,7 @@ RSpec.describe ProductsController, type: :controller do
           description: "A gregarious, lovable sailor",
           price: 2500,
           retired: false,
+          inventory_total: 20,
           image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
           user_id: 4
         },
