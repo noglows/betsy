@@ -17,7 +17,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function(){
+function initialize() {
   $("#accordion1").on("hide.bs.collapse", function(){
     $("#accordion1 .glyphicon").replaceWith('<span class="glyphicon glyphicon-collapse-down pull-right"></span>');
   });
@@ -31,4 +31,7 @@ $(document).ready(function(){
   $("#accordion2").on("show.bs.collapse", function(){
     $("#accordion2 .glyphicon").replaceWith('<span class="glyphicon glyphicon-collapse-up pull-right"></span>');
   });
-});
+}
+
+$(document).ready(initialize);
+$(document).on('page:load', initialize);
