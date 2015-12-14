@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
 
   def checkout
     my_order
+    @order_items = @order.order_items
     redirect_to root_path if @order.new_record?
   end
 

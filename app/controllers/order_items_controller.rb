@@ -20,7 +20,8 @@ class OrderItemsController < ApplicationController
   end
 
   def cart
-    @order_items = my_order.order_items
+    @instock = instock || []
+    @outofstock = outofstock || []
   end
 
   def update
@@ -46,5 +47,13 @@ private
 
   def order_item_params
     params.require(:order_item).permit(:quantity).merge(product_id: params[:product_id])
+  end
+
+  def instock
+    my_order.order_items.find_all { |item| item.enough_inventory? }
+  end
+
+  def outofstock
+    my_order.order_items.find_all { |item| !item.enough_inventory? }
   end
 end
