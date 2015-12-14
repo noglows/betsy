@@ -1,7 +1,14 @@
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4">
 <% if !flash.now[:error].nil? %>
   <%= flash.now[:error] %>
 <% end %>
+</div>
+<div class="col-md-4"></div>
+</div>
 
+<div class="row">
 <div class="col-md-4"></div>
 <div class="col-md-4">
   <%= form_for(:session_data, url: sessions_path) do |f| %>
@@ -17,3 +24,15 @@
   <% end %>
 </div>
 <div class="col-md-4"></div>
+</div>
+
+<div class="row">
+
+<div class="col-md-4"></div>
+<div class="col-md-4">
+  <%= link_to "Create a new account", new_user_path %>
+</div>
+<div class="col-md-4"></div>
+
+
+</div>

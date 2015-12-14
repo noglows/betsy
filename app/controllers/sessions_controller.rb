@@ -5,23 +5,19 @@ class SessionsController < ApplicationController
   def create
     data = params[:session_data]
     @user = User.find_by_email(data[:email])
-
-    if !@user.nil?
-      # User is in the system
-      if @user.authenticate(data[:password])
-        # User is Authenticated
-        session[:user_id] = @user.id
-        redirect_to root_path
-      else
-        # user is not Authenticated
-        flash.now[:error] = "Hmmm, that password/email combination doesn't seem quite right..."
-        render :new
-      end
+    if @user.nil?
+      flash.now[:error] = "Hmmm, that password/email combination doesn't seem quite right..."
+      render :new
+    elsif @user.authenticate(data[:password])
+    # User is in the system and authenitcated
+      session[:user_id] = @user.id
+      redirect_to root_path
     else
-      # User is not in the system
-      flash[:error] = "We don't have that email address registered. Would you like to create a new account?"
-      redirect_to new_user_path
+      # user is not Authenticated
+      flash.now[:error] = "Hmmm, that password/email combination doesn't seem quite right..."
+      render :new
     end
+    #redirect_to new_user_path
   end
 
   def destroy
