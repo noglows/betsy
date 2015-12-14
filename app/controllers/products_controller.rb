@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to user_path(@user_id)
     else
-      render :new
+      render :edit
     end
   end
 

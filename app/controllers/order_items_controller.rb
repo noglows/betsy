@@ -41,6 +41,8 @@ class OrderItemsController < ApplicationController
     order_item.destroy
   end
 
+private
+
   def order_item_params
     params.require(:order_item).permit(:quantity).merge(product_id: params[:product_id])
   end
