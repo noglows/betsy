@@ -18,14 +18,26 @@ RSpec.describe OrderItemsController, type: :controller do
         product_id: 6,
       }
     end
+
     before :each do
-      cookies[:order] = nil
+      cookies.signed[:order] = nil
     end
 
     it "creates a new order instance when one does not already exist" do
       all_orders = Order.all.to_a
       post :create, order_item_params
       expect(all_orders).not_to include(Order.all.last)
+    end
+
+    before :each do
+      ord = Order.create(status:"pending")
+      cookies.signed[:order] = ord.id
+    end
+
+    it "creates a new order instance when one does not already exist" do
+      all_orders = Order.all.length
+      post :create, order_item_params
+      expect(all_orders).to eq(Order.all.length)
     end
 
     it "redirects to the cart path when successful" do
