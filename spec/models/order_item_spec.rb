@@ -15,14 +15,12 @@ RSpec.describe OrderItem, type: :model do
       order_item = OrderItem.new(quantity: 10, product_id: 2)
       expect(order_item).to_not be_valid
       expect(order_item.errors.keys).to include :order_id
-      #expect(order_valid).to be_valid
     end
 
     it "must have a quantity" do
       order_item = OrderItem.new(product_id: 2, order_id: 2)
       expect(order_item).to_not be_valid
       expect(order_item.errors.keys).to include :quantity
-      #expect(order_valid).to be_valid
     end
 
     it "must have a quantity greater than or equal to 0" do
