@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :current_user
 
+  before_action :require_login, only: [:show, :new_category]
+
   def new
     @user = User.new
   end

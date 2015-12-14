@@ -16,3 +16,20 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 end
+
+def require_login
+  if current_user.nil?
+    flash[:error] = "You must be logged in to view this section"
+    redirect_to new_session_path
+  end
+end
+
+def check_user
+  if @current_user != nil
+    product = params[:product_id]
+    if Product.find(product).user == @current_user
+      flash[:error] = "You can't review your own products"
+      redirect_to user_product_path(@current_user.id, product)
+    end
+  end
+end

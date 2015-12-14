@@ -2,6 +2,8 @@ require 'pry'
 
 class ProductsController < ApplicationController
   before_action :current_user
+  before_action :require_login, only: [:new, :create, :edit, :update, :retire]
+  before_action :check_user, only: [:review, :retire]
 
   def index
     @products = Product.order(:created_at)
