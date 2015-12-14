@@ -29,9 +29,9 @@ class OrdersController < ApplicationController
 
   end
 
-  def new
-    @order = Order.new
-  end
+  # def new
+  #   @order = Order.new
+  # end
 
   def show
     user_id = params[:user_id]
@@ -42,9 +42,9 @@ class OrdersController < ApplicationController
     @cookie = true unless cookies[:order].nil?
   end
 
-  def update
-    @user = User.find(user_id)
-  end
+  # def update
+  #   @user = User.find(user_id)
+  # end
 
   def ship
     user_id = params[:user_id]

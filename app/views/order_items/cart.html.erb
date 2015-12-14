@@ -1,4 +1,8 @@
-<h2>You have <%= @order_items.length %> items in your cart!</h2>
+<% if @order_items.length == 1 %>
+  <h2>You have <%= @order_items.length %> item in your cart!</h2>
+<% else %>
+  <h2>You have <%= @order_items.length %> items in your cart!</h2>
+<% end %>
 <br>
 <table class="table table-hover">
   <tr>
@@ -18,8 +22,11 @@
       <%= form_for [item.product, item], controller: :order_items, action: :update do |f| %>
         <%= f.select :quantity, (0..item.product.inventory_total) %>
         <%= f.submit "Update", class: "btn btn-default" %>
+        <%= link_to "Remove", product_order_item_path(item.product, item), method: :delete, class: "btn btn-default" %>
       <% end %>
     </td>
   </tr>
   <% end %>
 </table>
+
+<%= link_to "Continue Shopping", root_path, class: "btn btn-default btn-block" %>
