@@ -42,12 +42,11 @@ class OrdersController < ApplicationController
   def checkout
     my_order
     @order_items = @order.order_items
-    redirect_to root_path if @order.new_record? || instock.empty?
+    redirect_to root_path if @order.new_record? || @order.instock.empty?
   end
 
   def update
     my_order
-    raise
 
     @order.attributes = order_params
   end
@@ -80,6 +79,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order)
+    last_four = params[:order][:last_four][-4..-1]
+    params.require(:order).permit(:email, :mailing_address, :zip, :name_on_card, :card_exp).merge(last_four: last_four)
   end
 end

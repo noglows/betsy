@@ -13,4 +13,11 @@ class Order < ActiveRecord::Base
     return revenue
   end
 
+  def instock
+    self.order_items.enough_inventory?
+  end
+
+  def outofstock
+    self.order_items.not_enough_inventory?
+  end
 end

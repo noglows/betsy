@@ -20,8 +20,8 @@ class OrderItemsController < ApplicationController
   end
 
   def cart
-    @instock = instock || []
-    @outofstock = outofstock || []
+    @instock = my_order.instock
+    @outofstock = my_order.outofstock
   end
 
   def update
