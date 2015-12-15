@@ -112,13 +112,25 @@ RSpec.describe OrderItemsController, type: :controller do
 
   describe "DELETE 'destroy'" do
 
-    # end
-    #
-    # it "deletes an order_item" do
-    #   expect(OrderItem.all).to include(order_item)
-    #   delete :destroy, params
-    #   expect(OrderItem.all).to_not include(order_item)
-    # end
+    before :each do
+      @product = Product.create(name:"Test A", description: "A Description", price: 100, inventory_total: 1, retired: false, image_url: "http://cdn.cutestpaw.com/wp-content/uploads/2012/08/s-fuzzy.jpg", user_id: 1, :categories => Category.where(:name => ['people']))
+      @order_item = OrderItem.create(quantity: 1, order_id: 200, product_id: @product.id)
+    end
+
+    let(:order_item_params) do
+      {
+        order_item: {
+          quantity: 0,
+        },
+        product_id: @product.id,
+        id: @order_item.id,
+      }
+    end
+
+    it "renders the cart" do
+      delete :destroy, order_item_params
+      expect(subject).to redirect_to cart_path
+    end
   end
 
 end
