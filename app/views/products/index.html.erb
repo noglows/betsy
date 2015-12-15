@@ -13,7 +13,7 @@
 
   <div class="container photo-gallery">
     <% @products.each_with_index do |product, index| %>
-      <% if index % 4 == 0 %>
+      <% if index % 3 == 0 %>
         <div class="row">
       <% end %>
       <div class="col-sm-4 col-xs-12">
@@ -23,7 +23,7 @@
           <span class="pull-right"><%= cents_to_dollars(product.price) %></span>
         </div>
       </div>
-      <% if index % 4 == 3 %>
+      <% if index % 3 == 2 %>
         </div>
       <% end %>
     <% end %>
