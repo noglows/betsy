@@ -36,8 +36,8 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    # order_item = OrderItem.find(params[:id])
-    # order_item.destroy
+    order_item = OrderItem.find(params[:id])
+    order_item.destroy
 
     redirect_to cart_path
   end
