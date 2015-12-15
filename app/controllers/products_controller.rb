@@ -1,5 +1,3 @@
-require 'pry'
-
 class ProductsController < ApplicationController
   before_action :current_user
   before_action :require_login, only: [:new, :create, :edit, :update, :retire]
@@ -33,7 +31,6 @@ class ProductsController < ApplicationController
 
   def review
     Review.create(review_params)
-
     redirect_to product_path(params[:product_id])
   end
 
@@ -47,8 +44,10 @@ class ProductsController < ApplicationController
   def create
     @user_id = session[:user_id]
     @product = Product.new(product_params)
-    params[:categories].each do |cat|
-      @product.categories << Category.where(id:cat.to_i)
+    if !params[:categories].nil?
+      params[:categories].each do |cat|
+        @product.categories << Category.where(id:cat.to_i)
+      end
     end
     if @product.save
       redirect_to user_path(@user_id)
@@ -69,8 +68,10 @@ class ProductsController < ApplicationController
     @product = Product.update(params[:id], product_params)
     @product.categories.clear
     @product.save
-    params[:categories].each do |cat|
-      @product.categories << Category.where(id:cat.to_i)
+    if !params[:categories].nil?
+      params[:categories].each do |cat|
+        @product.categories << Category.where(id:cat.to_i)
+      end
     end
     if @product.save
       redirect_to user_path(user_id)
@@ -78,12 +79,6 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
-
-  # def destroy
-  #   product_id = params[:id]
-  #   Product.destroy(product_id)
-  #   redirect_to user_path(params[:user_id])
-  # end
 
   def retire
     product_id = params[:product_id]
