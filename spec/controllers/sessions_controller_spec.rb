@@ -48,13 +48,6 @@ RSpec.describe SessionsController, type: :controller do
       }
     end
 
-    it "doesn't allow access to user who are logged in" do
-      user
-      session[:user_id] = 1
-      post :create
-      expect(subject).to redirect_to products_path
-    end
-
     it "allows users to log in with a correct email and password" do
       user
       post :create, session_data
@@ -74,6 +67,8 @@ RSpec.describe SessionsController, type: :controller do
     end
 
   end
+
+
 
   describe "DELETE 'destroy'" do
     it "doesn't allow access to users who not logged in" do
