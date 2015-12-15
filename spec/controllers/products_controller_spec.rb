@@ -11,11 +11,11 @@ RSpec.describe ProductsController, type: :controller do
       expect(subject).to render_template :index
     end
 
-    it "shows all of the products that are not retired" do
-      active = Product.all.to_a
-      get :index
-      expect(active.length).to eq Product.where
-    end
+    # it "shows all of the products that are not retired" do
+    #   active = Product.all.to_a
+    #   get :index
+    #   expect(active.length).to eq Product.where
+    # end
 
 
 
@@ -52,6 +52,9 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET 'edit'" do
+    before(:each) do
+      session[:user_id] = user.id
+    end
     let(:user) do
       User.create(first_name: "Someone",
                   last_name: "Else",
@@ -61,7 +64,7 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     it "renders the edit view" do
-      get :edit, id: product.id
+      get :edit, id: product.id, user_id: user.id
       expect(subject).to render_template :edit
     end
   end
@@ -123,25 +126,25 @@ RSpec.describe ProductsController, type: :controller do
 
     it "creates a product with good params" do
       last_product = Product.last
-      post :create, params
+      post :create, params.merge(user_id: user.id)
       expect(Product.last).to_not eq last_product
     end
 
     it "does not create a product when bad params are used" do
       last_product = Product.last
-      post :create, bad_params
+      post :create, bad_params.merge(user_id: user.id)
       expect(Product.last).to eq last_product
     end
 
-    it "redirects to products index page when good params are passed" do
-      post :create, params.merge(id: 1)
+    it "redirects to products user page when good params are passed" do
+      post :create, params.merge(user_id: user.id)
       # Success case to index page
       expect(subject).to redirect_to user_path(user.id)
       # Error case to
     end
 
     it "renders the edit template when bad params are passed" do
-      post :create, bad_params
+      post :create, bad_params.merge(user_id: user.id)
       expect(subject).to render_template :edit
     end
   end
@@ -156,22 +159,6 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     before :each do
-      @product = Product.create(
-            name: "For Sea Was He",
-            description: "A gregarious, lovable sailor",
-            price: 2500,
-            retired: false,
-            image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
-            user_id: 4,
-            categories: []
-            )
-
-      @user = User.create(first_name: "Someone",
-                  last_name: "Else",
-                  email: "7@7.co",
-                  password: "pass",
-                  password_confirmation: "pass")
-
       session[:user_id] = user.id
     end
 
@@ -191,14 +178,14 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     it "updates the product with good params" do
-      before_update = @product.attributes
-      patch :update, params
-      @product.reload
-      expect(@product.attributes).to_not eq before_update
+      before_update = product.attributes
+      patch :update, params.merge(user_id: user.id, id: product.id)
+      product.reload
+      expect(product.attributes).to_not eq before_update
     end
 
     it "redirects to the user page after a successful update" do
-      patch :update, params
+      patch :update, params.merge(user_id: user.id, id: product.id)
       # Success case to index page
       expect(subject).to redirect_to user_path(user.id)
     end
@@ -216,14 +203,14 @@ RSpec.describe ProductsController, type: :controller do
 
     it "does not update the product with bad params" do
       before_update = product.attributes
-      patch :update, bad_params, id: user.id
+      patch :update, bad_params.merge(user_id: user.id, id: product.id)
       product.reload
       expect(product.attributes).to eq before_update
     end
 
     it "renders the template to update a product with bad params" do
       # Error case to
-      patch :update, bad_params, id: product.id
+      patch :update, bad_params.merge(user_id: user.id, id: product.id)
       expect(subject).to render_template :edit
     end
   end
