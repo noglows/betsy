@@ -41,14 +41,24 @@ class OrdersController < ApplicationController
 
   def checkout
     my_order
-    @order_items = @order.order_items
-    redirect_to root_path if @order.new_record? || @order.instock.empty?
+    @instock = @order.instock
+    @total = @order.cart_total
+
+    redirect_to root_path if @order.new_record? || @instock.empty?
   end
 
   def update
     my_order
 
     @order.attributes = order_params
+
+    if @order.save
+      @order.update(status: "paid")
+      redirect_to cart_path
+    else
+      @instock = @order.instock
+      render :checkout
+    end
   end
 
   # N

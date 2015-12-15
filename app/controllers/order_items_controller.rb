@@ -22,6 +22,7 @@ class OrderItemsController < ApplicationController
   def cart
     @instock = my_order.instock
     @outofstock = my_order.outofstock
+    @total = my_order.cart_total
   end
 
   def update

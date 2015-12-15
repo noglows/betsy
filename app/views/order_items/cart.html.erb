@@ -18,11 +18,14 @@
   <% @instock.each do |item| %>
     <tr>
       <td>
-        <%= item.product.name %>
+        <%= link_to item.product.name, product_path(item.product) %>
       </td>
       <td>
         <%= form_for [item.product, item], controller: :order_items, action: :update do |f| %>
           <%= f.select :quantity, (0..item.product.inventory_total) %>
+          <td>
+            <%= cents_to_dollars(item.product.price * item.quantity) %>
+          </td>
           <td>
             <%= f.submit "Update", class: "btn btn-default pull-right" %>
             <%= link_to "Remove", product_order_item_path(item.product, item), method: :delete, class: "btn btn-default pull-right" %>
@@ -30,6 +33,17 @@
         <% end %>
       </td>
     </tr>
+  <% end %>
+  <% if @total %>
+  <tr>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
+      <h4>Total: <%= cents_to_dollars(@total) %></h4>
+    </td>
+  </tr>
   <% end %>
 </table>
 <%= link_to "Checkout", checkout_path, class: "btn btn-default btn-block" unless @instock.empty? %>
