@@ -1,0 +1,28 @@
+<div class="col-sm-6">
+  <table class="table table-hover">
+    <tr>
+      <th>
+        Item
+      </th>
+      <th>
+        Quantity
+      </th>
+    </tr>
+    <% @order_items.each do |item| %>
+      <tr>
+        <td>
+          <%= link_to item.product.name, product_path(item.product) %>
+        </td>
+        <td>
+          <%= item.quantity %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>
+        <h4>Total: <%= cents_to_dollars(@total) %></h4>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+</div>
