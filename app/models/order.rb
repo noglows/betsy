@@ -3,6 +3,10 @@ class Order < ActiveRecord::Base
 
   validates :status, presence: true
 
+  [:email, :mailing_address, :zip, :name_on_card, :last_four, :card_exp].each do |attribute|
+    validates attribute, presence: true, on: :update
+  end
+
   def total(user_id)
     revenue = 0
     order_items.each do |oi|

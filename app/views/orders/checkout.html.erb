@@ -9,8 +9,7 @@
           Quantity
         </th>
       </tr>
-      <% @order_items.each do |item| %>
-        <% if item.enough_inventory? %>
+      <% @instock.each do |item| %>
         <tr>
           <td>
             <%= item.product.name %>
@@ -19,7 +18,6 @@
             <%= item.quantity %>
           </td>
         </tr>
-        <% end %>
       <% end %>
     </table>
   </div>
