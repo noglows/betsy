@@ -21,6 +21,18 @@ body {
   background-color: #f9ecf9;
 }
 
+.error, .field_with_errors:nth-of-type(2n+1) {
+  display: inline-block;
+}
+
+.error {
+  margin-left: 10px;
+}
+
+.field_with_errors:nth-of-type(2n+1) {
+  float: left;
+}
+
 .sidebar {
   display: table-cell;
 }
@@ -74,6 +86,6 @@ div.col-sm-4 img {
   border-bottom-right-radius: 5px;
 }
 
-.cart tr > td {
-  width: 20%;
+.cart td:first-of-type {
+  width: 30%;
 }

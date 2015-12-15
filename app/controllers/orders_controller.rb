@@ -43,6 +43,7 @@ class OrdersController < ApplicationController
     my_order
     @instock = @order.instock
     @total = @order.cart_total
+    @errors = @order.errors.messages
 
     redirect_to root_path if @order.new_record? || @instock.empty?
   end
@@ -54,14 +55,20 @@ class OrdersController < ApplicationController
 
     if @order.save
       @order.update(status: "paid")
+      @order.adjust_stock
+      cookies.delete :order
+      @order.outofstock.destroy_all
+
       redirect_to cart_path
     else
+      @order.last_four = nil
       @instock = @order.instock
+      @total = @order.cart_total
+      @errors = @order.errors.messages
       render :checkout
     end
   end
 
-  # N
   def ship
     user_id = params[:user_id]
     order_id = params[:order_id]

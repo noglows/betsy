@@ -7,6 +7,9 @@ class Order < ActiveRecord::Base
     validates attribute, presence: true, on: :update
   end
 
+  validates :last_four, numericality: { only_integer: true }, on: :update
+  validates :zip, length: { is: 5 }, on: :update
+
   def total(user_id)
     revenue = 0
     order_items.each do |oi|
@@ -29,6 +32,9 @@ class Order < ActiveRecord::Base
     self.instock.joins(:product).sum('quantity * products.price')
   end
 
-  # res = @request.request_products.joins(:product_services)
-  #       .select("sum(request_products.quantity) as quantities, sum(product_services.price * request_products.quantity) as total")
+  def adjust_stock
+    self.order_items.each do |order_item|
+      order_item.product.decrement!(:inventory_total, by = order_item.quantity)
+    end
+  end
 end
