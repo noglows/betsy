@@ -66,7 +66,8 @@ class User < ActiveRecord::Base
   def find_order_item(order)
     user_id = self.id
     order.order_items.each do |oi|
-      if oi.product.user.id = user_id
+      if oi.product.user.id == user_id
+        #binding.pry
         return oi.shipped
       end
     end
