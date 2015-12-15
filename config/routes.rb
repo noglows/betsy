@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get "/cart" => "order_items#cart"
   get "/checkout" => "orders#checkout"
+  get "/confirmation" => "orders#confirmation"
 
   root 'products#index'
 

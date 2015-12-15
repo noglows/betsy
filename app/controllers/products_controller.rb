@@ -1,5 +1,3 @@
-require 'pry'
-
 class ProductsController < ApplicationController
   before_action :current_user
   before_action :require_login, only: [:new, :create, :edit, :update, :retire]
@@ -7,21 +5,20 @@ class ProductsController < ApplicationController
   before_action :check_user_id, only: [:retire, :edit, :update]
 
   def index
-    @products = Product.order(:created_at)
     @categories = Category.all
     @merchants = User.all
     case params[:type]
     when 'merch'
-      @products = Product.where("user_id = #{params[:order]}")
+      @products = Product.where("user_id = #{params[:order]} AND retired IS false")
     when "cat"
-      prod = Product.all
+      prod = Product.where(retired: false)
       @products = prod.select {|product|
-        rows = Product.categories.where("category_id = #{params[:order]}")
+        rows = product.categories.where("category_id = #{params[:order]}")
         !rows.to_a.empty?
       }
     else
       @order = "prod"
-      @products = Product.order(:created_at)
+      @products = Product.order(:created_at).where(retired: false)
     end
   end
 
@@ -34,7 +31,6 @@ class ProductsController < ApplicationController
 
   def review
     Review.create(review_params)
-
     redirect_to product_path(params[:product_id])
   end
 
@@ -48,8 +44,10 @@ class ProductsController < ApplicationController
   def create
     @user_id = session[:user_id]
     @product = Product.new(product_params)
-    params[:categories].each do |cat|
-      @product.categories << Category.where(id:cat.to_i)
+    if !params[:categories].nil?
+      params[:categories].each do |cat|
+        @product.categories << Category.where(id:cat.to_i)
+      end
     end
     if @product.save
       redirect_to user_path(@user_id)
@@ -70,8 +68,10 @@ class ProductsController < ApplicationController
     @product = Product.update(params[:id], product_params)
     @product.categories.clear
     @product.save
-    params[:categories].each do |cat|
-      @product.categories << Category.where(id:cat.to_i)
+    if !params[:categories].nil?
+      params[:categories].each do |cat|
+        @product.categories << Category.where(id:cat.to_i)
+      end
     end
     if @product.save
       redirect_to user_path(user_id)
@@ -79,12 +79,6 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
-
-  # def destroy
-  #   product_id = params[:id]
-  #   Product.destroy(product_id)
-  #   redirect_to user_path(params[:user_id])
-  # end
 
   def retire
     product_id = params[:product_id]

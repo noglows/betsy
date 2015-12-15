@@ -13,20 +13,18 @@
 
   <div class="container photo-gallery">
     <% @products.each_with_index do |product, index| %>
-      <% if !product.retired? %>
-        <% if index % 4 == 0 %>
-          <div class="row">
-        <% end %>
-        <div class="col-sm-4 col-xs-12">
-          <%= link_to image_tag(product.image_url), product_path(product.id) %>
-          <div class="caption">
-            <%= link_to product.name, product_path(product.id) %>
-            <span class="pull-right"><%= cents_to_dollars(product.price) %></span>
-          </div>
+      <% if index % 3 == 0 %>
+        <div class="row">
+      <% end %>
+      <div class="col-sm-4 col-xs-12">
+        <%= link_to image_tag(product.image_url), product_path(product.id) %>
+        <div class="caption">
+          <%= link_to product.name, product_path(product.id) %>
+          <span class="pull-right"><%= cents_to_dollars(product.price) %></span>
         </div>
-        <% if index % 4 == 3 %>
-          </div>
-        <% end %>
+      </div>
+      <% if index % 3 == 2 %>
+        </div>
       <% end %>
     <% end %>
   </div>

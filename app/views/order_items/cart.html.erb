@@ -6,15 +6,12 @@
 <br>
 <table class="table table-hover cart">
   <tr>
-    <th>
-      Item
-    </th>
-    <th>
-      Quantity
-    </th>
-    <th>
-      Price
-    </th>
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Total Price</th>
+    <th></th>
+    <th></th>
   </tr>
   <% @instock.each do |item| %>
     <tr>
@@ -24,26 +21,30 @@
       <td>
         <%= form_for [item.product, item], controller: :order_items, action: :update do |f| %>
           <%= f.select :quantity, (0..item.product.inventory_total) %>
-          <td>
-            <%= cents_to_dollars(item.product.price * item.quantity) %>
-          </td>
-          <td>
-            <%= f.submit "Update", class: "btn btn-default pull-right" %>
-            <%= link_to "Remove", product_order_item_path(item.product, item), method: :delete, class: "btn btn-default pull-right" %>
-          </td>
-        <% end %>
       </td>
+      <td>
+        <%= cents_to_dollars(item.product.price) %>
+      </td>
+      <td>
+        <%= cents_to_dollars(item.product.price * item.quantity) %>
+      </td>
+      <td>
+        <%= f.submit "Update", class: "btn btn-default pull-right" %>
+      </td>
+      <td>
+        <%= link_to "Remove", product_order_item_path(item.product, item), method: :delete, class: "btn btn-default pull-right" %>
+      </td>
+        <% end %>
     </tr>
   <% end %>
   <% if @total %>
   <tr>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-      <h4>Total: <%= cents_to_dollars(@total) %></h4>
-    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><h4>Total: <%= cents_to_dollars(@total) %></h4></td>
   </tr>
   <% end %>
 </table>
@@ -63,11 +64,13 @@
         <td>
           <%= item.product.name %>
         </td>
-        <td>
+
           <%= form_for [item.product, item], controller: :order_items, action: :update do |f| %>
             <%= f.select :quantity, (0..item.product.inventory_total) %>
             <td>
               <%= f.submit "Update", class: "btn btn-default pull-right" %>
+            </td>
+            <td>
               <%= link_to "Remove", product_order_item_path(item.product, item), method: :delete, class: "btn btn-default pull-right" %>
             </td>
           <% end %>
