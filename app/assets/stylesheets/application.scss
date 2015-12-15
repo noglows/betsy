@@ -48,14 +48,30 @@ body {
   }
 }
 
+@media(max-width:768px){
+  .photo-gallery {
+    padding-left: 10%;
+    max-width: 90%;
+  }
+}
+
 div.col-sm-4 img {
-  height: 250px;
+  height: 225px;
   width: 100%;
   object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.col-sm-4 {
+  padding: 5px;
 }
 
 .caption {
   background-color: #fff;
+  padding: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .cart tr > td {
