@@ -21,8 +21,12 @@ body {
   font-family: 'Alegreya', serif;
 }
 
-h1, h2, h3, h4, h5, h6, a, input[type="submit"], .navbar-text, legend {
+h1, h2, h3, h4, h5, h6, a, input[type="submit"], .navbar-text, legend, .dropdown-toggle, th {
   font-family: 'Nunito', sans-serif;
+}
+
+select {
+  width: 40px;
 }
 
 div.navbar-brand {
