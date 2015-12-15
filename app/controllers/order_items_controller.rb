@@ -24,13 +24,13 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    # order_item = OrderItem.find(params[:id])
-    #
-    # if order_item_params[:quantity] == "0"
-    #   order_item.destroy
+    order_item = OrderItem.find(params[:id])
+
+    if order_item_params[:quantity] == "0"
+      order_item.destroy
     # else
     #   order_item.update(quantity: order_item_params[:quantity])
-    # end
+    end
 
     redirect_to cart_path
   end

@@ -61,19 +61,6 @@ RSpec.describe OrderItemsController, type: :controller do
       @order_item = OrderItem.create(quantity: 1, order_id: 200, product_id: @product.id)
     end
 
-    let(:params) do
-      # should give us product_id and order_item_id
-      {
-        product_id: @product.id,
-        id: @order_item.id,
-      }
-    end
-
-    it "renders the cart" do
-      patch :update, params
-      expect(subject).to redirect_to cart_path
-    end
-
     let(:order_item_params) do
       {
         order_item: {
@@ -82,6 +69,11 @@ RSpec.describe OrderItemsController, type: :controller do
         product_id: @product.id,
         id: @order_item.id,
       }
+    end
+
+    it "renders the cart" do
+      patch :update, order_item_params
+      expect(subject).to redirect_to cart_path
     end
 
     it "destroys the order item if the quantity is 0" do
