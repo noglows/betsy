@@ -56,27 +56,23 @@ RSpec.describe OrderItemsController, type: :controller do
 
   describe "PATCH 'update'" do
 
-    let(:params) do
+    let(:order_item_params) do
       {
         order_item: {
-          quantity: 12,
-          order_id: 1,
-          product_id: 6
+          quantity: 0,
         },
-        product_id: 5
+        product_id: 6,
       }
-      end
+    end
 
-      before :each do
-        session[:user_id] = user.id
-      end
+    before :suite  do
+      new_item = OrderItem.find(params[:id])
+    end
 
-      it "updates the order item with good params" do
-        before_update = order_item.attributes
-        patch :update, params, id: order_item.id
-        order_item.reload
-        expect(order_item.attributes).to_not eq before_update
-      end
+    it "deletes the order item if quantity is 0" do
+      patch :update, order_item_params
+      expect(OrderItem.find(6)).to_not eq new_item
+    end
   end
 
   describe "DELETE 'destroy'" do

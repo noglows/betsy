@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     when "cat"
       prod = Product.all
       @products = prod.select {|product|
-        rows = product.categories.where("category_id = #{params[:order]}")
+        rows = Product.categories.where("category_id = #{params[:order]}")
         !rows.to_a.empty?
       }
     else
