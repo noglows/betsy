@@ -39,7 +39,7 @@ class OrderItemsController < ApplicationController
     # order_item = OrderItem.find(params[:id])
     # order_item.destroy
 
-    # redirect_to cart_path
+    redirect_to cart_path
   end
 
 private
