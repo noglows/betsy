@@ -21,6 +21,21 @@ body {
   background-color: #f9ecf9;
 }
 
+.add-cart {
+  padding: 10px;
+}
+
+.col-sm-6 {
+  min-height: 400px;
+}
+
+.product-img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
 .error, .field_with_errors:nth-of-type(2n+1) {
   display: inline-block;
 }
@@ -64,6 +79,12 @@ body {
   .photo-gallery {
     padding-left: 10%;
     max-width: 90%;
+  }
+
+  .product-img, .product-title {
+    height: 100%;
+    width: 90%;
+    padding-left: 10%;
   }
 }
 
