@@ -1,6 +1,6 @@
 module ApplicationHelper
   def readable_date(date)
-   date.strftime("%B %u, %Y - %I:%M")
+   date.strftime("%B %e, %Y - %I:%M")
   end
 
   def cents_to_dollars(money)
