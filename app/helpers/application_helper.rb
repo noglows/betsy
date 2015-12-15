@@ -34,8 +34,4 @@ module ApplicationHelper
     month = monthnames[month]
     "#{month} #{year}"
   end
-
-
-
-
 end

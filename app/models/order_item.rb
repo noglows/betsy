@@ -16,16 +16,15 @@ class OrderItem < ActiveRecord::Base
   #   self.quantity <= self.product.inventory_total
   # end
 
-  def self.enough_inventory?
+  def self.enough_inventory
     self.joins(:product).where('quantity <= products.inventory_total')
   end
 
-  def self.not_enough_inventory?
+  def self.not_enough_inventory
     self.joins(:product).where('quantity > products.inventory_total')
   end
 
   def set_shipped
     self.shipped = false
   end
-
 end

@@ -18,10 +18,17 @@ class Order < ActiveRecord::Base
   end
 
   def instock
-    self.order_items.enough_inventory?
+    self.order_items.enough_inventory
   end
 
   def outofstock
-    self.order_items.not_enough_inventory?
+    self.order_items.not_enough_inventory
   end
+
+  def cart_total
+    self.instock.joins(:product).sum('quantity * products.price')
+  end
+
+  # res = @request.request_products.joins(:product_services)
+  #       .select("sum(request_products.quantity) as quantities, sum(product_services.price * request_products.quantity) as total")
 end
