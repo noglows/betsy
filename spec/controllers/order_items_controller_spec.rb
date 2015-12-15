@@ -85,18 +85,28 @@ RSpec.describe OrderItemsController, type: :controller do
     let(:order_item_params_two) do
       {
         order_item: {
-          quantity: 1,
+          quantity: 2,
         },
         product_id: @product.id,
         id: @order_item.id,
       }
     end
 
-    it "does not destory the order item if the quantity is not 0" do
-      how_many_order_items_before = OrderItem.all.to_a.length
-      patch :update, order_item_params_two
-      expect(OrderItem.all.length).to eq(how_many_order_items_before)
+    describe "if the quantity is not 0" do
+
+      it "does not destory the order item if the quantity is not 0" do
+        how_many_order_items_before = OrderItem.all.to_a.length
+        patch :update, order_item_params_two
+        expect(OrderItem.all.length).to eq(how_many_order_items_before)
+      end
+
+      it "increases the order item's quantity" do
+        patch :update, order_item_params_two
+        expect(OrderItem.find(@order_item.id).quantity).to eq(2)
+      end
+
     end
+
 
   end
 

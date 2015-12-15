@@ -28,8 +28,8 @@ class OrderItemsController < ApplicationController
 
     if order_item_params[:quantity] == "0"
       order_item.destroy
-    # else
-    #   order_item.update(quantity: order_item_params[:quantity])
+    else
+      order_item.update(quantity: order_item_params[:quantity])
     end
 
     redirect_to cart_path
