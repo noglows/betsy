@@ -42,6 +42,7 @@ class OrdersController < ApplicationController
   def checkout
     my_order
     @instock = @order.instock
+    @total = @order.cart_total
 
     redirect_to root_path if @order.new_record? || @instock.empty?
   end
