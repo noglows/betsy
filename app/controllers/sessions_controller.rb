@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :not_require_login, only: [:new]
+
   def new
   end
 

@@ -21,6 +21,18 @@ body {
   background-color: #f9ecf9;
 }
 
+.error, .field_with_errors:nth-of-type(2n+1) {
+  display: inline-block;
+}
+
+.error {
+  margin-left: 10px;
+}
+
+.field_with_errors:nth-of-type(2n+1) {
+  float: left;
+}
+
 .sidebar {
   display: table-cell;
 }
@@ -48,16 +60,32 @@ body {
   }
 }
 
+@media(max-width:768px){
+  .photo-gallery {
+    padding-left: 10%;
+    max-width: 90%;
+  }
+}
+
 div.col-sm-4 img {
-  height: 250px;
+  height: 225px;
   width: 100%;
   object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.col-sm-4 {
+  padding: 5px;
 }
 
 .caption {
   background-color: #fff;
+  padding: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
-.cart tr > td {
-  width: 20%;
+.cart td:first-of-type {
+  width: 30%;
 }

@@ -9,8 +9,7 @@
           Quantity
         </th>
       </tr>
-      <% @order_items.each do |item| %>
-        <% if item.enough_inventory? %>
+      <% @instock.each do |item| %>
         <tr>
           <td>
             <%= item.product.name %>
@@ -19,8 +18,12 @@
             <%= item.quantity %>
           </td>
         </tr>
-        <% end %>
       <% end %>
+      <tr>
+        <td>
+          <h4>Total: <%= cents_to_dollars(@total) %></h4>
+        </td>
+      </tr>
     </table>
   </div>
 
@@ -30,24 +33,30 @@
       <legend>
         Billing Information
       </legend>
+      <span class="error"><%= "Please enter a valid email." if @errors.include?(:email) %></span>
       <%= f.label :email %>
       <%= f.email_field :email, class: "form-control" %>
+      <span class="error"><%= "Please enter a valid address." if @errors.include?(:mailing_address) %></span>
       <%= f.label :mailing_address, "Address" %>
       <%= f.text_field :mailing_address, class: "form-control" %>
+      <span class="error"><%= "Please enter a valid zip code." if @errors.include?(:zip) %></span>
       <%= f.label :zip %>
       <%= f.text_field :zip, class: "form-control" %>
-      <%= label :shipping, "Shipping address is the same as billing" %>
+      <span class="error"><%= label :shipping, "Shipping address is the same as billing" %></span>
       <%= check_box_tag :shipping %>
     </fieldset>
     <fieldset class="form-group">
       <legend>
         Credit Card Information
       </legend>
+      <span class="error"><%= "This field cannot be blank." if @errors.include?(:name_on_card) %></span>
       <%= f.label :name_on_card %>
       <%= f.text_field :name_on_card, class: "form-control" %>
+      <span class="error"><%= "Please enter a valid credit card number." if @errors.include?(:last_four) %></span>
       <%= f.label :last_four, "Credit Card Number" %>
       <%= f.text_field :last_four, minlength: 14, maxlength: 16, class: "form-control" %>
       <br>
+      <span class="error"><%= "Select an expiration date." if @errors.include?(:card_exp) %></span>
       <%= f.label :card_exp, "Expiration Date" %>
       <%= f.date_select :card_exp, start_year: Date.today.year, end_year: Date.today.year + 3, use_two_digit_numbers: true, discard_day: true, order: [:month, :year], prompt: { month: "Month", year: "Year" } %>
     </fieldset>

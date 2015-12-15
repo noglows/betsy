@@ -3,7 +3,6 @@
 <h3>Order Date: <%= readable_date(@order.created_at) %></h3>
 <h3>Order Status: <%= @order.status.capitalize %></h3>
 <h3>Shipped:
-  <% binding.pry %>
   <% if @user.find_order_item(@order) == true %>
     Yes
   <% else %>

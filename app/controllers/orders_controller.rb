@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
 
   # before_action :check_user_id, only: [:index, :show, :ship]
 
+
   def index
     user_id = params[:user_id]
     @user = User.find(user_id)
@@ -41,17 +42,39 @@ class OrdersController < ApplicationController
 
   def checkout
     my_order
-    @order_items = @order.order_items
-    redirect_to root_path if @order.new_record? || @order.instock.empty?
+    @instock = @order.instock
+    @total = @order.cart_total
+    @errors = @order.errors.messages
+    cookies.signed[:stocked] = @order.instock.length
+
+    redirect_to root_path if @order.new_record? || @instock.empty?
   end
 
   def update
     my_order
 
     @order.attributes = order_params
+    @instock = @order.instock
+
+    if @order.save && cookies.signed[:stocked] == @instock.length
+      @order.update(status: "paid")
+      @order.adjust_stock
+      cookies.delete :order
+      @order.outofstock.destroy_all
+
+      redirect_to cart_path
+    elsif cookies.signed[:stocked] != @instock.length
+      cookies.delete :stocked
+      redirect_to cart_path, alert: "Your cart has changed."
+    else
+      @order.last_four = nil
+      @total = @order.cart_total
+      @errors = @order.errors.messages
+
+      render :checkout
+    end
   end
 
-  # N
   def ship
     user_id = params[:user_id]
     order_id = params[:order_id]

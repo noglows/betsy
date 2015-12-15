@@ -1,3 +1,8 @@
+<% if !flash[:error].nil? %>
+  <%= flash[:error] %>
+<% end %>
+
+
 <div class="row">
   <div class="sidebar col-md-2 hidden-sm hidden-xs">
     <%= render "sidebar" %>
@@ -13,11 +18,11 @@
           <div class="row">
         <% end %>
         <div class="col-sm-4 col-xs-12">
-          <%= link_to image_tag(product.image_url, class: "img-responsive"), product_path(product.id) %>
+          <%= link_to image_tag(product.image_url), product_path(product.id) %>
           <div class="caption">
-            <%= link_to product.name + " " + cents_to_dollars(product.price), product_path(product.id) %>
+            <%= link_to product.name, product_path(product.id) %>
+            <span class="pull-right"><%= cents_to_dollars(product.price) %></span>
           </div>
-          <br>
         </div>
         <% if index % 4 == 3 %>
           </div>

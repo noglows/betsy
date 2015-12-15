@@ -13,15 +13,14 @@ class OrderItemsController < ApplicationController
     else
       @order.order_items << item = OrderItem.create(order_item_params)
     end
-
-    # item.product.decrement!(:inventory_total, by = order_item_params[:quantity].to_i)
-
+    
     redirect_to cart_path
   end
 
   def cart
     @instock = my_order.instock
     @outofstock = my_order.outofstock
+    @total = my_order.cart_total
   end
 
   def update

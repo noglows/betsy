@@ -15,6 +15,6 @@ class Product < ActiveRecord::Base
   validates :image_url, :url => true
 
   def average_rating
-    sum = self.reviews.average(:rating).to_f
+    self.reviews.average(:rating).to_f
   end
 end
