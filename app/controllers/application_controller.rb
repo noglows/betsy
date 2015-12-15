@@ -35,11 +35,23 @@ class ApplicationController < ActionController::Base
 
   def check_user_id
     if @current_user != nil
-      user = params[:id]
+      user = params[:user_id]
       if @current_user.id != user.to_i
         flash[:error] = "You can't view another user's content"
         redirect_to user_path(@current_user.id)
       end
     end
   end
+
+  # def check_user_product_details
+  #   if @current_user != nil
+  #     user = params[:id]
+  #     if @current_user.id != user.to_i
+  #       binding.pry
+  #       flash[:error] = "You can't view another user's content"
+  #       redirect_to user_path(@current_user.id)
+  #     end
+  #   end
+  # end
+
 end
