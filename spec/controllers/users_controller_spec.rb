@@ -112,8 +112,42 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to redirect_to new_session_path
       end
     end
+  end
 
+  describe "new_category" do
 
+    let (:category_params) do
+      {
+        category: {
+          name: "Test"
+        }
+      }
+    end
 
+    let (:bad_category_params) do
+      {
+        category: {
+          name: nil
+        }
+      }
+    end
+
+    before(:each) do
+      user
+      session[:user_id] = 1
+    end
+
+    it "lets a signed in user create a new category" do
+      post :new_category, category_params.merge(user_id: session[:user_id])
+      expect(subject).to redirect_to user_path(session[:user_id])
+      expect(session[:message]).to include "You have created a new category"
+    end
+
+    it "does not let a signed in user create a category without a name" do
+      post :new_category, bad_category_params.merge(user_id: session[:user_id])
+      expect(subject).to redirect_to user_path(session[:user_id])
+      expect(flash[:error]).to eq "Categories must have a name!"
+
+    end
   end
 end
