@@ -46,26 +46,27 @@ RSpec.describe User, type: :model do
       @order_item1 ||= OrderItem.create(quantity: 10, order_id: 1, product_id: 1)
       @order_item2 ||= OrderItem.create(quantity: 10, order_id: 2, product_id: 1)
       @order_item3 ||= OrderItem.create(quantity: 20, order_id: 1, product_id: 1)
+      @user = @test_user_user
     end
 
     it "must report accurate revenue" do
-      user = @test_user_user
-      expect(user.revenue).to eq 8000
+      expect(@user.revenue).to eq 8000
     end
 
     it "must report accurate revenue by status" do
-      user = @test_user_user
-      expect(user.revenue_by_status("test")).to eq 6000
+      expect(@user.revenue_by_status("test")).to eq 6000
     end
 
     it "must report an accurate number of orders" do
-      user = @test_user_user
-      expect(user.num_orders).to eq 2
+      expect(@user.num_orders).to eq 2
     end
 
     it "must report an accurate number of orders by status" do
-      user = @test_user_user
-      expect(user.num_orders_by_status("test")).to eq 1
+      expect(@user.num_orders_by_status("test")).to eq 1
+    end
+
+    it "must find an order item for a given order" do
+      expect(@user.find_order_item(@order1)).to eq false
     end
   end
 end
