@@ -131,6 +131,12 @@ RSpec.describe OrderItemsController, type: :controller do
       delete :destroy, order_item_params
       expect(subject).to redirect_to cart_path
     end
+
+    it "destroys the order item from the database" do
+      num_of_order_items_before = OrderItem.all.to_a.length
+      delete :destroy, order_item_params
+      expect(OrderItem.all.to_a.length).to eq(num_of_order_items_before - 1)
+    end
   end
 
 end
