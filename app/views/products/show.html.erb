@@ -1,7 +1,3 @@
-<% if !flash[:error].nil? %>
-  <%= flash[:error] %>
-<% end %>
-
 <h1 class="product-title"><%= @product.name %></h1>
 
 <div class="row">
@@ -13,12 +9,17 @@
   </div>
 
   <div class="container">
-    <div class="col-sm-6 panel">
-      <div class="add-cart">
+    <div class="col-sm-6">
+      <% if !flash[:error].nil? %>
+        <%= flash[:error] %>
+      <% end %>
+
+      <div class="add-cart panel">
+        <h3><%= cents_to_dollars(@product.price) %></h3>
         <% if @product.inventory_total > 0 && !@product.retired %>
           <%= form_for [@product, @order_item], controller: :order_items, action: :create do |f| %>
             <%= f.label :quantity %>
-            <%= f.select :quantity, (1..@product.inventory_total) %>
+            <%= f.select :quantity, (1..@product.inventory_total), checked: true %>
             <%= f.submit "Add to Cart", class: "btn btn-success" %>
           <% end %>
         <% end %>
