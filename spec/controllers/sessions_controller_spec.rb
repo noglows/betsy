@@ -17,6 +17,9 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe "POST 'create'" do
+    let(:session) do
+      session[:user_id] = nil
+    end
 
     let (:session_data) do
       {
