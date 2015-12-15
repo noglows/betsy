@@ -23,6 +23,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def not_require_login
+    if !current_user.nil?
+      flash[:error] = "You are already logged in"
+      redirect_to products_path
+    end
+  end
+
   def check_user_product
     if @current_user != nil
       product = params[:product_id]

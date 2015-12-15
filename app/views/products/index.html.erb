@@ -1,3 +1,8 @@
+<% if !flash[:error].nil? %>
+  <%= flash[:error] %>
+<% end %>
+
+
 <div class="row">
   <div class="sidebar col-md-2 hidden-sm hidden-xs">
     <%= render "sidebar" %>
