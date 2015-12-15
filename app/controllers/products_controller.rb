@@ -44,8 +44,10 @@ class ProductsController < ApplicationController
   def create
     @user_id = session[:user_id]
     @product = Product.new(product_params)
-    params[:categories].each do |cat|
-      @product.categories << Category.where(id:cat.to_i)
+    if !params[:categories].nil?
+      params[:categories].each do |cat|
+        @product.categories << Category.where(id:cat.to_i)
+      end
     end
     if @product.save
       redirect_to user_path(@user_id)
@@ -66,8 +68,10 @@ class ProductsController < ApplicationController
     @product = Product.update(params[:id], product_params)
     @product.categories.clear
     @product.save
-    params[:categories].each do |cat|
-      @product.categories << Category.where(id:cat.to_i)
+    if !params[:categories].nil?
+      params[:categories].each do |cat|
+        @product.categories << Category.where(id:cat.to_i)
+      end
     end
     if @product.save
       redirect_to user_path(user_id)
