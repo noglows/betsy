@@ -11,11 +11,11 @@ class ProductsController < ApplicationController
     @merchants = User.all
     case params[:type]
     when 'merch'
-      @products = Product.where("user_id = #{params[:order]}")
+      @products = Product.where("user_id = #{params[:order]} AND retired IS false")
     when "cat"
-      prod = Product.all
+      prod = Product.where(retired: false)
       @products = prod.select {|product|
-        rows = Product.categories.where("category_id = #{params[:order]}")
+        rows = product.categories.where("category_id = #{params[:order]}")
         !rows.to_a.empty?
       }
     else
