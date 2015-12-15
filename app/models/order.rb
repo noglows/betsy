@@ -2,13 +2,17 @@ class Order < ActiveRecord::Base
   has_many :order_items
 
   validates :status, presence: true
-
   [:email, :mailing_address, :zip, :name_on_card, :last_four, :card_exp].each do |attribute|
     validates attribute, presence: true, on: :update
   end
-
   validates :last_four, numericality: { only_integer: true }, on: :update
   validates :zip, length: { is: 5 }, on: :update
+
+  # validate :still_in_stock, on: :update
+  #
+  # def still_in_stock
+  #   errors.add(:stock, "Some items have gone out of stock") unless Order.find(cookies.signed[:order]).instock
+  # end
 
   def total(user_id)
     revenue = 0
