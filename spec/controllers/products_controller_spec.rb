@@ -13,8 +13,20 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET 'new'" do
+    let(:user) do
+      User.create(first_name: "Someone",
+                  last_name: "Else",
+                  email: "7@7.co",
+                  password: "pass",
+                  password_confirmation: "pass")
+    end
+
+    before :each do
+      session[:user_id] = user.id
+    end
+
     it "renders the new view" do
-      get :new, id: product.id
+      get :new, id: user_id
       expect(subject).to render_template :new
     end
   end
@@ -154,20 +166,20 @@ RSpec.describe ProductsController, type: :controller do
 
     it "updates the product with good params" do
       before_update = product.attributes
-      patch :update, params, id: product.id
+      patch :update, params
       product.reload
       expect(product.attributes).to_not eq before_update
     end
 
     it "does not update the product with bad params" do
       before_update = product.attributes
-      patch :update, bad_params, id: product.id
+      patch :update, bad_params, id: user.id, id: product.id
       product.reload
       expect(product.attributes).to eq before_update
     end
 
     it "redirects to the user page after a successful update" do
-      patch :update, params, id: product.id
+      patch :update, id: product.id
       # Success case to index page
       expect(subject).to redirect_to user_path(user.id)
     end
@@ -175,20 +187,32 @@ RSpec.describe ProductsController, type: :controller do
     it "renders the template to update a product with bad params" do
       # Error case to
       patch :update, bad_params, id: product.id
-      expect(subject).to render_template :new
+      expect(subject).to render_template :edit
     end
   end
 
   describe "POST 'retire'" do
+    let(:user) do
+      User.create(first_name: "Someone",
+                  last_name: "Else",
+                  email: "7@7.co",
+                  password: "pass",
+                  password_confirmation: "pass")
+    end
+
+    before :each do
+      session[:user_id] = user.id
+    end
+
     it "sets the status of a product to retired" do
-      post :retire, product_id: product.id, user_id: 2
+      post :retire, product_id: product.id, user_id: user.id
       product.reload
       expect(product.retired).to eq true
     end
 
     it "redirects to the user path" do
-      post :retire, product_id: product.id, user_id: 2
-      expect(subject).to redirect_to user_path(2)
+      post :retire, product_id: product.id, user_id: user.id
+      expect(subject).to redirect_to user_path(user.id)
     end
   end
 

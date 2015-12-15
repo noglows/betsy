@@ -1,29 +1,25 @@
 Rails.application.routes.draw do
-  #
-  # get 'order_items/create'
-  #
-  # get 'order_items/update'
-  #
-  # get 'order_items/destroy'
 
   get "/cart" => "order_items#cart"
   get "/checkout" => "orders#checkout"
 
   root 'products#index'
 
-  resources :products do
+  resources :products, :only => [:show, :index, :review] do
     post "/review", to: "products#review"
-    resources :order_items
+    resources :order_items, :only => [:create, :update, :destroy]
+    #resources :order_items
   end
 
-  resources :orders, only: [:show, :update]
+  #resources :orders, only: [:show, :update]
+  resources :orders, only: [:update]
 
-  resources :users do
+  resources :users, :except => [:destroy, :update, :edit, :index] do
     post "/categories/new", to: "users#new_category"
-    resources :orders do
+    resources :orders, :only => [:index, :show, :update] do
       post "/ship", to: "orders#ship"
     end
-    resources :products do
+    resources :products, :except => [:destroy] do
       post "/retire", to: "products#retire"
     end
   end
