@@ -180,15 +180,27 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "POST 'retire'" do
+    let(:user) do
+      User.create(first_name: "Someone",
+                  last_name: "Else",
+                  email: "7@7.co",
+                  password: "pass",
+                  password_confirmation: "pass")
+    end
+
+    before :each do
+      session[:user_id] = user.id
+    end
+
     it "sets the status of a product to retired" do
-      post :retire, product_id: product.id, user_id: 2
+      post :retire, product_id: product.id, user_id: user.id
       product.reload
       expect(product.retired).to eq true
     end
 
     it "redirects to the user path" do
-      post :retire, product_id: product.id, user_id: 2
-      expect(subject).to redirect_to user_path(2)
+      post :retire, product_id: product.id, user_id: user.id
+      expect(subject).to redirect_to user_path(user.id)
     end
   end
 
