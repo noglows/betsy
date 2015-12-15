@@ -42,6 +42,7 @@ class OrdersController < ApplicationController
 
   def checkout
     my_order
+    session[:order] = nil
     @instock = @order.instock
     @total = @order.cart_total
     @errors = @order.errors.messages
@@ -59,10 +60,10 @@ class OrdersController < ApplicationController
     if @order.save && cookies.signed[:stocked] == @instock.length
       @order.update(status: "paid")
       @order.adjust_stock
-      cookies.delete :order
-      @order.outofstock.destroy_all
+      # cookies.delete :order
+      # @order.outofstock.destroy_all
 
-      redirect_to cart_path
+      redirect_to confirmation_path
     elsif cookies.signed[:stocked] != @instock.length
       cookies.delete :stocked
       redirect_to cart_path, alert: "Your cart has changed."
@@ -73,6 +74,19 @@ class OrdersController < ApplicationController
 
       render :checkout
     end
+  end
+
+  def confirmation
+    if session[:order].nil? || session[:order] == nil
+      my_order
+      session[:order] = @order.id
+      cookies.delete :order
+      @order.outofstock.destroy_all
+    else
+      @order = Order.find(session[:order].to_i)
+    end
+    @order_items = @order.order_items
+    @total = @order.cart_total
   end
 
   def ship
