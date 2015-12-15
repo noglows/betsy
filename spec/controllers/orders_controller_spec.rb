@@ -1,20 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
-  let(:user) do
-    User.create(first_name: "Someone",
-                last_name: "Else",
-                email: "7@7.co",
-                password: "pass",
-                password_confirmation: "pass")
-  end
-
-  let(:order) do
-    Order.create(status:"pending", user_id: 4)
-  end
 
   describe "GET 'index'" do
     it "renders the index view" do
+      get :index, user_id: 4
       expect(subject).to render_template :index
     end
   end
@@ -41,5 +31,20 @@ RSpec.describe OrdersController, type: :controller do
   #
   #
   # end
+
+  # let(:order_params) do
+  #   {
+  #     order: {
+  #       email: "name@test.com",
+  #       mailing_address: "1234 Awesome Pl",
+  #       zip: "12345",
+  #       name_on_card: "Name McNamerson",
+  #       card_exp: "1212",
+  #     },
+  #     last_four: "1234",
+  #     user_id: new_order.user_id
+  #   }
+  # end
+  #
 
 end

@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # before_action :check_user_id, only: [:index, :show, :ship]
 
 
-  # def index
+  def index
   #   user_id = params[:user_id]
   #   @user = User.find(user_id)
   #   @orders = []
@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
   #   end
   #   @orders.sort_by! { |obj| obj.updated_at }
   #   return @orders
-  # end
+  end
 
   def show
     user_id = params[:user_id]
