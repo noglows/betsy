@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
     when "cat"
       prod = Product.all
       @products = prod.select {|product|
-        rows = product.categories.where("category_id = #{params[:order]}")
+        rows = Product.categories.where("category_id = #{params[:order]}")
         !rows.to_a.empty?
       }
     else
@@ -75,7 +75,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to user_path(user_id)
     else
-      render "new"
+      render :edit
     end
   end
 

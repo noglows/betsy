@@ -32,8 +32,8 @@ class UsersController < ApplicationController
       session[:message] = "You have created a new category: #{@category.name}"
       redirect_to user_path(user_id)
     else
-      flash[:error] = "Sorry, you didn't successfully create a new category"
-      redirect_to user_path(user.id)
+      flash[:error] = "Categories must have a name!"
+      redirect_to user_path(user_id)
     end
   end
 

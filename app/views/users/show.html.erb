@@ -40,13 +40,21 @@
 <br>
 <br>
 <hr>
-<% if !flash.now[:error].nil? %>
-  <%= flash.now[:error] %>
+<div class="row">
+
+<% if !flash[:error].nil? %>
+  <%= flash[:error] %>
 <% end %>
 <% if !session[:message].nil? %>
   <%= session[:message] %>
   <% session[:message] = nil %>
 <% end %>
+
+</div>
+<br>
+
+<div class="row">
+
 
 <div class="col-md-4">
 
@@ -57,6 +65,8 @@
   </div>
   <%= f.submit "Make New Category", class:"btn btn-default" %>
 <% end %>
+
+</div>
 
 </div>
 

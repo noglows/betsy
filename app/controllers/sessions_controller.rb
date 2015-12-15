@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :not_require_login, only: [:new]
+  before_action :require_login, only: [:destroy]
 
   def new
   end
