@@ -1,4 +1,8 @@
 class OrderItem < ActiveRecord::Base
+
+  after_validation :set_shipped, on: :create
+  #after_save :check_order, on: :ship
+
   belongs_to :order
   belongs_to :product
 
@@ -19,4 +23,9 @@ class OrderItem < ActiveRecord::Base
   def self.not_enough_inventory?
     self.joins(:product).where('quantity > products.inventory_total')
   end
+
+  def set_shipped
+    self.shipped = false
+  end
+
 end

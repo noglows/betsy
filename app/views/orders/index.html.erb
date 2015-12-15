@@ -76,13 +76,24 @@
         <tr>
           <td><%= order.id %></td>
           <td><%= link_to readable_date(order.updated_at), user_order_path(@user.id, order.id) %></td>
-          <td><%= order.status.capitalize %></td>
+
+          <td>
+            <% if ['complete', 'cancelled', 'pending'].include? order.status %>
+              <%= order.status.capitalize %>
+            <% elsif @user.find_order_item(order) == true %>
+              Shipped
+            <% else %>
+              Paid/Not Shipped
+            <% end %>
+
+          </td>
           <td><%= cents_to_dollars(order.total(@user.id)) %></td>
-          <% if order.status == 'paid' %>
-            <td><%= link_to "Mark as Shipped", user_order_ship_path(@user.id, order.id), method: :post %></td>
-          <% else %>
-            <td></td>
-          <% end %>
+
+            <% if  order.status == 'paid' && @user.find_order_item(order) == false %>
+              <td><%= link_to "Mark as Shipped", user_order_ship_path(@user.id, order.id), method: :post %></td>
+            <% else %>
+              <td></td>
+            <% end %>
         </tr>
       <% end %>
     </table>

@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   before_action :current_user
 
+  before_action :check_user_id, only: [:index, :show, :ship]
+
   def index
     user_id = params[:user_id]
     @user = User.find(user_id)
@@ -49,12 +51,28 @@ class OrdersController < ApplicationController
     @order.attributes = order_params
   end
 
+  # N
   def ship
     user_id = params[:user_id]
     order_id = params[:order_id]
     order = Order.find(order_id)
-    order.status = "complete"
-    order.save
+    is_complete = true
+
+    order.order_items.each do |oi|
+      if oi.product.user.id == user_id.to_i
+        oi.shipped = true
+        oi.save
+      end
+    end
+    order.order_items.each do |oi|
+      if oi.shipped == false
+        is_complete = false
+      end
+    end
+    if is_complete == true
+      order.status = "complete"
+      order.save
+    end
     redirect_to user_orders_path(user_id)
   end
 
