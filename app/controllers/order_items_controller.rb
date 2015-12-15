@@ -13,7 +13,7 @@ class OrderItemsController < ApplicationController
     else
       @order.order_items << item = OrderItem.create(order_item_params)
     end
-    
+
     redirect_to cart_path
   end
 
