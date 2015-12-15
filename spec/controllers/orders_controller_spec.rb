@@ -3,14 +3,7 @@ require 'rails_helper'
 RSpec.describe OrdersController, type: :controller do
 
   describe "GET 'index'" do
-    it "renders the index view" do
-      get :index, user_id: 4
-      expect(subject).to render_template :index
-    end
 
-    it "" do
-
-    end
   end
 
   # describe "GET 'new'" do

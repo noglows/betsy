@@ -32,7 +32,9 @@
         <%= f.submit "Update", class: "btn btn-default pull-right" %>
       </td>
       <td>
-        <%= link_to "Remove", product_order_item_path(item.product, item), method: :delete, class: "btn btn-default pull-right" %>
+        <%= link_to product_order_item_path(item.product, item), method: :delete do %>
+         <span class="glyphicon glyphicon-remove"></span>
+        <% end %>
       </td>
         <% end %>
     </tr>
@@ -71,7 +73,9 @@
               <%= f.submit "Update", class: "btn btn-default pull-right" %>
             </td>
             <td>
-              <%= link_to "Remove", product_order_item_path(item.product, item), method: :delete, class: "btn btn-default pull-right" %>
+              <%= link_to product_order_item_path(item.product, item), method: :delete do %>
+               <span class="glyphicon glyphicon-remove"></span>
+              <% end %>
             </td>
           <% end %>
         </td>

@@ -6,10 +6,19 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET 'index'" do
-    it "is successful" do
+    it "renders the index view" do
       get :index
-      expect(response.status).to eq 200
+      expect(subject).to render_template :index
     end
+
+    it "shows all of the products that are not retired" do
+      active = Product.all.to_a
+      get :index
+      expect(active.length).to eq Product.where
+    end
+
+
+
   end
 
   describe "GET 'new'" do
@@ -25,13 +34,17 @@ RSpec.describe ProductsController, type: :controller do
       session[:user_id] = user.id
     end
 
-    it "renders the new view" do
-      get :new, id: user_id
-      expect(subject).to render_template :new
-    end
   end
 
   describe "GET 'show'" do
+    let(:user) do
+      User.create(first_name: "Someone",
+                  last_name: "Else",
+                  email: "7@7.co",
+                  password: "pass",
+                  password_confirmation: "pass")
+    end
+
     it "renders the show view" do
       get :show, id: product.id
       expect(subject).to render_template :show
@@ -39,6 +52,14 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET 'edit'" do
+    let(:user) do
+      User.create(first_name: "Someone",
+                  last_name: "Else",
+                  email: "7@7.co",
+                  password: "pass",
+                  password_confirmation: "pass")
+    end
+
     it "renders the edit view" do
       get :edit, id: product.id
       expect(subject).to render_template :edit
@@ -134,6 +155,26 @@ RSpec.describe ProductsController, type: :controller do
                   password_confirmation: "pass")
     end
 
+    before :each do
+      @product = Product.create(
+            name: "For Sea Was He",
+            description: "A gregarious, lovable sailor",
+            price: 2500,
+            retired: false,
+            image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
+            user_id: 4,
+            categories: []
+            )
+
+      @user = User.create(first_name: "Someone",
+                  last_name: "Else",
+                  email: "7@7.co",
+                  password: "pass",
+                  password_confirmation: "pass")
+
+      session[:user_id] = user.id
+    end
+
     let(:params) do
       {
         product:{
@@ -149,6 +190,19 @@ RSpec.describe ProductsController, type: :controller do
       }
     end
 
+    it "updates the product with good params" do
+      before_update = @product.attributes
+      patch :update, params
+      @product.reload
+      expect(@product.attributes).to_not eq before_update
+    end
+
+    it "redirects to the user page after a successful update" do
+      patch :update, params
+      # Success case to index page
+      expect(subject).to redirect_to user_path(user.id)
+    end
+
     let(:bad_params) do
       {
         product:{
@@ -160,28 +214,11 @@ RSpec.describe ProductsController, type: :controller do
       }
     end
 
-    before :each do
-      session[:user_id] = user.id
-    end
-
-    it "updates the product with good params" do
-      before_update = product.attributes
-      patch :update, params
-      product.reload
-      expect(product.attributes).to_not eq before_update
-    end
-
     it "does not update the product with bad params" do
       before_update = product.attributes
-      patch :update, bad_params, id: user.id, id: product.id
+      patch :update, bad_params, id: user.id
       product.reload
       expect(product.attributes).to eq before_update
-    end
-
-    it "redirects to the user page after a successful update" do
-      patch :update, id: product.id
-      # Success case to index page
-      expect(subject).to redirect_to user_path(user.id)
     end
 
     it "renders the template to update a product with bad params" do
