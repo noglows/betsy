@@ -7,7 +7,6 @@ class ProductsController < ApplicationController
   before_action :check_user_id, only: [:retire, :edit, :update]
 
   def index
-    @products = Product.order(:created_at)
     @categories = Category.all
     @merchants = User.all
     case params[:type]
@@ -21,7 +20,7 @@ class ProductsController < ApplicationController
       }
     else
       @order = "prod"
-      @products = Product.order(:created_at)
+      @products = Product.order(:created_at).where(retired: false)
     end
   end
 
