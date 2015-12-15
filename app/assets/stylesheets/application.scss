@@ -18,7 +18,43 @@
 
 body {
   margin-top: 75px;
-  background-color: #f9ecf9;
+  font-family: 'Alegreya', serif;
+}
+
+h1, h2, h3, h4, h5, h6, a, input[type="submit"], .navbar-text, legend, .dropdown-toggle, th {
+  font-family: 'Nunito', sans-serif;
+}
+
+select {
+  width: 40px;
+}
+
+div.navbar-brand {
+  background-color: #66a3ff;
+  font-family: 'Crafty Girls', cursive;
+  font-size: 50px;
+  line-height: 55%;
+  color: black !important;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+div.navbar-brand:hover {
+  background-color: #0066ff !important;
+}
+
+.navbar {
+  border-bottom: none;
+  color: white;
+}
+
+.wrapper, .navbar {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  // background-color: #F0F0F0;
 }
 
 .tab-pane {
@@ -98,6 +134,8 @@ div.col-sm-4 img {
   height: 225px;
   width: 100%;
   object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .col-sm-4 {
@@ -113,4 +151,8 @@ div.col-sm-4 img {
 
 .cart td:first-of-type {
   width: 30%;
+}
+
+.navbar-toggle {
+  border: none;
 }
