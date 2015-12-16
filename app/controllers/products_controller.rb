@@ -55,6 +55,7 @@ class ProductsController < ApplicationController
     else
       @categories = @product.categories
       @all_categories = Category.all
+      @action = "create"
       render :new
     end
   end
@@ -81,6 +82,7 @@ class ProductsController < ApplicationController
     else
       @categories = @product.categories
       @all_categories = Category.all
+      @action = "update"
       render :edit
     end
   end
