@@ -17,8 +17,6 @@ RSpec.describe ProductsController, type: :controller do
     #   expect(active.length).to eq Product.where
     # end
 
-
-
   end
 
   describe "GET 'new'" do
