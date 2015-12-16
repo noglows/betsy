@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-sm-4">
-    <table class="table table-hover">
+    <table class="table table-hover panel">
+      <h2>In Your Cart</h2>
       <tr>
         <th>
           Item
@@ -22,6 +23,8 @@
       <tr>
         <td>
           <h4>Total: <%= cents_to_dollars(@total) %></h4>
+        </td>
+        <td>
         </td>
       </tr>
     </table>
@@ -60,7 +63,7 @@
       <%= f.label :card_exp, "Expiration Date" %>
       <%= f.date_select :card_exp, start_year: Date.today.year, end_year: Date.today.year + 3, use_two_digit_numbers: true, discard_day: true, order: [:month, :year], prompt: { month: "Month", year: "Year" } %>
     </fieldset>
-    <%= f.submit "Confirm Order", class: "btn btn-success btn-block" %>
+    <%= f.submit "Confirm Order", class: "btn btn-default btn-block" %>
     <% end %>
   </div>
 </div>

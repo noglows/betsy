@@ -21,6 +21,14 @@ body {
   font-family: 'Alegreya', serif;
 }
 
+#order_card_exp_2i, #order_card_exp_1i {
+  width: auto;
+}
+
+.glyphicon-remove {
+  font-size: 30px;
+}
+
 h1, h2, h3, h4, h5, h6, a, input[type="submit"], .navbar-text, legend, .dropdown-toggle, th {
   font-family: 'Nunito', sans-serif;
 }
@@ -30,31 +38,31 @@ select {
 }
 
 div.navbar-brand {
-  background-color: #66a3ff;
-  font-family: 'Crafty Girls', cursive;
-  font-size: 50px;
-  line-height: 55%;
+  background: -webkit-linear-gradient(to right, #fff, #d9b3ff, #222);
+  background: linear-gradient(to right, #fff, #d9b3ff, #222);
+  // font-family: 'Crafty Girls', cursive;
+  // font-family: 'Henny Penny', cursive;
+  font-family: 'Gorditas', cursive;
+  font-size: 60px;
+  line-height: 70%;
   color: black !important;
-  padding-right: 5px;
-  padding-left: 5px;
+  padding-right: 60px;
+  padding-left: 20px;
+  font-weight: bolder;
 }
 
 div.navbar-brand:hover {
-  background-color: #0066ff !important;
+  background: -webkit-linear-gradient(to right, #fff, #b3d9ff, #222);
+  background: linear-gradient(to right, #fff, #b3d9ff, #222);
 }
 
 .navbar {
   border-bottom: none;
-  color: white;
 }
 
 .wrapper, .navbar {
   max-width: 960px;
   margin: 0 auto;
-}
-
-.wrapper {
-  // background-color: #F0F0F0;
 }
 
 .tab-pane {
@@ -97,7 +105,8 @@ div.navbar-brand:hover {
 }
 
 .sidebar {
-  display: table-cell;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .dropdown {
@@ -136,14 +145,24 @@ div.col-sm-4 img {
   object-fit: cover;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  opacity: 1;
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+div.col-sm-4 img:hover {
+  opacity: 0.7;
 }
 
 .col-sm-4 {
-  padding: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 5px;
 }
 
 .caption {
-  background-color: rgba(221, 221, 221, 0.2);
+  border: 2px solid #f5f5f5;
   padding: 10px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;

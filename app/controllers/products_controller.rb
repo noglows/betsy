@@ -7,9 +7,10 @@ class ProductsController < ApplicationController
   def index
     @categories = Category.all
     @merchants = User.all
+    @products = Product.order(:created_at).where(retired: false)
     case params[:type]
     when 'merch'
-      @products = Product.where("user_id = #{params[:order]} AND retired IS false")
+      @products = @products.where("user_id = #{params[:order]}")
     when "cat"
       prod = Product.where(retired: false)
       @products = prod.select {|product|
@@ -18,7 +19,6 @@ class ProductsController < ApplicationController
       }
     else
       @order = "prod"
-      @products = Product.order(:created_at).where(retired: false)
     end
   end
 

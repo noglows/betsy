@@ -19,17 +19,17 @@
 
 function initialize() {
   $("#accordion1").on("hide.bs.collapse", function(){
-    $("#accordion1 .glyphicon").replaceWith('<span class="glyphicon glyphicon-collapse-down pull-right"></span>');
+    $("#accordion1 .glyphicon").replaceWith('<span class="glyphicon glyphicon-triangle-bottom pull-right"></span>');
   });
   $("#accordion1").on("show.bs.collapse", function(){
-    $("#accordion1 .glyphicon").replaceWith('<span class="glyphicon glyphicon-collapse-up pull-right"></span>');
+    $("#accordion1 .glyphicon").replaceWith('<span class="glyphicon glyphicon-triangle-top pull-right"></span>');
   });
 
   $("#accordion2").on("hide.bs.collapse", function(){
-    $("#accordion2 .glyphicon").replaceWith('<span class="glyphicon glyphicon-collapse-down pull-right"></span>');
+    $("#accordion2 .glyphicon").replaceWith('<span class="glyphicon glyphicon-triangle-bottom pull-right"></span>');
   });
   $("#accordion2").on("show.bs.collapse", function(){
-    $("#accordion2 .glyphicon").replaceWith('<span class="glyphicon glyphicon-collapse-up pull-right"></span>');
+    $("#accordion2 .glyphicon").replaceWith('<span class="glyphicon glyphicon-triangle-top pull-right"></span>');
   });
 }
 
