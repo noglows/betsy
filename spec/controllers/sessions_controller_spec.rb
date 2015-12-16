@@ -17,9 +17,6 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe "POST 'create'" do
-    let(:session) do
-      session[:user_id] = nil
-    end
 
     let (:session_data) do
       {
@@ -48,20 +45,31 @@ RSpec.describe SessionsController, type: :controller do
       }
     end
 
+    it "doesn't allow access to users who are logged in" do
+      user
+      session[:user_id] = 1
+      post :create, session_data
+      expect(subject).to redirect_to products_path
+      expect(flash[:error]).to include "You are already logged in"
+    end
+
     it "allows users to log in with a correct email and password" do
       user
+      session[:user_id] = nil
       post :create, session_data
       expect(subject).to redirect_to root_path
     end
 
     it "doesn't allow users to log in with an incorrect password" do
       user
+      session[:user_id] = nil
       post :create, session_data_bad_pass
       expect(subject).to render_template :new
     end
 
     it "doesn't allow users to log in with an unregistered email" do
       user
+      session[:user_id] = nil
       post :create, session_data_bad_email
       expect(subject).to render_template :new
     end
