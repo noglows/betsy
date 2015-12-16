@@ -35,7 +35,6 @@ class ProductsController < ApplicationController
   end
 
   def new
-    binding.pry
     @product = Product.new
     @action = "create"
     @categories = @product.categories
