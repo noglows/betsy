@@ -20,7 +20,7 @@
           <%= form_for [@product, @order_item], controller: :order_items, action: :create do |f| %>
             <%= f.label :quantity %>
             <%= f.select :quantity, (1..@product.inventory_total), checked: true %>
-            <%= f.submit "Add to Cart", class: "btn btn-success" %>
+            <%= f.submit "Add to Cart", class: "btn btn-default" %>
           <% end %>
         <% end %>
       </div>
@@ -62,7 +62,7 @@
             <%= f.label :review_text, "Write a Review" %>
             <%= f.text_area :review_text, class: "form-control"%>
             </div>
-            <%= f.submit class: "btn btn-primary" %>
+            <%= f.submit class: "btn btn-default" %>
           <% end %>
           <h3>Reviews</h3>
           <% @reviews.each do |review| %>
