@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :current_user
 
-  # before_action :check_user_id, only: [:index, :show, :ship]
+  before_action :check_user_id, only: [:index, :show, :ship]
 
 
   def index
