@@ -135,7 +135,7 @@ RSpec.describe ProductsController, type: :controller do
           price: 2500,
           retired: false,
           inventory_total: 20,
-          image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
+          image_url: "http://www.hdwallpapers.in/walls/maltese_puppy-wide.jpg",
           user_id: 4
         },
         categories: []
@@ -201,7 +201,7 @@ RSpec.describe ProductsController, type: :controller do
           description: "A gregarious, lovable sailor",
           price: 2500,
           retired: false,
-          image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
+          image_url: "http://www.hdwallpapers.in/walls/maltese_puppy-wide.jpg",
           user_id: 4
         },
         id: product.id,
