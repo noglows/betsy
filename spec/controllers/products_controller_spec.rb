@@ -274,7 +274,6 @@ RSpec.describe ProductsController, type: :controller do
 
     it "doesn't let a user retire a product that is not theirs" do
       user
-      #user_2
       session[:user_id] = user_2.id
       post :retire, product_id: product.id, user_id: user.id
       expect(subject).to redirect_to user_path(user_2.id)
