@@ -77,10 +77,39 @@ RSpec.describe ProductsController, type: :controller do
       }
     end
 
+    let(:user) do
+      User.create(first_name: "Someone",
+                  last_name: "Else",
+                  email: "7@7.co",
+                  password: "pass",
+                  password_confirmation: "pass")
+    end
+
+
+    let(:user_2) do
+      User.create(first_name: "New",
+                    last_name: "Person",
+                    email: "8@8.co",
+                    password: "pass",
+                    password_confirmation: "pass")
+    end
+
+
+
     it "creates a new review of a product" do
       post :review, params.merge(product_id: 1)
       last_review = Review.last
       expect(last_review.review_text).to eq "An average rating"
+    end
+
+    it "doesn't allow users to review their own products" do
+      user
+      user_2
+      product
+      session[:user_id] = 2
+      post :review, params.merge(product_id: 1)
+      expect(subject).to redirect_to user_product_path(session[:user_id],1)
+      expect(flash[:error]).to include "You can't review your own products"
     end
   end
 
@@ -222,19 +251,34 @@ RSpec.describe ProductsController, type: :controller do
                   password_confirmation: "pass")
     end
 
-    before :each do
-      session[:user_id] = user.id
+    let(:user_2) do
+      User.create(first_name: "New",
+                  last_name: "Person",
+                  email: "8@8.co",
+                  password: "pass",
+                  password_confirmation: "pass")
     end
 
     it "sets the status of a product to retired" do
+      session[:user_id] = user.id
       post :retire, product_id: product.id, user_id: user.id
       product.reload
       expect(product.retired).to eq true
     end
 
     it "redirects to the user path" do
+      session[:user_id] = user.id
       post :retire, product_id: product.id, user_id: user.id
       expect(subject).to redirect_to user_path(user.id)
+    end
+
+    it "doesn't let a user retire a product that is not theirs" do
+      user
+      session[:user_id] = user_2.id
+      post :retire, product_id: product.id, user_id: user.id
+      expect(subject).to redirect_to user_path(user_2.id)
+      expect(flash[:error]).to include "You can't view"
+
     end
   end
 

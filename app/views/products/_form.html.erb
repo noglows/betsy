@@ -2,6 +2,22 @@
   <%= flash.now[:error] %>
 <% end %>
 
+<% if !@product.errors.nil? %>
+<ul>
+  <% @product.errors.each do |column, message| %>
+  <% binding.pry %>
+  <% if column == :inventory_total %>
+    <% column = "Inventory" %>
+  <% elsif column == :image_url %>
+    <% column = "Image URL" %>
+  <% end %>
+  <li>
+    <strong><%= column.capitalize %></strong> <%= message %>
+  </li>
+<% end %>
+</ul>
+<% end %>
+
 
 <%= form_for @product, url:({ action: @action }) do |f| %>
 <div class="form-group">

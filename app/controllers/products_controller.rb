@@ -35,6 +35,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    binding.pry
     @product = Product.new
     @action = "create"
     @categories = @product.categories
@@ -52,7 +53,10 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to user_path(@user_id)
     else
-      render :edit
+      @categories = @product.categories
+      @all_categories = Category.all
+      @action = "create"
+      render :new
     end
   end
 
@@ -76,6 +80,9 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to user_path(user_id)
     else
+      @categories = @product.categories
+      @all_categories = Category.all
+      @action = "update"
       render :edit
     end
   end
