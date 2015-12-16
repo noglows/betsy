@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
+
   let(:user) do
     User.create(first_name: "Someone",
                 last_name: "Else",
