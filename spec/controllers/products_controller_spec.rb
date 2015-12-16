@@ -32,6 +32,11 @@ RSpec.describe ProductsController, type: :controller do
       session[:user_id] = user.id
     end
 
+    it "renders the new template" do
+      get :new, user_id: user.id
+      expect(subject).to render_template :new
+    end
+
   end
 
   describe "GET 'show'" do
