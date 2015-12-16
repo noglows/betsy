@@ -172,7 +172,7 @@ RSpec.describe ProductsController, type: :controller do
 
     it "renders the edit template when bad params are passed" do
       post :create, bad_params.merge(user_id: user.id)
-      expect(subject).to render_template :edit
+      expect(subject).to render_template :new
     end
   end
 
