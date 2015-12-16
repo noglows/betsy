@@ -37,13 +37,14 @@ div.navbar-brand {
   background: -webkit-linear-gradient(to right, #fff, #d9b3ff, #222);
   background: linear-gradient(to right, #fff, #d9b3ff, #222);
   // font-family: 'Crafty Girls', cursive;
-  font-family: 'Henny Penny', cursive;
-  font-size: 35px;
-  line-height: 110%;
+  // font-family: 'Henny Penny', cursive;
+  font-family: 'Gorditas', cursive;
+  font-size: 60px;
+  line-height: 70%;
   color: black !important;
   padding-right: 60px;
   padding-left: 20px;
-  font-weight: 800;
+  font-weight: bolder;
 }
 
 div.navbar-brand:hover {
@@ -53,16 +54,11 @@ div.navbar-brand:hover {
 
 .navbar {
   border-bottom: none;
-  color: white;
 }
 
 .wrapper, .navbar {
   max-width: 960px;
   margin: 0 auto;
-}
-
-.wrapper {
-  // background-color: #F0F0F0;
 }
 
 .tab-pane {
