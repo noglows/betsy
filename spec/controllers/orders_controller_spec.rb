@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe OrdersController, type: :controller do
   let(:user) do
@@ -37,17 +38,9 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe "GET 'checkout'" do
-    before :suite do
-      cookies.signed[:order] = order.id
-      # cookies.signed[:stocked] = order.length
-      session[:order] = nil
-    end
 
     it "renders checkout view if cart is not empty" do
-      order_item = OrderItem.create(quantity: 4,
-                         product_id: 5,
-                         shipped: false,
-                         order_id: order.id)
+      cookies.signed[:order] = order.id
       product = Product.create(name: "Fuzzy Wah-Wah pedal",
                          description: "Making some glorious vintage guitar sounds",
                          price: 4000,
@@ -55,8 +48,18 @@ RSpec.describe OrdersController, type: :controller do
                          retired: false,
                          image_url: "http://i.ebayimg.com/images/i/251806872987-0-1/s-l1000.jpg",
                          user_id: user.id)
+      order_item = OrderItem.create(quantity: 4,
+                         product_id: product.id,
+                         shipped: false,
+                         order_id: order.id)
+
       get :checkout
       expect(subject).to render_template :checkout
+    end
+
+    it "redirects to root path if new order or no in stock items in cart" do
+      get :checkout
+      expect(subject).to redirect_to root_path
     end
   end
 
