@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'pry'
 
 RSpec.describe OrdersController, type: :controller do
+
   let(:user) do
     User.create(first_name: "Someone",
                 last_name: "Else",
