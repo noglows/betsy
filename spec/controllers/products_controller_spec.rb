@@ -10,10 +10,7 @@ RSpec.describe ProductsController, type: :controller do
       get :index
       expect(subject).to render_template :index
     end
-<<<<<<< HEAD
 
-=======
->>>>>>> 72e4e8c6b2c0557a93d8f5d672f7e0d3b47b05a0
   end
 
   # describe "GET 'index' by category" do
