@@ -11,12 +11,6 @@ RSpec.describe ProductsController, type: :controller do
       expect(subject).to render_template :index
     end
 
-    # it "shows all of the products that are not retired" do
-    #   active = Product.all.to_a
-    #   get :index
-    #   expect(active.length).to eq Product.where
-    # end
-
   end
 
   describe "GET 'new'" do
