@@ -58,6 +58,11 @@
       <span class="error"><%= "Please enter a valid credit card number." if @errors.include?(:last_four) %></span>
       <%= f.label :last_four, "Credit Card Number" %>
       <%= f.text_field :last_four, minlength: 14, maxlength: 16, class: "form-control" %>
+      <span class="error"><%= "This field cannot be blank." if @errors.include?(:cvv)%></span>
+      <label>CVV</label>
+      <br>
+      <input type="text", minlength: 3, maxlength: 4, class: "form-control" %>
+      <br>
       <br>
       <span class="error"><%= "Select an expiration date." if @errors.include?(:card_exp) %></span>
       <%= f.label :card_exp, "Expiration Date" %>
