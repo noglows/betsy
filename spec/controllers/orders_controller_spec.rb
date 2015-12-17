@@ -152,7 +152,6 @@ RSpec.describe OrdersController, type: :controller do
                          shipped: false,
                          order_id: order.id)
       patch :ship, params
-      binding.pry
       expect(subject).to redirect_to user_orders_path(user.id)
     end
 
