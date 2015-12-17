@@ -39,8 +39,44 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe "GET 'index'" do
-    it "renders the index view" do
+    let(:product) do
+      Product.create(name: "For Some Was He",
+                       description: "A partial judge",
+                       price: 40000,
+                       inventory_total: 100,
+                       retired: false,
+                       image_url: "http://vignette4.wikia.nocookie.net/simpsons/images/c/cc/Judge_Roy_Snyder_.png",
+                       user_id: user.id)
+    end
+
+    let(:order_item) do
+      OrderItem.create(quantity: 4,
+                       product_id: product.id,
+                       shipped: false,
+                       order_id: order.id)
+    end
+
+    let(:order_item_2) do
+      OrderItem.create(quantity: 4,
+                       product_id: product.id,
+                       shipped: false,
+                       order_id: order.id)
+    end
+
+
+
+    it "renders the index view when there are no orders and a user is signed in" do
       get :index, user_id: user.id
+      expect(subject).to render_template :index
+    end
+
+    it "renders the index view when there are existing pending orders" do
+      get :index, {user_id: user.id, sort: "pending"}
+      expect(subject).to render_template :index
+    end
+
+    it "renders the index view when there is an order item in an order" do
+      get :index, {user_id: user.id, order_id: order.id, order_item_id: order_item.id, order_item_2_id: order_item_2.id}
       expect(subject).to render_template :index
     end
 
@@ -157,4 +193,15 @@ RSpec.describe OrdersController, type: :controller do
 
   end
 
+  describe "GET 'confirmation'" do
+    it "sets the session when one is set" do
+      session[:order] = order.id
+      get :confirmation
+      expect(subject).to render_template :confirmation
+    end
+    it "renders the confirmation page when a current session is set" do
+      get :confirmation
+      expect(subject).to render_template :confirmation
+    end
+  end
 end
