@@ -10,8 +10,41 @@ RSpec.describe ProductsController, type: :controller do
       get :index
       expect(subject).to render_template :index
     end
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72e4e8c6b2c0557a93d8f5d672f7e0d3b47b05a0
   end
+
+  # describe "GET 'index' by category" do
+  #   let(:params) do
+  #     {
+  #       type: "cat"
+  #     }
+  #   end
+  #
+  #   it "renders the index view based on category" do
+  #     params[:type] = "cat"
+  #     get :index
+  #     expect(subject).to render_template :index
+  #     #expect
+  #   end
+  # end
+  #
+  # describe "GET 'index' by mechant" do
+  #   let(:params) do
+  #     {
+  #       type: "merch"
+  #     }
+  #   end
+  #
+  #   it "renders the index view based on merchant" do
+  #     params[:type] = 'merch'
+  #     get :index
+  #     #binding.pry
+  #     expect(subject).to render_template :index
+  #   end
+  # end
 
   describe "GET 'new'" do
     let(:user) do
@@ -129,7 +162,7 @@ RSpec.describe ProductsController, type: :controller do
           price: 2500,
           retired: false,
           inventory_total: 20,
-          image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
+          image_url: "http://www.hdwallpapers.in/walls/maltese_puppy-wide.jpg",
           user_id: 4
         },
         categories: []
@@ -195,7 +228,7 @@ RSpec.describe ProductsController, type: :controller do
           description: "A gregarious, lovable sailor",
           price: 2500,
           retired: false,
-          image_url: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=21795680",
+          image_url: "http://www.hdwallpapers.in/walls/maltese_puppy-wide.jpg",
           user_id: 4
         },
         id: product.id,
