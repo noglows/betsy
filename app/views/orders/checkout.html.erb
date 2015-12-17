@@ -45,6 +45,18 @@
       <span class="error"><%= "Please enter a valid zip code." if @errors.include?(:zip) %></span>
       <%= f.label :zip %>
       <%= f.text_field :zip, class: "form-control" %>
+      <span class="error"><%= "This field cannot be blank." if @errors.include?(:city)%></span>
+      <label>City</label>
+      <br>
+      <input type="text", class: "form-control" %>
+      <br>
+      <br>
+      <span class="error"><%= "This field cannot be blank." if @errors.include?(:state)%></span>
+      <label>State</label>
+      <br>
+      <input type="text", minlength: 4, maxlength: 12, class: "form-control" %>
+      <br>
+      <br>
       <span class="error"><%= label :shipping, "Shipping address is the same as billing" %></span>
       <%= check_box_tag :shipping %>
     </fieldset>
