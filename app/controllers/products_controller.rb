@@ -8,7 +8,6 @@ class ProductsController < ApplicationController
     @categories = Category.all
     @merchants = User.all
     @products = Product.order(:created_at).where(retired: false)
-    binding.pry
     case params[:type]
 
       when "merch"
