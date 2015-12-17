@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  validates :first_name, presence: true
+  validates :first_name, length: { :maximum=>30 }
+  validates :last_name, presence: true
+  validates :last_name, length: { :maximum=>30 }
   validates :email, presence: true
   validates_uniqueness_of :email
   validates :email, email_format: { message: "doesn't look like an email address" }
