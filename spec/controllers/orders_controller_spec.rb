@@ -119,7 +119,41 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe "PATCH 'ship'" do
+    let(:another_user) do
+      User.create(first_name: "Mister",
+                  last_name: "Man",
+                  email: "10@10.co",
+                  password: "password",
+                  password_confirmation: "password")
+    end
 
+    let(:params) do
+      {
+        user_id: user.id,
+        order_id: order.id
+      }
+    end
+
+    it "redirects to the user order page with order complete" do
+      patch :ship, params
+      expect(subject).to redirect_to user_orders_path(user.id)
+    end
+
+    it "redirects to the user order page without order complete" do
+      product = Product.create(name: "Poop",
+                         description: "Smelly",
+                         price: 40,
+                         inventory_total: 5,
+                         retired: false,
+                         image_url: "http://i.ebayimg.com/images/i/251806872987-0-1/s-l1000.jpg",
+                         user_id: another_user.id)
+      order_item = OrderItem.create(quantity: 4,
+                         product_id: product.id,
+                         shipped: false,
+                         order_id: order.id)
+      patch :ship, params
+      expect(subject).to redirect_to user_orders_path(user.id)
+    end
 
   end
 
