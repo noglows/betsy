@@ -5,7 +5,6 @@
 <% if !@product.errors.nil? %>
 <ul>
   <% @product.errors.each do |column, message| %>
-  <% binding.pry %>
   <% if column == :inventory_total %>
     <% column = "Inventory" %>
   <% elsif column == :image_url %>
