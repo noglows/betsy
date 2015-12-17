@@ -1,5 +1,3 @@
-
-
 <div class="row">
   <div class="col-sm-4">
     <table class="table table-hover panel">
@@ -36,7 +34,7 @@
     <%= form_for @order do |f| %>
     <fieldset class="form-group">
       <legend>
-        Billing Information
+        Shipping Information
       </legend>
       <span class="error"><%= "Please enter a valid email." if @errors.include?(:email) %></span>
       <%= f.label :email %>
@@ -47,12 +45,22 @@
       <span class="error"><%= "Please enter a valid zip code." if @errors.include?(:zip) %></span>
       <%= f.label :zip %>
       <%= f.text_field :zip, class: "form-control" %>
-      <span class="error"><%= label :shipping, "Shipping address is different than billing address" %></span>
+      <span class="error"><%= label :shipping, "Billing address is different than shipping address" %></span>
       <%= check_box_tag :shipping %>
+    </fieldset>
+    <fieldset class="form-group applesauce">
       <div id="shipform" style="display: none">
-        applesauce
+        <legend>
+          Billing Information
+        </legend>
+        <%= label :address, "Address" %>
+        <%= text_field_tag 'billing', nil, class: "form-control" %>
+        <%= label :zip, "Zipcode" %>
+        <%= text_field_tag 'zip', nil, class: "form-control" %>
+        <br>
       </div>
     </fieldset>
+
     <fieldset class="form-group">
       <legend>
         Credit Card Information
