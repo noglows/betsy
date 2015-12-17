@@ -8,17 +8,20 @@ class ProductsController < ApplicationController
     @categories = Category.all
     @merchants = User.all
     @products = Product.order(:created_at).where(retired: false)
+    binding.pry
     case params[:type]
-    when 'merch'
-      @products = @products.where("user_id = #{params[:order]}")
-    when "cat"
-      prod = Product.where(retired: false)
-      @products = prod.select {|product|
-        rows = product.categories.where("category_id = #{params[:order]}")
-        !rows.to_a.empty?
-      }
-    else
-      @order = "prod"
+
+      when "merch"
+        @products = @products.where("user_id = #{params[:order]}")
+      when "cat"
+        prod = Product.where(retired: false)
+        @products = prod.select {|product|
+          rows = product.categories.where("category_id = #{params[:order]}")
+          !rows.to_a.empty?
+        }
+      else
+        #binding.pry
+        @order = "prod"
     end
   end
 
