@@ -78,7 +78,7 @@ class OrdersController < ApplicationController
 
   def confirmation
     # @total = @order.cart_total
-    if session[:order].nil? # || session[:order] == nil
+    if !session[:order]
       my_order
       session[:order] = @order.id
       session[:total] = @order.cart_total
