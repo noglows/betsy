@@ -157,4 +157,15 @@ RSpec.describe OrdersController, type: :controller do
 
   end
 
+  describe "GET 'confirmation'" do
+    it "sets the session when one is set" do
+      session[:order] = order.id
+      get :confirmation
+      expect(subject).to render_template :confirmation
+    end
+    it "renders the confirmation page when a current session is set" do
+      get :confirmation
+      expect(subject).to render_template :confirmation
+    end
+  end
 end
