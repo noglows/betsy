@@ -43,6 +43,7 @@ class OrdersController < ApplicationController
   def checkout
     my_order
     session[:order] = nil
+    session[:total] = nil
     @instock = @order.instock
     @total = @order.cart_total
     @errors = @order.errors.messages
@@ -59,9 +60,8 @@ class OrdersController < ApplicationController
 
     if @order.save && cookies.signed[:stocked] == @instock.length
       @order.update(status: "paid")
-      @order.adjust_stock
       # cookies.delete :order
-      # @order.outofstock.destroy_all
+      @order.outofstock.destroy_all
 
       redirect_to confirmation_path
     elsif cookies.signed[:stocked] != @instock.length
@@ -77,16 +77,17 @@ class OrdersController < ApplicationController
   end
 
   def confirmation
-    if session[:order].nil? || session[:order] == nil
+    # @total = @order.cart_total
+    if !session[:order]
       my_order
       session[:order] = @order.id
+      session[:total] = @order.cart_total
+      @order.adjust_stock
       cookies.delete :order
-      @order.outofstock.destroy_all
     else
       @order = Order.find(session[:order].to_i)
     end
     @order_items = @order.order_items
-    @total = @order.cart_total
   end
 
   def ship
