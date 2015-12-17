@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      flash.now[:error] = "Passwords don't match"
+      flash.now[:error] = "Please fill out all fields with valid information"
       render :new
     end
   end
