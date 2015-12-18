@@ -80,6 +80,7 @@
       <span class="error"><%= "Select an expiration date." if @errors.include?(:card_exp) %></span>
       <%= f.label :card_exp, "Expiration Date" %>
       <%= f.date_select :card_exp, start_year: Date.today.year, end_year: Date.today.year + 3, use_two_digit_numbers: true, discard_day: true, order: [:month, :year], prompt: { month: "Month", year: "Year" } %>
+      <span class="error"><%= @errors[:exp].first if @errors.include?(:exp) %></span>
     </fieldset>
     <%= f.submit "Confirm Order", class: "btn btn-default btn-block" %>
     <% end %>
