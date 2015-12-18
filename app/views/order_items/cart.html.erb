@@ -61,8 +61,8 @@
 <% end %>
 
 <table class="table table-hover cart">
-  <h6>YOUR CART HAS CHANGED:</h6>
   <% @outofstock.each do |item| %>
+  <h6>YOUR CART HAS CHANGED:</h6>
     <% if item.product.inventory_total == 0 %>
         <h6> <%= item.product.name %> is now unavaliable </h6>
     <% else %>
