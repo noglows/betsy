@@ -2,6 +2,25 @@
   <%= flash.now[:error] %>
 <% end %>
 
+<div class="row">
+
+<% if !@user.errors.nil? %>
+<ul>
+  <% binding.pry %>
+  <% @user.errors.each do |column, message| %>
+  <% if column == :first_name %>
+    <% column = "First name" %>
+  <% elsif column == :last_name %>
+    <% column = "Last name" %>
+  <% end %>
+  <li>
+    <strong><%= column.capitalize %></strong> <%= message %>
+  </li>
+<% end %>
+</ul>
+<% end %>
+</div>
+
 
 <%= form_for @user do |f| %>
 <div class="form-group">
