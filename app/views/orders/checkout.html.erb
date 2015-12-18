@@ -45,7 +45,11 @@
       <span class="error"><%= "Please enter a valid zip code." if @errors.include?(:zip) %></span>
       <%= f.label :zip %>
       <%= f.text_field :zip, class: "form-control" %>
-      <span class="error"><%= label :shipping, "Billing address is different than shipping address" %></span>
+      <%= label :city, "City" %>
+      <%= text_field_tag :city, nil, class: "form-control" %>
+      <%= label :state, "State" %>
+      <%= text_field_tag :state, nil, class: "form-control", minlength: 4, maxlength: 15 %>
+      <%= label :shipping, "Billing address is different than shipping address" %>
       <%= check_box_tag :shipping %>
     </fieldset>
     <fieldset class="form-group applesauce">
@@ -71,7 +75,8 @@
       <span class="error"><%= "Please enter a valid credit card number." if @errors.include?(:last_four) %></span>
       <%= f.label :last_four, "Credit Card Number" %>
       <%= f.text_field :last_four, minlength: 14, maxlength: 16, class: "form-control" %>
-      <br>
+      <%= label :CVV, "CVV" %>
+      <%= text_field_tag 'CVV', nil, class: "form-control", minlength: 3, maxlength: 4 %>
       <span class="error"><%= "Select an expiration date." if @errors.include?(:card_exp) %></span>
       <%= f.label :card_exp, "Expiration Date" %>
       <%= f.date_select :card_exp, start_year: Date.today.year, end_year: Date.today.year + 3, use_two_digit_numbers: true, discard_day: true, order: [:month, :year], prompt: { month: "Month", year: "Year" } %>

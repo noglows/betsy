@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
         if ['pending','paid','cancelled','complete'].include? params[:sort]
           if oi.order.status == params[:sort]
             if @orders.include? oi.order
-              next
+              # next
             else
               @orders.push(oi.order)
             end
@@ -78,7 +78,7 @@ class OrdersController < ApplicationController
 
   def confirmation
     # @total = @order.cart_total
-    if !session[:order]
+    if session[:order].nil? # || session[:order] == nil
       my_order
       session[:order] = @order.id
       session[:total] = @order.cart_total

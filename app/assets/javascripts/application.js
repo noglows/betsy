@@ -35,7 +35,6 @@ function initialize() {
 }
 
 function shipFunction() {
-    console.log("applesauce")
     $("#shipform").toggle();
 }
 
