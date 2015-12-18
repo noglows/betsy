@@ -20,7 +20,7 @@ class Product < ActiveRecord::Base
 
 
   def average_rating
-    self.reviews.average(:rating).to_f
+    self.reviews.average(:rating).to_f.round(1)
   end
 
   # def dollars_to_cents

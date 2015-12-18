@@ -32,7 +32,8 @@ class ProductsController < ApplicationController
   end
 
   def review
-    Review.create(review_params)
+    review = Review.create(review_params)
+    flash[:rating] = "You must give your review a star rating."
     redirect_to product_path(params[:product_id], anchor: "review")
   end
 

@@ -1,51 +1,5 @@
 <h1>Order Fulfillment</h1>
 
-<h2>Revenue Stats</h2>
-<br>
-<div class="row">
-  <div class="col-lg-4"></div>
-  <div class="col-lg-4">
-  <table class="table">
-    <tr>
-      <td><strong>Total Revenue (exluding cancelled orders)</strong></td>
-      <td><strong><%= cents_to_dollars(@user.revenue) %></strong></td>
-    </tr>
-    <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
-      <tr>
-        <td>Revenue for <%= status %> orders</td>
-        <td><%= cents_to_dollars(@user.revenue_by_status(status)) %></td>
-      </tr>
-    <% end %>
-  </table>
-  </div>
-  <div class="col-lg-4"></div>
-</div>
-
-<br>
-
-<h2>Order Stats</h2>
-<br>
-<div class="row">
-  <div class="col-lg-4"></div>
-  <div class="col-lg-4">
-  <table class="table">
-    <tr>
-      <td><strong>Total Orders</strong></td>
-      <td><strong><%= @user.num_orders %></strong></td>
-    </tr>
-    <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
-      <tr>
-        <td><%= status.capitalize %> orders</td>
-        <td><%= @user.num_orders_by_status(status) %></td>
-      </tr>
-    <% end %>
-  </table>
-  </div>
-  <div class="col-lg-4"></div>
-</div>
-
-<br>
-
 
 <h2>All Orders</h2>
 <br>
@@ -108,3 +62,50 @@
   </div>
   <div class="col-lg-2"></div>
 </div>
+<hr>
+
+<h2>Revenue Stats</h2>
+<br>
+<div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+  <table class="table">
+    <tr>
+      <td><strong>Total Revenue (exluding cancelled orders)</strong></td>
+      <td><strong><%= cents_to_dollars(@user.revenue) %></strong></td>
+    </tr>
+    <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+      <tr>
+        <td>Revenue for <%= status %> orders</td>
+        <td><%= cents_to_dollars(@user.revenue_by_status(status)) %></td>
+      </tr>
+    <% end %>
+  </table>
+  </div>
+  <div class="col-lg-4"></div>
+</div>
+
+<br>
+
+<h2>Order Stats</h2>
+<br>
+<div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+  <table class="table">
+    <tr>
+      <td><strong>Total Orders</strong></td>
+      <td><strong><%= @user.num_orders %></strong></td>
+    </tr>
+    <% ["pending", "paid", "complete", "cancelled"].each do |status| %>
+      <tr>
+        <td><%= status.capitalize %> orders</td>
+        <td><%= @user.num_orders_by_status(status) %></td>
+      </tr>
+    <% end %>
+  </table>
+  </div>
+  <div class="col-lg-4"></div>
+</div>
+
+<br>
