@@ -34,7 +34,7 @@
     <%= form_for @order do |f| %>
     <fieldset class="form-group">
       <legend>
-        Billing Information
+        Shipping Information
       </legend>
       <span class="error"><%= "Please enter a valid email." if @errors.include?(:email) %></span>
       <%= f.label :email %>
@@ -45,21 +45,26 @@
       <span class="error"><%= "Please enter a valid zip code." if @errors.include?(:zip) %></span>
       <%= f.label :zip %>
       <%= f.text_field :zip, class: "form-control" %>
-      <span class="error"><%= "This field cannot be blank." if @errors.include?(:city)%></span>
-      <label>City</label>
-      <br>
-      <input type="text", class: "form-control" %>
-      <br>
-      <br>
-      <span class="error"><%= "This field cannot be blank." if @errors.include?(:state)%></span>
-      <label>State</label>
-      <br>
-      <input type="text", minlength: 4, maxlength: 12, class: "form-control" %>
-      <br>
-      <br>
-      <span class="error"><%= label :shipping, "Shipping address is the same as billing" %></span>
+      <%= label :city, "City" %>
+      <%= text_field_tag :city, nil, class: "form-control" %>
+      <%= label :state, "State" %>
+      <%= text_field_tag :state, nil, class: "form-control", minlength: 4, maxlength: 15 %>
+      <%= label :shipping, "Billing address is different than shipping address" %>
       <%= check_box_tag :shipping %>
     </fieldset>
+    <fieldset class="form-group applesauce">
+      <div id="shipform" style="display: none">
+        <legend>
+          Billing Information
+        </legend>
+        <%= label :address, "Address" %>
+        <%= text_field_tag 'billing', nil, class: "form-control" %>
+        <%= label :zip, "Zipcode" %>
+        <%= text_field_tag 'zip', nil, class: "form-control" %>
+        <br>
+      </div>
+    </fieldset>
+
     <fieldset class="form-group">
       <legend>
         Credit Card Information
@@ -70,12 +75,8 @@
       <span class="error"><%= "Please enter a valid credit card number." if @errors.include?(:last_four) %></span>
       <%= f.label :last_four, "Credit Card Number" %>
       <%= f.text_field :last_four, minlength: 14, maxlength: 16, class: "form-control" %>
-      <span class="error"><%= "This field cannot be blank." if @errors.include?(:cvv)%></span>
-      <label>CVV</label>
-      <br>
-      <input type="text", minlength: 3, maxlength: 4, class: "form-control" %>
-      <br>
-      <br>
+      <%= label :CVV, "CVV" %>
+      <%= text_field_tag 'CVV', nil, class: "form-control", minlength: 3, maxlength: 4 %>
       <span class="error"><%= "Select an expiration date." if @errors.include?(:card_exp) %></span>
       <%= f.label :card_exp, "Expiration Date" %>
       <%= f.date_select :card_exp, start_year: Date.today.year, end_year: Date.today.year + 3, use_two_digit_numbers: true, discard_day: true, order: [:month, :year], prompt: { month: "Month", year: "Year" } %>

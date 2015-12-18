@@ -14,7 +14,6 @@
 //= require jquery.cookie
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
 
 function initialize() {
@@ -31,7 +30,12 @@ function initialize() {
   $("#accordion2").on("show.bs.collapse", function(){
     $("#accordion2 .glyphicon").replaceWith('<span class="glyphicon glyphicon-triangle-top pull-right"></span>');
   });
+
+  $("input#shipping").on('click', shipFunction);
+}
+
+function shipFunction() {
+    $("#shipform").toggle();
 }
 
 $(document).ready(initialize);
-$(document).on('page:load', initialize);
