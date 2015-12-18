@@ -61,9 +61,12 @@
 <% end %>
 
 <table class="table table-hover cart">
+  <h6>YOUR CART HAS CHANGED:</h6>
   <% @outofstock.each do |item| %>
-    <% unless item.product.inventory_total == 0 %>
-      <h6>You selected <%= item.quantity %> but only <%= item.product.inventory_total %> are currently available.</h6>
+    <% if item.product.inventory_total == 0 %>
+        <h6> <%= item.product.name %> is now unavaliable </h6>
+    <% else %>
+      <h6>You selected <%= item.quantity %> of <%= item.product.name %> but only <%= item.product.inventory_total %> are currently available. Please change your quantity if you would still like to purchase this item.</h6>
       <tr>
         <td>
           <%= item.product.name %>
@@ -85,4 +88,5 @@
     <% end %>
   <% end %>
 </table>
+
 <%= link_to "Continue Shopping", root_path, class: "btn btn-default btn-block" %>
