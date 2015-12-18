@@ -32,7 +32,13 @@ class UsersController < ApplicationController
       session[:message] = "You have created a new category: #{@category.name}"
       redirect_to user_path(user_id)
     else
-      flash[:error] = "Categories must have a name!"
+      if @category.errors.messages[:name].include? "can't be blank"
+        flash[:error] = "Categories must have a name!"
+      elsif @category.errors.messages[:name].include? "is too short (minimum is 3 characters)"
+        flash[:error] = "Category names must be greater than 3 characters and less than 15 characters"
+      elsif @category.errors.messages[:name].include? "is too long (maximum is 15 characters)"
+        flash[:error] = "Category names must be greater than 3 characters and less than 15 characters"
+      end
       redirect_to user_path(user_id)
     end
   end

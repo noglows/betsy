@@ -42,15 +42,19 @@
 <hr>
 <div class="row">
 
-<% if !flash[:error].nil? %>
-  <%= flash[:error] %>
-<% end %>
 <% if !session[:message].nil? %>
   <%= session[:message] %>
   <% session[:message] = nil %>
 <% end %>
 
+<% if !flash[:error].nil? %>
+  <%= flash[:error] %>
+<% end %>
+
+
 </div>
+
+
 <br>
 
 <div class="row">
