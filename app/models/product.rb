@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   #before_validation :dollars_to_cents
 
   validates :name, length: { :maximum => 30 }
-  validates :description, length: { :maximum => 60 }
+  validates :description, length: { :maximum => 250 }
   validates :name, presence: true
   validates :name, uniqueness: true
   validates :price, presence: true
