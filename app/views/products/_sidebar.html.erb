@@ -17,10 +17,12 @@
     <div id="collapseOne" class="panel-collapse collapse">
       <div class="panel-body">
         <% @categories.each do |cat| %>
-          <%= link_to(root_path(:type => 'cat', :order => cat.id)) do %>
-            <%= cat.name %>
+          <% if cat.products != [] %>
+            <%= link_to(root_path(:type => 'cat', :order => cat.id)) do %>
+              <%= cat.name %>
+              <hr />
+            <% end %>
           <% end %>
-          <hr />
         <% end %>
       </div>
     </div>
@@ -38,10 +40,12 @@
     <div id="collapseTwo" class="panel-collapse collapse">
       <div class="panel-body">
         <% @merchants.each do |merch| %>
-          <%= link_to(root_path(:type => 'merch',:order => merch.id)) do %>
-            <%= merch.first_name %> <%= merch.last_name %>
+          <% if merch.products != [] %>
+            <%= link_to(root_path(:type => 'merch',:order => merch.id)) do %>
+              <%= merch.first_name %> <%= merch.last_name %>
+            <% end %>
+            <hr />
           <% end %>
-          <hr />
         <% end %>
       </div>
     </div>
