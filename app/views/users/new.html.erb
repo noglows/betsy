@@ -6,7 +6,6 @@
 
 <% if !@user.errors.nil? %>
 <ul>
-  <% binding.pry %>
   <% @user.errors.each do |column, message| %>
   <% if column == :first_name %>
     <% column = "First name" %>
