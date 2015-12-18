@@ -31,6 +31,13 @@ function initialize() {
     $("#accordion2 .glyphicon").replaceWith('<span class="glyphicon glyphicon-triangle-top pull-right"></span>');
   });
 
+  var url = document.location.hash;
+  if (url.match('#')) {
+    console.log('matched');
+    $(".nav-tabs a[href='" + url + "']").tab('show');
+  }
+
+
   $("input#shipping").on('click', shipFunction);
 }
 

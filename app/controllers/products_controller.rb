@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
 
   def review
     Review.create(review_params)
-    redirect_to product_path(params[:product_id])
+    redirect_to product_path(params[:product_id], anchor: "review")
   end
 
   def new
