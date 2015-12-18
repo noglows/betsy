@@ -51,7 +51,7 @@
                   <% 1.upto(5) do |i| %>
                     <%= f.label :rating, class: "btn btn-info" do %>
                       <%= f.radio_button :rating, i %>
-                      <%= i %>
+                      <%= i %> <span class="glyphicon glyphicon-star-empty"></span>
                     <% end %>
                   <% end %>
                 </div>
