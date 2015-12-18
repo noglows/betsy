@@ -31,7 +31,7 @@
 
 <div class="form-group">
   <%= f.label :price %>
-  <%= f.number_field :price, class: "form-control" %>
+  <%= f.number_field :price, min:0, max:500000, class: "form-control" %>
 </div>
 
 <div class="field form-group">
@@ -54,7 +54,7 @@
 
 <div class="form-group">
   <%= f.label :inventory_total %>
-  <%= f.number_field :inventory_total, class: "form-control" %>
+  <%= f.number_field :inventory_total, min:0, max:100, class: "form-control" %>
 </div>
 
   <div class="form-group">

@@ -65,7 +65,7 @@
 <%= form_for :category, method: :post, url:user_categories_new_path(@user.id) do |f| %>
   <div class="form-group">
   <%= f.label :name, "Category Name" %> <br>
-  <%= f.text_field :name, class:"form-control" %> <br>
+  <%= f.text_field :name, maxlength:20, class:"form-control" %> <br>
   </div>
   <%= f.submit "Make New Category", class:"btn btn-default" %>
 <% end %>
