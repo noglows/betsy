@@ -5,8 +5,8 @@ class Product < ActiveRecord::Base
   has_and_belongs_to_many :categories
   #before_validation :dollars_to_cents
 
-  validates_length_of :name, :maximum => 30
-  validates_length_of :description, maximum => 60
+  validates :name, length: { :maximum => 30 }
+  validates :description, length: { :maximum => 60 }
   validates :name, presence: true
   validates :name, uniqueness: true
   validates :price, presence: true
