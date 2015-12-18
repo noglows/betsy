@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     if @current_user != nil
       product = params[:product_id]
       if Product.find(product).user == @current_user
-        flash[:error] = "You can't review your own products"
+        flash[:error] = "ERROR! You can NOT review your own products!"
         redirect_to user_product_path(@current_user.id, product)
       end
     end
