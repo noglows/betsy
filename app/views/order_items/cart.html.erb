@@ -73,7 +73,9 @@
         </td>
 
           <%= form_for [item.product, item], controller: :order_items, action: :update do |f| %>
+            <td>
             <%= f.select :quantity, (0..item.product.inventory_total) %>
+            </td>
             <td>
               <%= f.submit "Update", class: "btn btn-default pull-right" %>
             </td>
