@@ -12,11 +12,11 @@ class OrdersController < ApplicationController
       product.order_items.each do |oi|
         if ['pending','paid','cancelled','complete'].include? params[:sort]
           if oi.order.status == params[:sort]
-            if @orders.include? oi.order
-              # next
-            else
-              @orders.push(oi.order)
-            end
+            # if @orders.include? oi.order
+            #   next
+            # else
+            @orders.push(oi.order)
+            # end
           end
         else
           if @orders.include? oi.order
