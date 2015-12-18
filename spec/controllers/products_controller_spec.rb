@@ -138,7 +138,7 @@ RSpec.describe ProductsController, type: :controller do
       session[:user_id] = 2
       post :review, params.merge(product_id: 1)
       expect(subject).to redirect_to user_product_path(session[:user_id],1)
-      expect(flash[:error]).to include "You can't review your own products"
+      expect(flash[:error]).to include "You can NOT review your own products"
     end
   end
 
