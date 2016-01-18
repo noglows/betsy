@@ -2,9 +2,7 @@ class Order < ActiveRecord::Base
   has_many :order_items
 
   validates :status, presence: true
-  [:email, :mailing_address, :zip, :name_on_card, :last_four, :card_exp].each do |attribute|
-    validates attribute, presence: true, on: :update
-  end
+  validates_presence_of :email, :mailing_address, :zip, :name_on_card, :last_four, :card_exp, on: :update
   validates :last_four, numericality: { only_integer: true }, on: :update
   validates :zip, length: { is: 5 }, on: :update
   validate :card_exp_cannot_be_in_the_past

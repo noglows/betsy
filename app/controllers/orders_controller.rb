@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
 
   before_action :check_user_id, only: [:index, :show, :ship]
 
+  before_action :my_order, only: [:checkout, :update]
+
 
   def index
     user_id = params[:user_id]
@@ -11,12 +13,10 @@ class OrdersController < ApplicationController
     @user.products.each do |product|
       product.order_items.each do |oi|
         if ['pending','paid','cancelled','complete'].include? params[:sort]
-          if oi.order.status == params[:sort]
-            if @orders.include? oi.order
-              next
-            else
-              @orders.push(oi.order)
-            end
+          if oi.order.status == params[:sort] && (@orders.include? oi.order)
+            next
+          else
+            @orders.push(oi.order)
           end
         else
           if @orders.include? oi.order
@@ -41,7 +41,6 @@ class OrdersController < ApplicationController
   end
 
   def checkout
-    my_order
     session[:order] = nil
     session[:total] = nil
     @instock = @order.instock
@@ -53,7 +52,6 @@ class OrdersController < ApplicationController
   end
 
   def update
-    my_order
 
     @order.attributes = order_params
     @instock = @order.instock
