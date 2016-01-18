@@ -19,7 +19,6 @@ class ProductsController < ApplicationController
           !rows.to_a.empty?
         }
       else
-        #binding.pry
         @order = "prod"
     end
   end
