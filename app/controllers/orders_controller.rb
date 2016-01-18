@@ -58,7 +58,6 @@ class OrdersController < ApplicationController
 
     if @order.save && cookies.signed[:stocked] == @instock.length
       @order.update(status: "paid")
-      # cookies.delete :order
       @order.outofstock.destroy_all
 
       redirect_to confirmation_path
@@ -75,8 +74,7 @@ class OrdersController < ApplicationController
   end
 
   def confirmation
-    # @total = @order.cart_total
-    if session[:order].nil? # || session[:order] == nil
+    if session[:order].nil?
       my_order
       session[:order] = @order.id
       session[:total] = @order.cart_total

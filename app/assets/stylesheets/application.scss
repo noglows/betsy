@@ -46,8 +46,6 @@ footer {
 div.navbar-brand {
   background: -webkit-linear-gradient(to right, #fff, #d9b3ff, #222);
   background: linear-gradient(to right, #fff, #d9b3ff, #222);
-  // font-family: 'Crafty Girls', cursive;
-  // font-family: 'Henny Penny', cursive;
   font-family: 'Gorditas', cursive;
   font-size: 60px;
   line-height: 50%;
@@ -109,11 +107,6 @@ div.navbar-brand:hover {
 .field_with_errors:nth-of-type(2n+1) {
   float: left;
 }
-
-// .sidebar {
-//   padding-right: 5px;
-//   padding-left: 5px;
-// }
 
 .dropdown {
   text-align: center;

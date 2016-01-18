@@ -1,8 +1,5 @@
-<% if @instock.length == 1 %>
-  <h2>You have <%= @instock.length %> item in your cart!</h2>
-<% else %>
-  <h2>You have <%= @instock.length %> items in your cart!</h2>
-<% end %>
+<h2><%= print_cart_total %></h2>
+
 <% unless @instock.empty? %>
   <br>
   <table class="table table-hover cart">
@@ -62,32 +59,28 @@
 
 <table class="table table-hover cart">
   <% @outofstock.each do |item| %>
-  <h6>YOUR CART HAS CHANGED:</h6>
-    <% if item.product.inventory_total == 0 %>
-        <h6> <%= item.product.name %> is now unavaliable </h6>
-    <% else %>
-      <h6>You selected <%= item.quantity %> of <%= item.product.name %> but only <%= item.product.inventory_total %> are currently available. Please change your quantity if you would still like to purchase this item.</h6>
-      <tr>
-        <td>
-          <%= item.product.name %>
-        </td>
-
-          <%= form_for [item.product, item], controller: :order_items, action: :update do |f| %>
-            <td>
-            <%= f.select :quantity, (0..item.product.inventory_total) %>
-            </td>
-            <td>
-              <%= f.submit "Update", class: "btn btn-default pull-right" %>
-            </td>
-            <td>
-              <%= link_to product_order_item_path(item.product, item), method: :delete do %>
-               <span class="glyphicon glyphicon-remove"></span>
-              <% end %>
-            </td>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
+    <h6> <%= print_unavaliable_status(item) %> </h6>
+  <% end %>
+  <% still_avaliable.each do |item| %>
+    <tr>
+      <td>
+        <%= item.product.name %>
+      </td>
+        <%= form_for [item.product, item], controller: :order_items, action: :update do |f| %>
+          <td>
+          <%= f.select :quantity, (0..item.product.inventory_total) %>
+          </td>
+          <td>
+            <%= f.submit "Update", class: "btn btn-default pull-right" %>
+          </td>
+          <td>
+            <%= link_to product_order_item_path(item.product, item), method: :delete do %>
+             <span class="glyphicon glyphicon-remove"></span>
+            <% end %>
+          </td>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
 </table>
 

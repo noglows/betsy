@@ -3,7 +3,6 @@ class Product < ActiveRecord::Base
   has_many :order_items
   has_many :reviews
   has_and_belongs_to_many :categories
-  #before_validation :dollars_to_cents
 
   validates :name, length: { :maximum => 30 }
   validates :description, length: { :maximum => 250 }
@@ -23,10 +22,4 @@ class Product < ActiveRecord::Base
     self.reviews.average(:rating).to_f.round(1)
   end
 
-  # def dollars_to_cents
-  #   price_cents = self.price * 100
-  #   binding.pry
-  #   self.price = price_cents
-  #   self.save
-  # end
 end

@@ -20,7 +20,6 @@ class SessionsController < ApplicationController
       flash.now[:error] = "Hmmm, that password/email combination doesn't seem quite right..."
       render :new
     end
-    #redirect_to new_user_path
   end
 
   def destroy
