@@ -10,7 +10,6 @@ seed_categories = [
   { name: "stickers" },
   { name: "clothing" },
   { name: "slippers" },
-#  { name: "socks" },
   { name: "people"},
   { name: "live animals"}
 ]
@@ -24,7 +23,8 @@ seed_users = [
   { first_name: "Amy", last_name: "Hunter", email: "2@2.com" },
   { first_name: "Jessica", last_name: "Noglows", email: "3@3.com" },
   { first_name: "Lauren", last_name: "Granger", email: "4@4.com" },
-  { first_name: "Charles", last_name: "Ellis", email: "5@5.com" }
+  { first_name: "Charles", last_name: "Ellis", email: "5@5.com" },
+  { first_name: "Kari", last_name: "Bancroft", email: "6@6.com" }
 ]
 
 seed_users.each do |seed|
@@ -41,7 +41,9 @@ seed_products = [
   {name: "Fuzzy Wah-Wah pedal", description: "Making some glorious vintage guitar sounds", price: 4000, inventory_total: 50, retired: false, image_url: "http://i.ebayimg.com/images/i/251806872987-0-1/s-l1000.jpg", user_id: 2, :categories => Category.where(:name => ['stuffed animals',  'slippers'])},
   {name: "Fun Size Whatchamacallit", description: "Caaaaaaaaandy", price: 500, inventory_total: 2000, retired: false, image_url: "http://ecx.images-amazon.com/images/I/41kHr2%2BU6XL._SL500_AA300_.jpg", user_id: 1, :categories => Category.where(:name => ['stuffed animals', 'clothing'])},
   {name: "Giant Scary Bear", description: "This is to test if orders are working as expected", price: 500, inventory_total: 2000, retired: false, image_url: "http://www.annsheybani.com/wp-content/uploads/2012/12/bear.jpg", user_id: 3, :categories => Category.where(:name => ['stuffed animals', 'clothing'])},
-  {name: "Intimidating Bear", description: "This is the second item to test if orders are working as expected", price: 800, inventory_total: 100, retired: false, image_url: "http://3.bp.blogspot.com/_W90V87w3sr8/TSdKsMMbdsI/AAAAAAAAAmY/DZq_8pArw2g/s1600/brown_bear_3.png", user_id: 3, :categories => Category.where(:name => ['stuffed animals', 'clothing'])}
+  {name: "Intimidating Bear", description: "This is the second item to test if orders are working as expected", price: 800, inventory_total: 100, retired: false, image_url: "http://3.bp.blogspot.com/_W90V87w3sr8/TSdKsMMbdsI/AAAAAAAAAmY/DZq_8pArw2g/s1600/brown_bear_3.png", user_id: 4, :categories => Category.where(:name => ['stuffed animals', 'clothing'])},
+  {name: "Fuzzy Dice", description: "Hang them in your car! Hang them in your friend's car!", price: 1000, inventory_total: 50, retired: false, image_url: "http://hawkhardware.com/images/c5038r.jpg", user_id: 6, :categories => Category.where(:name => ['stickers', 'live animals'])},
+  {name: "Fuzzy Hot-Pink Slippers", description: "For cozzy feet time!", price: 800, inventory_total: 15, retired: false, image_url: "http://flipflopsandalz.com/wp-content/uploads/2015/02/Fuzzy-Flip-Flop-Slippers.jpg", user_id: 5, :categories => Category.where(:name => ['slippers', 'clothing'])}
 ]
 
 seed_products.each do |seed|

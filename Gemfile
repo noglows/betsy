@@ -4,9 +4,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 
-# Use pg as the database for Active Record
-gem 'pg'
-
 # Use Bootstrap for styling
 gem 'bootstrap-sass', '~> 3.3.6'
 # Use SCSS for stylesheets
@@ -43,6 +40,10 @@ gem 'validate_url', '~> 1.0', '>= 1.0.2'
 
 gem 'jquery-cookie-rails', '~> 1.3', '>= 1.3.1.1'
 
+group :production do
+  # Use pg as the database for Active Record
+  gem 'pg'
+end
 
 
 group :development, :test do
