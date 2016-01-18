@@ -5,6 +5,8 @@ class ProductsController < ApplicationController
   before_action :check_user_id, only: [:retire, :edit, :update]
 
   def index
+    # This method contains the logic for the buttons to be able to
+    # filter search options on the index page
     @categories = Category.all
     @merchants = User.all
     @products = Product.order(:created_at).where(retired: false)
@@ -47,7 +49,7 @@ class ProductsController < ApplicationController
   def create
     @user_id = session[:user_id]
     @product = Product.new(product_params)
-    if !params[:categories].nil?
+    if params[:categories]
       params[:categories].each do |cat|
         @product.categories << Category.where(id:cat.to_i)
       end
