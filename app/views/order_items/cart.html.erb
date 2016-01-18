@@ -1,8 +1,5 @@
-<% if @instock.length == 1 %>
-  <h2>You have <%= @instock.length %> item in your cart!</h2>
-<% else %>
-  <h2>You have <%= @instock.length %> items in your cart!</h2>
-<% end %>
+<h2><%= print_cart_total %></h2>
+
 <% unless @instock.empty? %>
   <br>
   <table class="table table-hover cart">

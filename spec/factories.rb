@@ -24,12 +24,7 @@ FactoryGirl.define do
     inventory_total 50
     retired false
     image_url "http://i.ebayimg.com/images/i/251806872987-0-1/s-l1000.jpg"
-    user_id user.id
+    user_id "user.id"
   end
-  
-  factory :order do
-    quantity 4
-    product_id product.id
-    shipped false
-    order_id order.id
-  end
+
+end
