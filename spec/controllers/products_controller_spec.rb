@@ -13,35 +13,35 @@ RSpec.describe ProductsController, type: :controller do
 
   end
 
-  # describe "GET 'index' by category" do
-  #   let(:params) do
-  #     {
-  #       type: "cat"
-  #     }
-  #   end
-  #
-  #   it "renders the index view based on category" do
-  #     params[:type] = "cat"
-  #     get :index
-  #     expect(subject).to render_template :index
-  #     #expect
-  #   end
-  # end
-  #
-  # describe "GET 'index' by mechant" do
-  #   let(:params) do
-  #     {
-  #       type: "merch"
-  #     }
-  #   end
-  #
-  #   it "renders the index view based on merchant" do
-  #     params[:type] = 'merch'
-  #     get :index
-  #     #binding.pry
-  #     expect(subject).to render_template :index
-  #   end
-  # end
+  describe "GET 'index' by category" do
+    let(:params) do
+      {
+        type: "cat"
+      }
+    end
+
+    it "renders the index view based on category" do
+      params[:type] = "cat"
+      get :index
+      expect(subject).to render_template :index
+      #expect
+    end
+  end
+
+  describe "GET 'index' by mechant" do
+    let(:params) do
+      {
+        type: "merch"
+      }
+    end
+
+    it "renders the index view based on merchant" do
+      params[:type] = 'merch'
+      get :index
+      #binding.pry
+      expect(subject).to render_template :index
+    end
+  end
 
   describe "GET 'new'" do
     let(:user) do
