@@ -9,12 +9,6 @@ class Order < ActiveRecord::Base
   validates :zip, length: { is: 5 }, on: :update
   validate :card_exp_cannot_be_in_the_past
 
-  # validate :still_in_stock, on: :update
-  #
-  # def still_in_stock
-  #   errors.add(:stock, "Some items have gone out of stock") unless Order.find(cookies.signed[:order]).instock
-  # end
-
   def card_exp_cannot_be_in_the_past
     if card_exp.present? && card_exp < Date.today
       errors.add(:exp, "Can't be in the past")
