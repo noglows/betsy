@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @review = Review.new
-    @reviews = Review.where("product_id = #{params[:id]}").reverse
+    @reviews = Review.reverse_by_product(params)
     @order_item = my_order.order_items.new
   end
 

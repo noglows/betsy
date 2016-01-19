@@ -17,9 +17,4 @@ class Product < ActiveRecord::Base
   validates :image_url, :url => true
   validates :image_url, format: { with: %r{.(gif|jpg|png)\Z}i, message: 'must be a URL for GIF, JPG or PNG image.' }
 
-
-  def average_rating
-    self.reviews.average(:rating).to_f.round(1)
-  end
-
 end
