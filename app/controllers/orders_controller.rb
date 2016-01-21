@@ -55,11 +55,13 @@ class OrdersController < ApplicationController
     # API call to our app, which includes
     # needs to include destination address (country, state, city, zip)
     # needs to include info about each package: value (cost)
+    # carrier (ex., ups) and service code (ex., "03")
     response = HTTParty.get()
 
     parsed_response = JSON.parse(response)
 
-    #somehow store in an instance variable the cost and date
+    #somehow store in instance variables the @cost and @date, so we can then use them in the view
+    # to display the cost and delivery date to the user on the checkout page.
 
   end
 
