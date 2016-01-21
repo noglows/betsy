@@ -30,7 +30,7 @@
     <div class="tab-content">
       <div id="desc" class="tab-pane fade in active">
         <h3>Description</h3>
-        <%= @product.description %>
+        <%= @product.description %><h1> Rating: <%= @product.average_rating %></h1>
         <br>
         <% if @product.retired %>
           Status: Unavailable
