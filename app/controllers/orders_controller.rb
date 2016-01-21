@@ -51,6 +51,18 @@ class OrdersController < ApplicationController
     redirect_to root_path if @order.new_record? || @instock.empty?
   end
 
+  def shipping_estimate
+    # API call to our app, which includes
+    # needs to include destination address (country, state, city, zip)
+    # needs to include info about each package: value (cost)
+    response = HTTParty.get()
+
+    parsed_response = JSON.parse(response)
+
+    #somehow store in an instance variable the cost and date
+
+  end
+
   def update
 
     @order.attributes = order_params
