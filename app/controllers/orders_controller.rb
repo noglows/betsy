@@ -55,14 +55,17 @@ class OrdersController < ApplicationController
     # API call to our app, which includes
     # needs to include destination address (country, state, city, zip)
     # needs to include info about each package: value (cost)
-    # carrier (ex., ups) and service code (ex., "03")
-    response = HTTParty.get()
+    # carrier (ex., ups)
+    my_order
+    shipping_params = {"destination" => { :country => "US", :state => params[:state], :city => params[:city], :zip => params[:zip]}, "value" => my_order.cart_total, "carrier" => params[:carrier]}
+    query = shipping_params.to_query
+    response = HTTParty.get("http://localhost:3000/?#{query}", format: :json).parsed_response
 
-    parsed_response = JSON.parse(response)
-
-    #somehow store in instance variables the @cost and @date, so we can then use them in the view
+    # somehow store in instance variables the @cost and @date, so we can then use them in the view
     # to display the cost and delivery date to the user on the checkout page.
-
+    @service_type = response[:service_name]
+    @cost = response[:total_price]
+    @delivery_est = response[:delivery_date]
   end
 
   def update
