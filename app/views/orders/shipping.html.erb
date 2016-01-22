@@ -65,7 +65,7 @@
 
 
   <div class="col-sm-8">
-    <%= form_for @order do |f| %>
+    <%= form_for @order, as: :patch, url: billing_path(@order.id) do |f| %>
     <fieldset class="form-group applesauce">
       <div id="shipform" style="display: none">
         <legend>

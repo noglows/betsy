@@ -3,7 +3,7 @@ require './lib/services/service_estimate'
 class OrdersController < ApplicationController
   before_action :current_user
   before_action :check_user_id, only: [:index, :show, :ship]
-  before_action :my_order, only: [:checkout, :shipping_estimate, :update_billing]
+  before_action :my_order, only: [:checkout, :shipping_estimate, :update_billing, :confirmation]
 
   def index
     user_id = params[:user_id]
@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
   end
 
   def update_billing
-    @order.attributes = address_params
+    @order.attributes = billing_params
     @instock = @order.instock
 
     if @order.save && cookies.signed[:stocked] == @instock.length
@@ -86,7 +86,7 @@ class OrdersController < ApplicationController
       @total = @order.cart_total
       @errors = @order.errors.messages
 
-      render :checkout
+      redirect_to confirmation_path
     end
   end
 
@@ -134,8 +134,8 @@ class OrdersController < ApplicationController
   end
 
   def billing_params
-    last_four = params[:order][:last_four][-4..-1]
-    params.require(:order).permit(:name_on_card, :card_exp).merge(last_four: last_four)
+    last_four = params[:patch][:last_four][-4..-1]
+    params.require(:patch).permit(:name_on_card, :card_exp).merge(last_four: last_four)
   end
 
 end
