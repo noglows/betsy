@@ -1,3 +1,5 @@
+require './lib/ups/service_estimate'
+
 class OrdersController < ApplicationController
   before_action :current_user
   before_action :check_user_id, only: [:index, :show, :ship]
@@ -55,23 +57,13 @@ class OrdersController < ApplicationController
     @total = @order.cart_total
     @errors = @order.errors.messages
 
+    query = {"destination" => { :state => @order.state, :city => @order.city, :zip => @order.zip}, "value" => @order.cart_total}.to_query
 
-    # API call to our app, which includes
-    # needs to include destination address (country, state, city, zip)
-    # needs to include info about each package: value (cost)
-    # carrier (ex., ups)
-    # my_order
-    # shipping_params = {"destination" => { :country => "US", :state => params[:state], :city => params[:city], :zip => params[:zip]}, "value" => my_order.cart_total, "carrier" => params[:carrier]}
-    # query = shipping_params.to_query
-    # response = HTTParty.get("http://localhost:3000/?#{query}", format: :json).parsed_response
+    parsed_response = (HTTParty.get("http://localhost:3000/?#{query}", format: :json)).parsed_response
 
-    # somehow store in instance variables the @cost and @date, so we can then use them in the view
-    # to display the cost and delivery date to the user on the checkout page.
-    # value = my_order.cart_total
-    # @service_type = response[:service_name]
-    # @cost = response[:total_price]
-    # @delivery_est = response[:delivery_date]
-    # @total_cost = @cost + value
+    # this is an array of estimate objects, each has a service code, date, and cost:
+    @ups_estimates = Ups::ServiceEstimates.get_service_estimates(parsed_response["UPS Service Options"])
+    
     render :shipping
   end
 
