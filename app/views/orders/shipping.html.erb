@@ -30,6 +30,39 @@
     </table>
 
   </div>
+  <div class="col-sm-4">
+    <h3>UPS Estimates</h3>
+    <ul>
+      <% @ups_estimates.each do |estimate| %>
+        <li><strong>Service:</strong> <%= estimate.service_name %></li>
+        <strong>Price:</strong> <%= cents_to_dollars(estimate.cost.to_i) %>
+        <br>
+        <strong>Estimated Delivery Date:</strong> <% if estimate.date == "" %>
+                Unavailable
+              <% else %>
+                <%= readable_date(Time.parse(estimate.date)) %>
+              <% end %>
+        <br>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-sm-4" >
+    <h3>USPS Estimates</h3>
+    <ul>
+      <% @usps_estimates.each do |estimate| %>
+        <li><strong>Service:</strong> <%= estimate.service_name %></li>
+        <strong>Price:</strong> <%= cents_to_dollars(estimate.cost.to_i) %>
+        <br>
+        <strong>Estimated Delivery Date:</strong> <% if estimate.date == "" %>
+                Unavailable
+              <% else %>
+                <%= readable_date(Time.parse(estimate.date)) %>
+              <% end %>
+        <br>
+      <% end %>
+    </ul>
+  </div>
+
 
   <div class="col-sm-8">
     <%= form_for @order do |f| %>
