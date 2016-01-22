@@ -69,9 +69,11 @@ class OrdersController < ApplicationController
 
     # somehow store in instance variables the @cost and @date, so we can then use them in the view
     # to display the cost and delivery date to the user on the checkout page.
+    # value = my_order.cart_total
     # @service_type = response[:service_name]
     # @cost = response[:total_price]
     # @delivery_est = response[:delivery_date]
+    # @total_cost = @cost + value
     render :shipping
   end
 

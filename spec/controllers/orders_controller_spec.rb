@@ -205,4 +205,19 @@ RSpec.describe OrdersController, type: :controller do
       expect(subject).to render_template :confirmation
     end
   end
+
+  describe "GET 'shipping_estimate'" do
+
+    let(:destination) do
+      ActiveShipping::Location.new(country: "US",
+                                   state: "CA",
+                                   city: "San Francisco",
+                                   zip: "94101")
+    end
+
+    it "sends shipping params to shipping API" do
+      
+    end
+
+  end
 end
