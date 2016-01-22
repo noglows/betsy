@@ -1,4 +1,4 @@
-require './lib/ups/service_estimate'
+require './lib/services/service_estimate'
 
 class OrdersController < ApplicationController
   before_action :current_user
@@ -62,8 +62,10 @@ class OrdersController < ApplicationController
     parsed_response = (HTTParty.get("http://localhost:3000/?#{query}", format: :json)).parsed_response
 
     # this is an array of estimate objects, each has a service code, date, and cost:
-    @ups_estimates = Ups::ServiceEstimates.get_service_estimates(parsed_response["UPS Service Options"])
-    
+    @ups_estimates = ServiceEstimates.get_service_estimates(parsed_response["UPS Service Options"])
+
+    @usps_estimates = ServiceEstimates.get_service_estimates(parsed_response["USPS Service Options"])
+
     render :shipping
   end
 
