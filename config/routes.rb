@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get "/cart" => "order_items#cart"
   get "/checkout" => "orders#checkout"
   get "/confirmation" => "orders#confirmation"
+  patch "/orders/:id" => "orders#shipping_estimate"
+  get "/shipping" => "orders#shipping_estimate", as: :shipping
 
   root 'products#index'
 
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :users, :except => [:destroy, :update, :edit, :index] do
     post "/categories/new", to: "users#new_category"
-    resources :orders, :only => [:index, :show, :update] do
+    resources :orders, :only => [:index, :show, :update], :except => [:update] do
       post "/ship", to: "orders#ship"
     end
     resources :products, :except => [:destroy] do

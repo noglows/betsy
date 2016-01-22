@@ -1,10 +1,7 @@
 class OrdersController < ApplicationController
   before_action :current_user
-
   before_action :check_user_id, only: [:index, :show, :ship]
-
-  before_action :my_order, only: [:checkout, :update]
-
+  before_action :my_order, only: [:checkout, :shipping_estimate, :update_billing]
 
   def index
     user_id = params[:user_id]
@@ -52,25 +49,34 @@ class OrdersController < ApplicationController
   end
 
   def shipping_estimate
+    @order.attributes = address_params
+    @test = [my_order.mailing_address, my_order.zip, my_order.email]
+    @instock = @order.instock
+    @total = @order.cart_total
+    @errors = @order.errors.messages
+
+    raise
+
+
     # API call to our app, which includes
     # needs to include destination address (country, state, city, zip)
     # needs to include info about each package: value (cost)
     # carrier (ex., ups)
-    my_order
-    shipping_params = {"destination" => { :country => "US", :state => params[:state], :city => params[:city], :zip => params[:zip]}, "value" => my_order.cart_total, "carrier" => params[:carrier]}
-    query = shipping_params.to_query
-    response = HTTParty.get("http://localhost:3000/?#{query}", format: :json).parsed_response
+    # my_order
+    # shipping_params = {"destination" => { :country => "US", :state => params[:state], :city => params[:city], :zip => params[:zip]}, "value" => my_order.cart_total, "carrier" => params[:carrier]}
+    # query = shipping_params.to_query
+    # response = HTTParty.get("http://localhost:3000/?#{query}", format: :json).parsed_response
 
     # somehow store in instance variables the @cost and @date, so we can then use them in the view
     # to display the cost and delivery date to the user on the checkout page.
-    @service_type = response[:service_name]
-    @cost = response[:total_price]
-    @delivery_est = response[:delivery_date]
+    # @service_type = response[:service_name]
+    # @cost = response[:total_price]
+    # @delivery_est = response[:delivery_date]
+    render :shipping
   end
 
-  def update
-
-    @order.attributes = order_params
+  def update_billing
+    @order.attributes = address_params
     @instock = @order.instock
 
     if @order.save && cookies.signed[:stocked] == @instock.length
@@ -129,8 +135,13 @@ class OrdersController < ApplicationController
 
   private
 
-  def order_params
-    last_four = params[:order][:last_four][-4..-1]
-    params.require(:order).permit(:email, :mailing_address, :zip, :name_on_card, :card_exp).merge(last_four: last_four)
+  def address_params
+    params.require(:order).permit(:email, :mailing_address, :zip)
   end
+
+  def billing_params
+    last_four = params[:order][:last_four][-4..-1]
+    params.require(:order).permit(:name_on_card, :card_exp).merge(last_four: last_four)
+  end
+
 end
