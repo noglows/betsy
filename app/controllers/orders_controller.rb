@@ -55,8 +55,6 @@ class OrdersController < ApplicationController
     @total = @order.cart_total
     @errors = @order.errors.messages
 
-    raise
-
 
     # API call to our app, which includes
     # needs to include destination address (country, state, city, zip)
@@ -138,7 +136,7 @@ class OrdersController < ApplicationController
   private
 
   def address_params
-    params.require(:order).permit(:email, :mailing_address, :zip)
+    params.require(:order).permit(:email, :mailing_address, :city, :state, :zip)
   end
 
   def billing_params
