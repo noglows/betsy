@@ -66,6 +66,7 @@ class OrdersController < ApplicationController
     @service_type = response[:service_name]
     @cost = response[:total_price]
     @delivery_est = response[:delivery_date]
+    @total_cost = @cost + 
   end
 
   def update
