@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-sm-4">
+    <table class="table table-hover panel">
+      <h2>In Your Cart</h2>
+      <tr>
+        <th>
+          Item
+        </th>
+        <th>
+          Quantity
+        </th>
+      </tr>
+      <% @instock.each do |item| %>
+        <tr>
+          <td>
+            <%= item.product.name %>
+          </td>
+          <td>
+            <%= item.quantity %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>
+          <h4>Total: <%= cents_to_dollars(@total) %></h4>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div class="col-sm-8">
+    <%= form_for @order do |f| %>
+    <fieldset class="form-group">
+      <legend>
+        Shipping Information
+      </legend>
+      <span class="error"><%= "Please enter a valid email." if @errors.include?(:email) %></span>
+      <%= f.label :email %>
+      <%= f.email_field :email, class: "form-control" %>
+      <span class="error"><%= "Please enter a valid address." if @errors.include?(:mailing_address) %></span>
+      <%= f.label :mailing_address, "Address" %>
+      <%= f.text_field :mailing_address, class: "form-control" %>
+      <span class="error"><%= "Please enter a valid zip code." if @errors.include?(:zip) %></span>
+      <%= f.label :zip %>
+      <%= f.text_field :zip, class: "form-control" %>
+      <%= f.label :city %>
+      <%= f.text_field :city, class: "form-control" %>
+      <%= f.label :state %>
+      <%= f.text_field :state, class: "form-control", minlength: 2, maxlength: 15 %>
+    </fieldset>
+
+    <%= f.submit "Continue to Shipping Method", class: "btn btn-default btn-block" %>
+
+    <% end %>
+  </div>
+</div>
