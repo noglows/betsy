@@ -59,13 +59,12 @@ class OrdersController < ApplicationController
 
     query = {"destination" => { :state => @order.state, :city => @order.city, :zip => @order.zip}, "value" => @order.cart_total}.to_query
 
-    parsed_response = (HTTParty.get("http://localhost:3000/?#{query}", format: :json)).parsed_response
+    parsed_response = (HTTParty.get("http://fuzzyfiona.herokuapp.com/?#{query}", format: :json)).parsed_response
 
     # this is an array of estimate objects, each has a service code, date, and cost:
     @ups_estimates = ServiceEstimates.get_service_estimates(parsed_response["UPS Service Options"])
 
     @usps_estimates = ServiceEstimates.get_service_estimates(parsed_response["USPS Service Options"])
-
     render :shipping
   end
 

@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   get "/cart" => "order_items#cart"
   get "/checkout" => "orders#checkout"
   get "/confirmation" => "orders#confirmation"
-  patch "/orders/:id" => "orders#shipping_estimate"
+  patch "/orders/:id" => "orders#shipping_estimate", as: :shipping
   patch "/billing/:id" => "orders#update_billing", as: :billing
-  get "/shipping" => "orders#shipping_estimate", as: :shipping
+  # get "/shipping" => "orders#shipping_estimate", as: :shipping
 
   root 'products#index'
 

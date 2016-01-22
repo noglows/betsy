@@ -216,7 +216,7 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     it "sends shipping params to shipping API" do
-      
+
     end
 
   end
